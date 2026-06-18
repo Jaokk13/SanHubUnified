@@ -34,6 +34,9 @@ def init_db():
                 execution_order     INTEGER,
                 import_date         TEXT,
                 execution_date      TEXT,
+                scheduled_date      TEXT,
+                is_postergada       INTEGER DEFAULT 0,
+                postergo_reason     TEXT,
                 FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE SET NULL
             );
 
@@ -41,7 +44,8 @@ def init_db():
             CREATE TABLE IF NOT EXISTS teams (
                 id      INTEGER PRIMARY KEY AUTOINCREMENT,
                 name    TEXT UNIQUE NOT NULL,
-                type    TEXT NOT NULL CHECK(type IN ('Calçada', 'Asfalto'))
+                type    TEXT NOT NULL CHECK(type IN ('Calçada', 'Asfalto')),
+                task_type TEXT NOT NULL DEFAULT 'Execução' CHECK(task_type IN ('Prévia', 'Execução'))
             );
 
             -- Cache de Geocodificação (bairros já localizados)
@@ -70,7 +74,19 @@ def init_db():
         
         # Migration para scheduled_date
         try:
-            conn.execute("ALTER TABLE orders ADD COLUMN scheduled_date TEXT")
+            conn.execute("ALTER TABLE orders ADD COLUMN scheduled_date TEXT;")
+        except sqlite3.OperationalError:
+            pass
+
+        # Adicionar as colunas de postergo nas bases existentes
+        try:
+            conn.execute("ALTER TABLE orders ADD COLUMN is_postergada INTEGER DEFAULT 0;")
+            conn.execute("ALTER TABLE orders ADD COLUMN postergo_reason TEXT;")
+        except sqlite3.OperationalError:
+            pass
+        
+        try:
+            conn.execute("ALTER TABLE teams ADD COLUMN task_type TEXT NOT NULL DEFAULT 'Execução' CHECK(task_type IN ('Prévia', 'Execução'));")
         except sqlite3.OperationalError:
             pass
 
@@ -106,8 +122,8 @@ def upsert_orders(orders: list[dict]) -> dict:
                 INSERT OR IGNORE INTO orders
                     (os_number, solicitation_date, neighborhood,
                      service_description, limit_date, status,
-                     category, import_date)
-                VALUES (?, ?, ?, ?, ?, 'Pendente', ?, ?)
+                     category, import_date, is_postergada, postergo_reason)
+                VALUES (?, ?, ?, ?, ?, 'Pendente', ?, ?, ?, ?)
             """, (
                 o["os_number"],
                 o.get("solicitation_date", ""),
@@ -116,9 +132,23 @@ def upsert_orders(orders: list[dict]) -> dict:
                 o.get("limit_date", ""),
                 o.get("category", "Indefinido"),
                 date.today().isoformat(),
+                1 if o.get("is_postergada") else 0,
+                o.get("postergo_reason", "")
             ))
             if cursor.rowcount > 0:
                 new_count += 1
+            else:
+                # Update postergo info for existing orders if it changed
+                if "is_postergada" in o:
+                    conn.execute("""
+                        UPDATE orders 
+                        SET is_postergada = ?, postergo_reason = ? 
+                        WHERE os_number = ? AND status = 'Pendente'
+                    """, (
+                        1 if o.get("is_postergada") else 0,
+                        o.get("postergo_reason", ""),
+                        o["os_number"]
+                    ))
     return {"inserted": new_count}
 
 
@@ -271,15 +301,15 @@ def get_teams() -> list[dict]:
         return [dict(r) for r in rows]
 
 
-def create_team(name: str, type_: str) -> dict:
+def create_team(name: str, type_: str, task_type: str = 'Execução') -> dict:
     with get_conn() as conn:
-        cursor = conn.execute("INSERT INTO teams(name, type) VALUES(?, ?)", (name, type_))
-        return {"id": cursor.lastrowid, "name": name, "type": type_}
+        cursor = conn.execute("INSERT INTO teams(name, type, task_type) VALUES(?, ?, ?)", (name, type_, task_type))
+        return {"id": cursor.lastrowid, "name": name, "type": type_, "task_type": task_type}
 
 
-def update_team(team_id: int, name: str, type_: str):
+def update_team(team_id: int, name: str, type_: str, task_type: str = 'Execução'):
     with get_conn() as conn:
-        conn.execute("UPDATE teams SET name=?, type=? WHERE id=?", (name, type_, team_id))
+        conn.execute("UPDATE teams SET name=?, type=?, task_type=? WHERE id=?", (name, type_, task_type, team_id))
 
 
 def delete_team(team_id: int):

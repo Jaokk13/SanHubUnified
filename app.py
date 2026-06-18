@@ -114,6 +114,10 @@ async def import_samsys(
         col_bairro = next((c for c in df_filtrado.columns if 'bairro' in c.lower()), None)
         col_servico = 'Serviço'
         col_data_limite = next((c for c in df_filtrado.columns if 'limite' in c.lower()), None)
+        
+        # Match exato para não pegar "Situação Ligação Água" nem "Parecer Solicitação"
+        col_situacao = next((c for c in df_filtrado.columns if c.lower().strip() in ['situação', 'situacao', 'status']), None)
+        col_parecer = next((c for c in df_filtrado.columns if c.lower().strip() in ['parecer não execução', 'parecer nao execucao', 'motivo não execução']), None)
 
         if not col_os:
             raise HTTPException(status_code=400, detail="Coluna de Número da OS não encontrada.")
@@ -125,6 +129,10 @@ async def import_samsys(
             os_number = str(row[col_os]).strip()
             current_os_numbers.add(os_number)
             servico_desc = str(row[col_servico]) if col_servico in row else ""
+            situacao_val = str(row[col_situacao]).upper() if col_situacao in row else ""
+            parecer_val = str(row[col_parecer]) if col_parecer in row else ""
+            
+            is_post = "POSTERGADO" in situacao_val or "POSTERGADA" in situacao_val
             
             orders_to_insert.append({
                 "os_number": os_number,
@@ -132,7 +140,9 @@ async def import_samsys(
                 "neighborhood": str(row[col_bairro]) if col_bairro in row else "",
                 "service_description": servico_desc,
                 "limit_date": str(row[col_data_limite]) if col_data_limite in row else "",
-                "category": _determinar_categoria(servico_desc)
+                "category": _determinar_categoria(servico_desc),
+                "is_postergada": is_post,
+                "postergo_reason": parecer_val if is_post else ""
             })
 
         # Insere novas OS
@@ -188,29 +198,47 @@ def reorder_orders(req: ReorderRequest):
 class AutoAssignRequest(BaseModel):
     category: str
     date: Optional[str] = None
+    task_type: str
 
 @app.post("/api/orders/auto-assign")
 def auto_assign_orders(req: AutoAssignRequest):
-    # 1. Obter todas as equipes dessa categoria
-    teams = [t for t in db.get_teams() if t["type"] == req.category]
+    # 1. Obter todas as equipes dessa categoria e dessa função (Prévia ou Execução)
+    teams = [t for t in db.get_teams() if t["type"] == req.category and t["task_type"] == req.task_type]
     if not teams:
-        raise HTTPException(status_code=400, detail="Nenhuma equipe cadastrada para esta categoria.")
+        raise HTTPException(status_code=400, detail="Nenhuma equipe cadastrada para esta Categoria e Função.")
     
     # 2. Obter todas as OSs pendentes dessa categoria sem equipe
-    orders = db.get_orders(status="Pendente", category=req.category, team_id=None)
+    all_orders = db.get_orders(status="Pendente", category=req.category, team_id=None)
+    
+    # 3. Filtrar as OSs baseadas na Função
+    # Se Função for Execução, precisamos de OSs Cortadas (com medidas).
+    # Se Função for Prévia, precisamos de OSs Não-Cortadas (sem medidas).
+    orders = []
+    import re
+    for o in all_orders:
+        is_cortada = False
+        if o.get('is_postergada') and o.get('postergo_reason'):
+            is_cortada = bool(re.search(r'\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?', o['postergo_reason'], re.IGNORECASE))
+        
+        if req.task_type == 'Execução' and is_cortada:
+            orders.append(o)
+        elif req.task_type == 'Prévia' and not is_cortada:
+            orders.append(o)
+
     if not orders:
-        raise HTTPException(status_code=400, detail="Nenhuma OS pendente sem equipe para esta categoria.")
+        raise HTTPException(status_code=400, detail="Nenhuma OS pendente sem equipe se encaixa nesta Função (Prévia/Execução).")
     
-    # 3. Aplicar algoritmo Sweep
-    divisao = router.dividir_em_equipes_sweep(orders, len(teams))
+    # 4. Aplicar algoritmo Sweep
+    check_mass = (req.category == 'Asfalto' and req.task_type == 'Execução')
+    divisao = router.dividir_em_equipes_sweep(orders, len(teams), check_mass=check_mass)
     
-    # 4. Atribuir OSs às equipes
+    # 5. Atribuir OSs às equipes
     for i, team in enumerate(teams):
         if i in divisao:
             for os_num in divisao[i]:
                 db.assign_order_to_team(os_num, team["id"], req.date)
                 
-    return {"success": True, "message": "Divisão automática via Sweep concluída!"}
+    return {"success": True, "message": f"Divisão automática via Sweep concluída para {len(orders)} OS(s)!"}
 
 @app.get("/api/teams")
 def get_teams():
@@ -219,14 +247,15 @@ def get_teams():
 class TeamCreate(BaseModel):
     name: str
     type: str
+    task_type: str = 'Execução'
 
 @app.post("/api/teams")
 def create_team(team: TeamCreate):
-    return db.create_team(team.name, team.type)
+    return db.create_team(team.name, team.type, team.task_type)
 
 @app.put("/api/teams/{team_id}")
 def update_team(team_id: int, team: TeamCreate):
-    db.update_team(team_id, team.name, team.type)
+    db.update_team(team_id, team.name, team.type, team.task_type)
     return {"success": True}
 
 @app.delete("/api/teams/{team_id}")

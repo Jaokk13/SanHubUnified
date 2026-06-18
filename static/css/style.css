@@ -480,6 +480,29 @@ body.dark-theme {
 .badge-asfalto { background-color: var(--dark-accent); color: white; }
 .badge-pendente { background-color: var(--warning-soft); color: var(--warning); }
 .badge-executado { background-color: var(--success-soft); color: var(--success); }
+.badge-postergada { background-color: var(--danger-soft); color: var(--danger); cursor: pointer; }
+.badge-postergada:hover { filter: brightness(1.2); text-decoration: underline; }
+.badge-cortada { background-color: var(--primary-soft); color: var(--primary); cursor: pointer; }
+.badge-cortada:hover { filter: brightness(1.2); text-decoration: underline; }
+
+/* Table Sorting */
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding-right: 20px !important;
+}
+th.sortable:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+th.sortable::after {
+    content: '↕';
+    position: absolute;
+    right: 8px;
+    opacity: 0.3;
+}
+th.sort-asc::after { content: '▲'; opacity: 1; color: var(--primary); }
+th.sort-desc::after { content: '▼'; opacity: 1; color: var(--primary); }
 
 /* Programing Grid */
 .programing-grid {

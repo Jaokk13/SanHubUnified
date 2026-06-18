@@ -472,10 +472,32 @@ def montar_rota_salva(orders: list[dict]) -> dict:
         "maps_link": maps_link,
     }
 
-def dividir_em_equipes_sweep(orders: list[dict], num_equipes: int) -> dict:
+def extract_massa_asfaltica(text: str) -> float:
+    if not text:
+        return 0.0
+    import re
+    total_area = 0.0
+    pattern = r"(\d+[,.]?\d*)\s*(m|mts|cm)?\s*[xX]\s*(\d+[,.]?\d*)\s*(m|mts|cm)?"
+    for match in re.finditer(pattern, text, re.IGNORECASE):
+        try:
+            n1 = float(match.group(1).replace(',', '.'))
+            u1 = (match.group(2) or 'm').lower()
+            n2 = float(match.group(3).replace(',', '.'))
+            u2 = (match.group(4) or 'm').lower()
+            
+            if u1 == 'cm': n1 /= 100.0
+            if u2 == 'cm': n2 /= 100.0
+            
+            total_area += (n1 * n2)
+        except:
+            pass
+    return total_area * 0.05 * 2.4
+
+def dividir_em_equipes_sweep(orders: list[dict], num_equipes: int, check_mass: bool = False) -> dict:
     """
     Usa o Algoritmo Sweep (Varredura Angular) para dividir as OSs 
     em um número de equipes com base em suas localizações geocodificadas.
+    Se check_mass=True, limita a alocação para ~8 a 10 toneladas por equipe.
     Retorna { "equipe_index": [lista de os_number] }
     """
     config = get_app_config()
@@ -495,29 +517,51 @@ def dividir_em_equipes_sweep(orders: list[dict], num_equipes: int) -> dict:
         if coords:
             # Calcular o ângulo usando math.atan2 (do centro)
             angulo = math.atan2(coords["lon"] - center_lon, coords["lat"] - center_lat)
+            massa_os = extract_massa_asfaltica(o.get("postergo_reason", "")) if check_mass else 0.0
             pontos_geocodificados.append({
                 "os_number": o["os_number"],
                 "lat": coords["lat"],
                 "lon": coords["lon"],
-                "angulo": angulo
+                "angulo": angulo,
+                "massa": massa_os
             })
 
     # 2. Ordenar por ângulo (Sweep)
     pontos_geocodificados.sort(key=lambda x: x["angulo"])
 
-    # 3. Dividir as fatias igualmente entre as equipes
-    total = len(pontos_geocodificados)
-    tamanho_base = total // num_equipes
-    sobra = total % num_equipes
-
+    # 3. Dividir as fatias entre as equipes
     resultado = {}
-    idx_atual = 0
-
-    for j in range(num_equipes):
-        qtd = tamanho_base + (1 if j < sobra else 0)
-        membros = pontos_geocodificados[idx_atual : idx_atual + qtd]
-        idx_atual += qtd
-        
-        resultado[j] = [m["os_number"] for m in membros]
+    
+    if check_mass:
+        idx_atual = 0
+        total_pontos = len(pontos_geocodificados)
+        for j in range(num_equipes):
+            massa_atual = 0.0
+            membros = []
+            while idx_atual < total_pontos:
+                pt = pontos_geocodificados[idx_atual]
+                massa_os = pt["massa"]
+                
+                if massa_atual >= 10.0:
+                    break
+                    
+                massa_atual += massa_os
+                membros.append(pt)
+                idx_atual += 1
+                
+                if massa_atual >= 10.0:
+                    break
+            
+            resultado[j] = [m["os_number"] for m in membros]
+    else:
+        total = len(pontos_geocodificados)
+        tamanho_base = total // num_equipes
+        sobra = total % num_equipes
+        idx_atual = 0
+        for j in range(num_equipes):
+            qtd = tamanho_base + (1 if j < sobra else 0)
+            membros = pontos_geocodificados[idx_atual : idx_atual + qtd]
+            idx_atual += qtd
+            resultado[j] = [m["os_number"] for m in membros]
 
     return resultado

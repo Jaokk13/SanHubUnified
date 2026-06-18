@@ -147,6 +147,14 @@ function toggleModal(modalId) {
     }
 }
 
+function showInfoModal(title, message) {
+    document.getElementById('info-modal-title').innerHTML = title;
+    // Replace \n with <br> for HTML rendering if we pass plain text with newlines
+    document.getElementById('info-modal-message').innerHTML = message.replace(/\n/g, '<br>');
+    const modal = document.getElementById('info-modal');
+    modal.classList.remove('hidden');
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // UTILS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -175,6 +183,52 @@ function getStatusBadge(status) {
     return `<span class="badge" style="background:#555; color:white;">${status}</span>`;
 }
 
+function extractMeasurements(text) {
+    let totalArea = 0;
+    const regex = /(\d+[,.]?\d*)\s*(m|mts|cm)?\s*[xX]\s*(\d+[,.]?\d*)\s*(m|mts|cm)?/gi;
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+        let n1 = parseFloat(match[1].replace(',', '.'));
+        let u1 = match[2] ? match[2].toLowerCase() : 'm';
+        let n2 = parseFloat(match[3].replace(',', '.'));
+        let u2 = match[4] ? match[4].toLowerCase() : 'm';
+        
+        if (u1 === 'cm') n1 = n1 / 100;
+        if (u2 === 'cm') n2 = n2 / 100;
+        
+        if (!isNaN(n1) && !isNaN(n2)) {
+            totalArea += (n1 * n2);
+        }
+    }
+    return totalArea;
+}
+
+function getStatusBadges(o) {
+    let html = getStatusBadge(o.status);
+    if (o.is_postergada) {
+        const safeReason = (o.postergo_reason || 'Motivo não informado').replace(/"/g, '&quot;').replace(/\n/g, '\\n').replace(/\r/g, '');
+        
+        // Se tem números formatados como dimensões, é uma OS Cortada
+        const isCortada = /\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?/i.test(o.postergo_reason || '');
+        
+        if (isCortada) {
+            let extraInfo = '';
+            const area = extractMeasurements(o.postergo_reason);
+            if (area > 0) {
+                extraInfo += `\\n\\nÁrea Total: ${area.toFixed(2).replace('.', ',')} m²`;
+                if (o.category === 'Asfalto') {
+                    const massa = area * 0.05 * 2.4;
+                    extraInfo += `\\nMassa Asfáltica Estimada: ${massa.toFixed(2).replace('.', ',')} Toneladas`;
+                }
+            }
+            html += ` <span class="badge badge-cortada" onclick="showInfoModal('Medição / Corte', '${safeReason}${extraInfo}')" title="Clique para ver a medição">CORTADA</span>`;
+        } else {
+            html += ` <span class="badge badge-postergada" onclick="showInfoModal('Motivo Postergação', '${safeReason}')" title="Clique para ver o parecer">POSTERGADA</span>`;
+        }
+    }
+    return html;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // API CALLS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -195,7 +249,7 @@ async function fetchAPI(endpoint, options = {}) {
         return await res.json();
     } catch (error) {
         console.error(error);
-        alert(error.message);
+        showInfoModal('Aviso', error.message);
         throw error;
     }
 }
@@ -319,7 +373,7 @@ async function handleImport(e) {
             method: 'POST',
             body: formData
         });
-        alert(res.message);
+        showInfoModal('Aviso', res.message);
         toggleModal('import-modal');
         loadDashboard();
     } catch (error) {
@@ -350,7 +404,7 @@ async function handleCacheImport(e) {
             method: 'POST',
             body: formData
         });
-        alert(res.message);
+        showInfoModal('Aviso', res.message);
         toggleModal('cache-modal');
     } catch (error) {
         // already handled
@@ -392,7 +446,7 @@ async function loadTableData() {
             <td>${o.neighborhood}</td>
             <td class="text-sm" style="max-width:250px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${o.service_description}">${o.service_description || '-'}</td>
             <td>${getCategoryBadge(o.category)}</td>
-            <td>${getStatusBadge(o.status)}</td>
+            <td>${getStatusBadges(o)}</td>
             <td>${o.team_name || '<span class="text-muted">Sem Equipe</span>'}</td>
         `;
         tbody.appendChild(tr);
@@ -421,8 +475,10 @@ async function loadTeams() {
                 <td>${t.id}</td>
                 <td class="font-bold">${t.name}</td>
                 <td>${getCategoryBadge(t.type)}</td>
+                <td><span class="badge" style="background:var(--border-color); color:var(--text-color);">${t.task_type || 'Execução'}</span></td>
                 <td><span class="badge bg-primary-soft text-primary">${t.os_count} Pendentes</span>${routeBadge}</td>
                 <td>
+                    <button class="btn btn-icon" onclick="editTeam(${t.id}, '${t.name.replace(/'/g, "\\'")}', '${t.type}', '${t.task_type || 'Execução'}')"><i class="fas fa-edit text-primary"></i></button>
                     <button class="btn btn-icon" onclick="deleteTeam(${t.id})"><i class="fas fa-trash text-danger"></i></button>
                 </td>
             `;
@@ -443,7 +499,7 @@ async function loadTeams() {
         teams.forEach(t => {
             const isRouted = t.os_count > 0 && t.routed_count === t.os_count;
             const routeText = isRouted ? ' ✔ Roteirizada' : '';
-            select.innerHTML += `<option value="${t.id}">${t.name} (${t.type})${routeText}</option>`;
+            select.innerHTML += `<option value="${t.id}">${t.name} (${t.type} - ${t.task_type || 'Execução'})${routeText}</option>`;
         });
         if (currentVal) select.value = currentVal;
     });
@@ -455,13 +511,22 @@ function openTeamModal() {
     toggleModal('team-modal');
 }
 
+function editTeam(id, name, type, task_type) {
+    document.getElementById('team_id').value = id;
+    document.getElementById('team_name').value = name;
+    document.getElementById('team_type').value = type;
+    document.getElementById('team_task_type').value = task_type;
+    toggleModal('team-modal');
+}
+
 async function handleTeamSubmit(e) {
     e.preventDefault();
     const id = document.getElementById('team_id').value;
     const name = document.getElementById('team_name').value;
     const type = document.getElementById('team_type').value;
+    const task_type = document.getElementById('team_task_type').value;
     
-    const payload = { name, type };
+    const payload = { name, type, task_type };
     
     if (id) {
         await fetchAPI(`/api/teams/${id}`, {
@@ -493,20 +558,56 @@ async function deleteTeam(id) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function initDragAndDrop() {
-    const list = document.getElementById('team-orders-sortable');
-    Sortable.create(list, {
-        handle: '.drag-handle',
-        animation: 150,
-        ghostClass: 'sortable-ghost',
-        dragClass: 'sortable-drag',
-        onEnd: () => {
-            document.getElementById('btn-save-order').disabled = false;
-        }
-    });
+    const teamList = document.getElementById('team-orders-sortable');
+    const availList = document.querySelector('#available-orders-table tbody');
+
+    if (teamList) {
+        Sortable.create(teamList, {
+            group: 'orders',
+            animation: 150,
+            ghostClass: 'sortable-ghost',
+            dragClass: 'sortable-drag',
+            onEnd: () => {
+                document.getElementById('btn-save-order').disabled = false;
+            },
+            onAdd: async function (evt) {
+                const os_number = evt.item.getAttribute('data-id');
+                const teamId = document.getElementById('prog-team-select').value;
+                const progDate = document.getElementById('prog-date').value;
+                if (!teamId || !progDate) {
+                    showInfoModal('Aviso', 'Selecione uma Equipe e uma Data antes de arrastar.');
+                    evt.from.appendChild(evt.item); // cancel drop
+                    return;
+                }
+                
+                try {
+                    await fetchAPI('/api/orders/assign', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ team_id: parseInt(teamId), os_numbers: [os_number], date: progDate })
+                    });
+                    loadProgramingData();
+                } catch (e) {
+                    evt.from.appendChild(evt.item); // rollback on error
+                }
+            }
+        });
+    }
+
+    if (availList) {
+        Sortable.create(availList, {
+            group: 'orders',
+            animation: 150,
+            sort: false, // Don't sort inside the available list itself
+            ghostClass: 'sortable-ghost',
+            dragClass: 'sortable-drag'
+        });
+    }
 }
 
 async function loadProgramingData() {
     const filterCat = document.getElementById('prog-filter-cat').value;
+    const filterTask = document.getElementById('prog-filter-task-type').value;
     const teamId = document.getElementById('prog-team-select').value;
     const progDate = document.getElementById('prog-date').value;
     
@@ -518,13 +619,26 @@ async function loadProgramingData() {
     
     const tbodyAvail = document.querySelector('#available-orders-table tbody');
     tbodyAvail.innerHTML = '';
-    availableOrders.filter(o => !o.team_id).forEach(o => {
+    
+    let filteredOrders = availableOrders.filter(o => !o.team_id);
+    if (filterTask) {
+        filteredOrders = filteredOrders.filter(o => {
+            const isCortada = /\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?/i.test(o.postergo_reason || '');
+            if (filterTask === 'Execução') return isCortada;
+            if (filterTask === 'Prévia') return !isCortada;
+            return true;
+        });
+    }
+    
+    filteredOrders.forEach(o => {
         const tr = document.createElement('tr');
+        tr.setAttribute('data-id', o.os_number);
+        tr.style.cursor = 'grab';
         tr.innerHTML = `
             <td><input type="checkbox" class="chk-avail" value="${o.os_number}"></td>
             <td class="font-bold">${o.os_number}</td>
-            <td class="text-sm" style="max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${o.neighborhood}</td>
-            <td>${getCategoryBadge(o.category)}</td>
+            <td class="text-sm">${o.neighborhood}</td>
+            <td>${getCategoryBadge(o.category)} <br/> ${o.is_postergada ? getStatusBadges(o).replace(getStatusBadge(o.status), '') : ''}</td>
         `;
         tbodyAvail.appendChild(tr);
     });
@@ -552,11 +666,26 @@ async function loadProgramingData() {
     
     const teamOrders = await fetchAPI(teamUrl);
     
+    let totalMass = 0.0;
+    let isAsphaltExecution = false;
+    const teamOption = document.querySelector(`#prog-team-select option[value="${teamId}"]`);
+    if (teamOption) {
+        const text = teamOption.textContent;
+        if (text.includes('Asfalto') && text.includes('Execução')) {
+            isAsphaltExecution = true;
+        }
+    }
+    
     if (teamOrders.length === 0) {
         emptyState.classList.remove('hidden');
     } else {
         emptyState.classList.add('hidden');
         teamOrders.forEach(o => {
+            if (isAsphaltExecution) {
+                const area = extractMeasurements(o.postergo_reason || '');
+                totalMass += (area * 0.05 * 2.4);
+            }
+            
             const tr = document.createElement('tr');
             tr.setAttribute('data-id', o.os_number);
             tr.innerHTML = `
@@ -568,22 +697,27 @@ async function loadProgramingData() {
             tbodyTeam.appendChild(tr);
         });
     }
-    badge.textContent = `${teamOrders.length} OS`;
+    
+    if (isAsphaltExecution) {
+        badge.textContent = `${teamOrders.length} OS | ${totalMass.toFixed(2).replace('.', ',')} Ton`;
+    } else {
+        badge.textContent = `${teamOrders.length} OS`;
+    }
 }
 
 async function assignSelectedToTeam() {
     const teamId = document.getElementById('prog-team-select').value;
     const progDate = document.getElementById('prog-date').value;
-    if (!teamId) return alert('Selecione uma equipe na direita primeiro.');
-    if (!progDate) return alert('Selecione uma data para o agendamento.');
+    if (!teamId) return showInfoModal('Aviso', 'Selecione uma equipe na direita primeiro.');
+    if (!progDate) return showInfoModal('Aviso', 'Selecione uma data para o agendamento.');
     
     const selected = Array.from(document.querySelectorAll('.chk-avail:checked')).map(cb => cb.value);
-    if (selected.length === 0) return alert('Selecione pelo menos uma OS na esquerda.');
+    if (selected.length === 0) return showInfoModal('Aviso', 'Selecione pelo menos uma OS na esquerda.');
     
     await fetchAPI('/api/orders/assign', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ os_numbers: selected, team_id: parseInt(teamId) })
+        body: JSON.stringify({ os_numbers: selected, team_id: parseInt(teamId), date: progDate })
     });
     
     document.getElementById('check-all-available').checked = false;
@@ -592,7 +726,7 @@ async function assignSelectedToTeam() {
 
 async function unassignSelectedFromTeam() {
     const selected = Array.from(document.querySelectorAll('.chk-team:checked')).map(cb => cb.value);
-    if (selected.length === 0) return alert('Selecione pelo menos uma OS na direita.');
+    if (selected.length === 0) return showInfoModal('Aviso', 'Selecione pelo menos uma OS na direita.');
     
     await fetchAPI('/api/orders/assign', {
         method: 'POST',
@@ -618,17 +752,22 @@ async function saveTeamOrder() {
     });
     
     document.getElementById('btn-save-order').disabled = true;
-    // alert('Ordem salva com sucesso!');
+    // showInfoModal('Aviso', 'Ordem salva com sucesso!');
 }
 
 async function autoAssignSweep() {
     const cat = document.getElementById('prog-filter-cat').value;
+    const taskType = document.getElementById('prog-filter-task-type').value;
     const progDate = document.getElementById('prog-date').value;
     if (!cat) {
-        alert("Selecione uma categoria específica (Calçada ou Asfalto) para realizar a divisão automática.");
+        showInfoModal('Aviso', "Selecione uma categoria específica (Calçada ou Asfalto) para realizar a divisão automática.");
         return;
     }
-    if (!progDate) return alert("Selecione uma data para programação.");
+    if (!taskType) {
+        showInfoModal('Aviso', "Selecione uma Função (Execução ou Prévia) para realizar a divisão automática.");
+        return;
+    }
+    if (!progDate) return showInfoModal('Aviso', "Selecione uma data para programação.");
     
     const btn = document.getElementById('btn-auto-assign');
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Auto';
@@ -638,9 +777,9 @@ async function autoAssignSweep() {
         const res = await fetchAPI('/api/orders/auto-assign', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ category: cat, date: progDate })
+            body: JSON.stringify({ category: cat, date: progDate, task_type: taskType })
         });
-        alert(res.message);
+        showInfoModal('Aviso', res.message);
         loadProgramingData();
         loadDashboard();
     } catch (e) {
@@ -653,7 +792,7 @@ async function autoAssignSweep() {
 
 async function resetYesterdayRoutes() {
     const progDate = document.getElementById('prog-date').value;
-    if (!progDate) return alert("Selecione uma data para determinar qual será o dia anterior a ser zerado.");
+    if (!progDate) return showInfoModal('Aviso', "Selecione uma data para determinar qual será o dia anterior a ser zerado.");
     
     // Subtrai 1 dia
     const d = new Date(progDate);
@@ -680,7 +819,7 @@ async function resetYesterdayRoutes() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ date: yesterdayStr })
         });
-        alert(res.message);
+        showInfoModal('Aviso', res.message);
         loadProgramingData();
         loadDashboard();
     } catch (err) {
@@ -871,7 +1010,7 @@ function renderRoute(res) {
     map.fitBounds(bounds, { padding: [50, 50] });
     
     if (res.not_found && res.not_found.length > 0) {
-        alert(`Atenção: Não foi possível geocodificar as seguintes OS/Bairros:\n${res.not_found.join(', ')}`);
+        showInfoModal('Aviso', `Atenção: Não foi possível geocodificar as seguintes OS/Bairros:\n${res.not_found.join(', ')}`);
     }
     
     // Init Sortable
@@ -1019,13 +1158,13 @@ async function confirmRoute() {
             body: JSON.stringify(finalOrder)
         });
         
-        alert(res.message || "Rota confirmada com sucesso!");
+        showInfoModal('Aviso', res.message || "Rota confirmada com sucesso!");
         window.unsavedRouteChanges = false;
         
         btn.style.display = 'none';
         document.getElementById('btn-cancel-route').style.display = 'none';
     } catch (err) {
-        alert(err.message || "Erro ao confirmar rota");
+        showInfoModal('Aviso', err.message || "Erro ao confirmar rota");
     } finally {
         btn.innerHTML = oldHtml;
         btn.disabled = false;
@@ -1048,7 +1187,7 @@ async function clearLocalCache() {
     
     try {
         const res = await fetchAPI('/api/cache', { method: 'DELETE' });
-        alert(res.message || "Cache limpo com sucesso!");
+        showInfoModal('Aviso', res.message || "Cache limpo com sucesso!");
     } catch (err) {
         // Error já tratado no fetchAPI
     }
@@ -1077,9 +1216,43 @@ async function handleSettingsSubmit(e) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ base_lat: lat, base_lon: lon })
         });
-        alert(res.message);
+        showInfoModal('Aviso', res.message);
         toggleModal('settings-modal');
     } catch (err) {
         // Error já tratado no fetchAPI
     }
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TABLE SORTING
+// ─────────────────────────────────────────────────────────────────────────────
+
+document.addEventListener('click', function(e) {
+    const th = e.target.closest('th.sortable');
+    if (!th) return;
+
+    const table = th.closest('table');
+    const tbody = table.querySelector('tbody');
+    // Só ordena linhas que não têm classe especial se houver
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    
+    const ths = Array.from(th.parentNode.children);
+    const colIndex = ths.indexOf(th);
+    const isAsc = !th.classList.contains('sort-asc');
+    
+    ths.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+    th.classList.add(isAsc ? 'sort-asc' : 'sort-desc');
+
+    rows.sort((a, b) => {
+        let valA = a.children[colIndex].textContent.trim();
+        let valB = b.children[colIndex].textContent.trim();
+        
+        if (!isNaN(valA) && !isNaN(valB) && valA !== '' && valB !== '') {
+            return isAsc ? Number(valA) - Number(valB) : Number(valB) - Number(valA);
+        }
+        
+        return isAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    });
+    
+    rows.forEach(r => tbody.appendChild(r));
+});

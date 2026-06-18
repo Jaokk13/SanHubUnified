@@ -6,14 +6,15 @@ O **SanHub Unified** é um sistema inteligente e ágil para o gerenciamento, pro
 
 1. **Dashboard Executivo:** Visualização rápida do status geral de todas as OSs (Pendentes, Executadas) divididas por Categoria (Calçada, Asfalto).
 2. **Importação Automatizada Diária:** Aceita envio de planilhas do sistema Samsys em formato `.xls` e `.xlsx`. Identifica automaticamente OSs novas e atualiza as que já foram executadas com base na ausência nas planilhas recentes.
-3. **Gestão e Programação de Equipes (Drag & Drop):** Permite o cadastro rápido de equipes por categoria e atribuição fácil de OSs pendentes utilizando caixas de seleção, setas direcionais ou o prático "Arrastar e Soltar" para organizar a ordem.
-4. **Divisão Angular Sweep (Automática):** Com apenas um clique, o sistema consegue desenhar "fatias geográficas de pizza" a partir do centro da cidade e distribuir magicamente centenas de ordens igualmente e geograficamente próximas entre as equipes que você tiver em campo.
-5. **Roteirizador Geográfico com Fallback (TSP Otimizado):**
+3. **Gestão e Programação de Equipes (Drag & Drop):** Permite o cadastro rápido de equipes por categoria e atribuição de OSs pendentes utilizando caixas de seleção ou o prático "Arrastar e Soltar" (Drag & Drop interativo) para organizar e programar as equipes na hora.
+4. **Divisão Angular Sweep Inteligente (Roteamento por Carga):** Distribui ordens geograficamente próximas entre as equipes. Para frentes de **Asfalto e Execução**, o robô planeja o roteamento respeitando limites de peso de **8 a 10 toneladas por equipe** (calculado via área da OS), com margem de tolerância automática para manter trechos vizinhos na mesma frente.
+5. **Cálculo de Massa em Tempo Real:** Exibe no painel de programação o somatório instantâneo de toneladas alocadas em cada equipe de asfalto, recalculando de forma transparente ao mover ordens de serviço.
+6. **Roteirizador Geográfico com Fallback (TSP Otimizado):**
    - Rastreia a localização das OSs agrupando-as por Bairros.
    - Utiliza múltiplas camadas de geocodificação: **Banco JSON Local Ultra Rápido > OpenStreetMap (Nominatim) > ArcGIS > BrasilAPI**.
    - Calcula a melhor rota possível (fechando um ciclo da Base e retornando) usando algoritmos de *Nearest Neighbor* (Vizinho Mais Próximo) + otimização matemática *2-Opt*.
-6. **Gerenciador de Banco de Bairros:** Como o tempo é dinheiro, o SanHub aprende. Cada vez que um bairro é localizado na nuvem, ele salva no `banco_bairros_compartilhar.json`. O sistema permite exportar e importar esse JSON para que a sua empresa tenha o cache sempre abastecido e rápido.
-7. **Exportação Excel:** Gera planilhas mastigadas e formatadas (.xlsx) para envio das rotas e OSs diretas para os líderes das equipes.
+7. **Gerenciador de Banco de Bairros:** Como o tempo é dinheiro, o SanHub aprende. Cada vez que um bairro é localizado na nuvem, ele salva no `banco_bairros_compartilhar.json`. O sistema permite exportar e importar esse JSON para que a sua empresa tenha o cache sempre abastecido e rápido.
+8. **Exportação Excel:** Gera planilhas mastigadas e formatadas (.xlsx) para envio das rotas e OSs diretas para os líderes das equipes.
 
 ---
 

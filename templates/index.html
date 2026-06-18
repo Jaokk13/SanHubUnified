@@ -75,6 +75,13 @@
                             <option value="Asfalto">Asfalto</option>
                         </select>
                     </div>
+                    <div class="input-group">
+                        <label>Função da Equipe</label>
+                        <select id="team_task_type" required>
+                            <option value="Execução">Execução (Faz a Obra)</option>
+                            <option value="Prévia">Prévia (Corte / Medição)</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-block mt-4">
                         <i class="fas fa-save"></i> Salvar Equipe
                     </button>
@@ -140,6 +147,19 @@
                         <i class="fas fa-save"></i> Salvar Configurações
                     </button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Informações Genéricas -->
+    <div id="info-modal" class="modal hidden">
+        <div class="modal-content glass" style="max-width: 400px; text-align: center;">
+            <div class="modal-header" style="justify-content: center;">
+                <h2 id="info-modal-title">Informação</h2>
+            </div>
+            <div class="modal-body">
+                <p id="info-modal-message" style="margin-bottom: 20px; white-space: pre-line; text-align: left;"></p>
+                <button class="btn btn-primary btn-block" onclick="toggleModal('info-modal')">OK</button>
             </div>
         </div>
     </div>
@@ -278,12 +298,12 @@
                             <thead>
                                 <tr>
                                     <th width="40"></th>
-                                    <th>OS</th>
-                                    <th>Bairro</th>
-                                    <th>Serviço</th>
-                                    <th>Categoria</th>
-                                    <th>Status</th>
-                                    <th>Equipe</th>
+                                    <th class="sortable" data-sort="os_number">OS</th>
+                                    <th class="sortable" data-sort="neighborhood">Bairro</th>
+                                    <th class="sortable" data-sort="service_description">Serviço</th>
+                                    <th class="sortable" data-sort="category">Categoria</th>
+                                    <th class="sortable" data-sort="status">Status</th>
+                                    <th class="sortable" data-sort="team_name">Equipe</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -311,6 +331,11 @@
                                     <option value="Calçada">Calçada</option>
                                     <option value="Asfalto">Asfalto</option>
                                 </select>
+                                <select id="prog-filter-task-type">
+                                    <option value="">Ambas Funções</option>
+                                    <option value="Execução">Execução</option>
+                                    <option value="Prévia">Prévia/Corte</option>
+                                </select>
                                 <button class="btn btn-outline btn-sm" id="btn-auto-assign" title="Divisão Automática (Sweep) para equipes desta categoria">
                                     <i class="fas fa-magic"></i> Auto
                                 </button>
@@ -321,9 +346,9 @@
                                 <thead>
                                     <tr>
                                         <th width="30"><input type="checkbox" id="check-all-available"></th>
-                                        <th>OS</th>
-                                        <th>Bairro</th>
-                                        <th>Categoria</th>
+                                        <th class="sortable" data-sort="os_number">OS</th>
+                                        <th class="sortable" data-sort="neighborhood">Bairro</th>
+                                        <th class="sortable" data-sort="category">Categoria</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -450,6 +475,7 @@
                                     <th>ID</th>
                                     <th>Nome</th>
                                     <th>Tipo (Calçada/Asfalto)</th>
+                                    <th>Função</th>
                                     <th>OS Pendentes</th>
                                     <th width="100">Ações</th>
                                 </tr>
@@ -469,6 +495,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/js/app.js"></script>
+    <script src="/static/js/app.js?v=4"></script>
 </body>
 </html>
