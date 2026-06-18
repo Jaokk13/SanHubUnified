@@ -398,6 +398,80 @@ def roteirizar_equipe(orders: list[dict], log_fn=None) -> dict:
     }
 
 
+def montar_rota_salva(orders: list[dict]) -> dict:
+    """
+    Monta a visualização da rota para equipes que já têm `execution_order` salvo no banco.
+    Não usa o caixeiro-viajante, apenas respeita a ordem do banco.
+    """
+    config = get_app_config()
+
+    base = {
+        "os_numbers": ["BASE"],
+        "neighborhood": f"{config['cidade']} - Base",
+        "lat": config["base_lat"],
+        "lon": config["base_lon"],
+        "source": "config",
+    }
+
+    pontos_bairro = []
+    not_found = []
+    
+    # Agrupar bairros na ordem em que aparecem (preservando o execution_order)
+    bairro_atual = None
+    for o in orders:
+        if o.get("execution_order") is None:
+            continue
+            
+        bairro = o.get("neighborhood", "")
+        if not bairro:
+            not_found.append(o.get("os_number", "?"))
+            continue
+            
+        if bairro != bairro_atual:
+            bairro_atual = bairro
+            pontos_bairro.append({
+                "neighborhood": bairro,
+                "os_numbers": [o["os_number"]]
+            })
+        else:
+            pontos_bairro[-1]["os_numbers"].append(o["os_number"])
+            
+    pontos = [base]
+    for b_data in pontos_bairro:
+        coords = geocodificar(b_data["neighborhood"], config)
+        if coords:
+            pontos.append({
+                "os_numbers": b_data["os_numbers"],
+                "neighborhood": b_data["neighborhood"],
+                "lat": coords["lat"],
+                "lon": coords["lon"],
+                "source": coords["source"],
+            })
+        else:
+            not_found.extend(b_data["os_numbers"])
+            
+    pontos.append(base) # Volta para a base
+    
+    total_km = 0.0
+    resultado = []
+    for i, p in enumerate(pontos):
+        dist = 0.0
+        if i > 0:
+            prev = pontos[i - 1]
+            dist = calcular_distancia((prev["lat"], prev["lon"]), (p["lat"], p["lon"]))
+            total_km += dist
+        resultado.append({**p, "order": i, "distance_km": round(dist, 2)})
+
+    coords_str = "/".join(f"{p['lat']},{p['lon']}" for p in pontos)
+    maps_link = f"https://www.google.com/maps/dir/{coords_str}"
+
+    return {
+        "route": resultado,
+        "not_found": not_found,
+        "total_km": round(total_km, 2),
+        "maps_link": maps_link,
+    }
+
 def dividir_em_equipes_sweep(orders: list[dict], num_equipes: int) -> dict:
     """
     Usa o Algoritmo Sweep (Varredura Angular) para dividir as OSs 

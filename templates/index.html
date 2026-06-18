@@ -378,8 +378,8 @@
                         </div>
                         <div class="p-3">
                             <label class="text-sm text-muted">Selecione a equipe para rotear:</label>
-                            <select id="route-team-select" class="w-100 mb-3 mt-1">
-                                <option value="">Selecione...</option>
+                            <select id="route-team-select" class="filter-select w-100 mb-3 mt-1">
+                                <option value="">Selecione uma Equipe...</option>
                                 <!-- JS Injected -->
                             </select>
                             
@@ -404,6 +404,15 @@
                                 <ul class="route-list" id="route-list-ul">
                                     <!-- JS Injected -->
                                 </ul>
+                                
+                                <div class="mt-4" id="route-actions-container" style="display: flex; gap: 10px; flex-direction: column;">
+                                    <button class="btn btn-success btn-block" onclick="confirmRoute()" id="btn-confirm-route">
+                                        <i class="fas fa-check"></i> Confirmar Rota
+                                    </button>
+                                    <button class="btn btn-outline btn-block text-danger" onclick="cancelRouteChanges()" id="btn-cancel-route" style="border-color: var(--danger-soft);">
+                                        <i class="fas fa-times"></i> Descartar Alterações
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

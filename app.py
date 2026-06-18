@@ -245,18 +245,39 @@ def calculate_route(team_id: int):
         import json
         json.dumps(res)
         
-        # Salvar a ordem otimizada no banco
-        if res["route"]:
-            os_order = []
-            for p in res["route"]:
-                if p["os_numbers"][0] != "BASE":
-                    os_order.extend(p["os_numbers"])
-            db.set_execution_orders(team_id, os_order)
-            
+        # Não salva mais automaticamente no banco
+        # Apenas retorna a rota calculada para o frontend
         return res
     except Exception as e:
         err_str = traceback.format_exc()
         raise HTTPException(status_code=500, detail=f"Erro interno: {err_str}")
+
+@app.post("/api/route/{team_id}/confirm")
+def confirm_route(team_id: int, os_list: list[str] = Body(...)):
+    try:
+        db.set_execution_orders(team_id, os_list)
+        return {"success": True, "message": "Rota confirmada e salva com sucesso!"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/route/{team_id}")
+def get_saved_route(team_id: int):
+    try:
+        orders = db.get_orders(status="Pendente", team_id=team_id)
+        if not orders:
+            raise HTTPException(status_code=404, detail="Nenhuma OS para esta equipe.")
+            
+        # Verifica se pelo menos uma tem execution_order
+        has_route = any(o.get("execution_order") is not None for o in orders)
+        if not has_route:
+            raise HTTPException(status_code=404, detail="Rota ainda não confirmada para esta equipe.")
+            
+        res = router.montar_rota_salva(orders)
+        return res
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.delete("/api/cache")
 def clear_geocoding_cache():

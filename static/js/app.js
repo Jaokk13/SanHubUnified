@@ -8,6 +8,7 @@ let allTeams = [];
 let map = null;
 let routeLayer = null;
 let markersLayer = null;
+window.unsavedRouteChanges = false;
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,6 +69,16 @@ function initNavigation() {
         item.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = item.getAttribute('data-target');
+            
+            // Check for unsaved changes before leaving routing tab
+            if (targetId !== 'routing' && window.unsavedRouteChanges) {
+                if (!confirm("Algumas alterações não foram salvas. Deseja sair da aba de roteirização mesmo assim?")) {
+                    return;
+                }
+            }
+            if (targetId !== 'routing') {
+                window.unsavedRouteChanges = false; // Reset if user agreed to leave
+            }
             
             // Update nav active state
             navItems.forEach(nav => nav.classList.remove('active'));
@@ -572,11 +583,52 @@ function handleRouteTeamSelect() {
     document.getElementById('route-results').classList.add('hidden');
     markersLayer.clearLayers();
     routeLayer.clearLayers();
+    
+    window.unsavedRouteChanges = false;
+    
+    if (val) {
+        // Auto-load se existir rota
+        autoLoadSavedRoute(val);
+    }
+}
+
+async function autoLoadSavedRoute(teamId) {
+    const btn = document.getElementById('btn-calculate-route');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Carregando Rota...';
+    btn.disabled = true;
+    
+    try {
+        const resRaw = await fetch(`/api/route/${teamId}`);
+        if (!resRaw.ok) {
+            // Se for 404, não tem rota salva
+            if (resRaw.status === 404) {
+                document.getElementById('route-results').classList.add('hidden');
+                return;
+            }
+            throw new Error('Erro ao carregar rota salva');
+        }
+        const res = await resRaw.json();
+        renderRoute(res);
+        // Hide/disable "Confirmar Rota" since it's already saved
+        document.getElementById('btn-confirm-route').style.display = 'none';
+        document.getElementById('btn-cancel-route').style.display = 'none';
+        
+    } catch (err) {
+        console.warn(err);
+    } finally {
+        btn.innerHTML = '<i class="fas fa-route"></i> Calcular Rota (TSP)';
+        btn.disabled = false;
+    }
 }
 
 async function calculateRoute() {
     const teamId = document.getElementById('route-team-select').value;
     if (!teamId) return;
+    
+    // Alert user if they are calculating over unsaved changes
+    if (window.unsavedRouteChanges && !confirm("Isto irá sobrescrever as alterações não salvas. Deseja continuar?")) {
+        return;
+    }
     
     const btn = document.getElementById('btn-calculate-route');
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Calculando...';
@@ -585,6 +637,11 @@ async function calculateRoute() {
     try {
         const res = await fetchAPI(`/api/route/${teamId}`, { method: 'POST' });
         renderRoute(res);
+        
+        window.unsavedRouteChanges = true;
+        document.getElementById('btn-confirm-route').style.display = 'block';
+        document.getElementById('btn-cancel-route').style.display = 'block';
+        
     } catch (e) {
         // Handled
     } finally {
@@ -632,7 +689,7 @@ function renderRoute(res) {
         li.dataset.neighborhood = p.neighborhood;
         li.dataset.idx = idx;
         
-        const dragHandle = p.os_numbers[0] === 'BASE' ? '' : '<div style="cursor: grab; margin-left: 10px; color: var(--text-muted);"><i class="fas fa-bars"></i></div>';
+        const dragHandle = p.os_numbers[0] === 'BASE' ? '' : '<div class="drag-handle" style="margin-left: 10px; color: var(--text-muted);"><i class="fas fa-bars"></i></div>';
         
         li.innerHTML = `
             <div class="badge-num">${idx}</div>
@@ -679,7 +736,8 @@ function renderRoute(res) {
     if (window.routeSortable) window.routeSortable.destroy();
     window.routeSortable = Sortable.create(ul, {
         animation: 150,
-        filter: ':not(.route-draggable)', // Don't drag base
+        draggable: '.route-draggable', // Only allow these to be dragged
+        handle: '.drag-handle', // Drag from icon
         onEnd: function() {
             recalcularRotaVisual();
         }
@@ -708,7 +766,7 @@ function recalcularRotaVisual() {
     let totalKm = 0;
     
     // Google Maps link generation
-    let gmapsUrl = "https://www.google.com/maps/dir/";
+    let coordsStr = "";
     
     items.forEach((li, idx) => {
         const lat = parseFloat(li.dataset.lat);
@@ -734,7 +792,7 @@ function recalcularRotaVisual() {
         
         // Map markers
         latlngs.push([lat, lon]);
-        gmapsUrl += `${lat},${lon}/`;
+        coordsStr += `${lat},${lon}/`;
         
         let color = '#3b82f6';
         if (osList[0] === 'BASE') color = '#ef4444';
@@ -755,10 +813,15 @@ function recalcularRotaVisual() {
     
     // Draw line
     L.polyline(latlngs, { color: '#3b82f6', weight: 4, opacity: 0.7, dashArray: '10, 10' }).addTo(routeLayer);
+    const gmapsUrl = `https://www.google.com/maps/dir/${coordsStr}`;
     
     // Update total dist and maps link
     document.getElementById('route-dist').textContent = `${totalKm.toFixed(2)} km`;
     document.getElementById('route-gmaps').href = gmapsUrl;
+    
+    window.unsavedRouteChanges = true;
+    document.getElementById('btn-confirm-route').style.display = 'block';
+    document.getElementById('btn-cancel-route').style.display = 'block';
 }
 
 function reverseRoute() {
@@ -782,6 +845,59 @@ function reverseRoute() {
     }
     
     recalcularRotaVisual();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SALVAR E CANCELAR ROTA
+// ─────────────────────────────────────────────────────────────────────────────
+async function confirmRoute() {
+    const teamId = document.getElementById('route-team-select').value;
+    if (!teamId) return;
+    
+    const ul = document.getElementById('route-list-ul');
+    const items = ul.querySelectorAll('li[data-os]');
+    
+    let finalOrder = [];
+    items.forEach(li => {
+        const osArray = JSON.parse(li.dataset.os || '[]');
+        if (osArray[0] !== 'BASE') {
+            finalOrder.push(...osArray);
+        }
+    });
+    
+    const btn = document.getElementById('btn-confirm-route');
+    const oldHtml = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+    btn.disabled = true;
+    
+    try {
+        const res = await fetchAPI(`/api/route/${teamId}/confirm`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(finalOrder)
+        });
+        
+        alert(res.message || "Rota confirmada com sucesso!");
+        window.unsavedRouteChanges = false;
+        
+        btn.style.display = 'none';
+        document.getElementById('btn-cancel-route').style.display = 'none';
+    } catch (err) {
+        alert(err.message || "Erro ao confirmar rota");
+    } finally {
+        btn.innerHTML = oldHtml;
+        btn.disabled = false;
+    }
+}
+
+function cancelRouteChanges() {
+    if (!confirm("Tem certeza que deseja descartar todas as alterações não salvas?")) return;
+    
+    const teamId = document.getElementById('route-team-select').value;
+    if (!teamId) return;
+    
+    window.unsavedRouteChanges = false;
+    autoLoadSavedRoute(teamId);
 }
 
 // Limpar cache temporário local
