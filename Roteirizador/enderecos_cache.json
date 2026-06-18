@@ -1,0 +1,230 @@
+{
+    "Avenida Doutor Meirelles 2660 Tijucal": {
+        "lat": -15.622670688243,
+        "lon": -56.007692901808,
+        "address": "Origem: arcgis",
+        "origem": "arcgis"
+    },
+    "ALTOS DA SERRA": {
+        "lat": -15.5801492,
+        "lon": -56.025136,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "ALTOS DA SERRA II": {
+        "lat": -15.5830974,
+        "lon": -56.0196384,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "CPA III": {
+        "lat": -15.5657618,
+        "lon": -56.0450292,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Jardim BRASIL": {
+        "lat": -15.564569580146225,
+        "lon": -56.03133665770486,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "TANCREDO NEVES": {
+        "lat": -15.5683774,
+        "lon": -56.0530041,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "TRES BARRAS": {
+        "lat": -15.5549439,
+        "lon": -56.0279642,
+        "address": "Origem: arcgis",
+        "origem": "arcgis"
+    },
+    "Jardim das Américas": {
+        "lat": -15.6078685,
+        "lon": -56.0739401,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Pedra 90": {
+        "lat": -15.6329763,
+        "lon": -55.95045,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Santa Rosa": {
+        "lat": -15.5857027,
+        "lon": -56.1231011,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "CPA I": {
+        "lat": -15.5557948,
+        "lon": -56.0528091,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "Goiabeiras": {
+        "lat": -15.5894685,
+        "lon": -56.1165255,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "-15 635946308016816, -56 02728144730883": {
+        "lat": -15.635946308016816,
+        "lon": -56.02728144730883,
+        "address": "Origem: coordenadas",
+        "origem": "coordenadas"
+    },
+    "ALTOS DO COXIPO": {
+        "lat": -15.6300881,
+        "lon": -56.0242988,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "C R RIO JANGADA": {
+        "lat": -15.622270892198,
+        "lon": -56.081870447882,
+        "address": "Origem: arcgis",
+        "origem": "arcgis"
+    },
+    "DOM AQUINO": {
+        "lat": -15.6092584,
+        "lon": -56.0937074,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "DOM BOSCO": {
+        "lat": -15.5856641,
+        "lon": -56.0665822,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Jardim DOS IPES": {
+        "lat": -15.625555,
+        "lon": -56.0151928,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Jardim IMPERIAL II": {
+        "lat": -15.620002829701328,
+        "lon": -56.02366809177762,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "Jardim ITALIA I": {
+        "lat": -15.5982431,
+        "lon": -56.0595398,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Jardim NOVO MILENIO": {
+        "lat": -15.6177811,
+        "lon": -56.0047446,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "Jardim PASSAREDO": {
+        "lat": -15.6428279,
+        "lon": -56.0045274,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Jardim SHANGRI-LA": {
+        "lat": -15.6253741,
+        "lon": -56.0649745,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "PEDRA 90": {
+        "lat": -15.6329763,
+        "lon": -55.95045,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "POCAO": {
+        "lat": -15.6066893,
+        "lon": -56.08687,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Parque ATALAIA": {
+        "lat": -15.66195081564258,
+        "lon": -56.05611026517418,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "R ALTOS DO PARQUE": {
+        "lat": -15.68466313395343,
+        "lon": -56.032225941070585,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "R MAR RONDON": {
+        "lat": -15.593412944334,
+        "lon": -56.122410109787,
+        "address": "Origem: arcgis",
+        "origem": "arcgis"
+    },
+    "R NOVO PARQUE": {
+        "lat": -15.6826086,
+        "lon": -56.0380162,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "R SONHO MEU": {
+        "lat": -15.6291009,
+        "lon": -55.9491225,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "TIJUCAL": {
+        "lat": -15.6324138,
+        "lon": -56.0121465,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "R FRANCISCA LOUREIRO BORBA": {
+        "lat": -15.606065033270646,
+        "lon": -55.98631738195978,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "R NICO BARACAT II": {
+        "lat": -15.613317744393424,
+        "lon": -55.978465296151846,
+        "address": "Origem: json",
+        "origem": "json"
+    },
+    "SAO GONCALO": {
+        "lat": -15.6464776,
+        "lon": -56.0429078,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "Santa TEREZINHA": {
+        "lat": -15.6616937,
+        "lon": -56.0268128,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "AREAO": {
+        "lat": -15.6003404,
+        "lon": -56.082765,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "BAU": {
+        "lat": -15.5919752,
+        "lon": -56.0856856,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    },
+    "BELA VISTA": {
+        "lat": -15.5804292,
+        "lon": -56.0626227,
+        "address": "Origem: geopy (Cuiabá)",
+        "origem": "geopy (Cuiabá)"
+    }
+}

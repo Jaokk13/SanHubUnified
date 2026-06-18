@@ -1,0 +1,4377 @@
+{
+    "GOIABEIRAS": {
+        "lat": -15.599195902977254,
+        "lon": -56.10833722319906,
+        "tipo": "manual"
+    },
+    "JD. BRASIL": {
+        "lat": -15.564903218573924,
+        "lon": -56.03113311645417,
+        "tipo": "manual"
+    },
+    "JD. ITAPUA": {
+        "lat": -15.557493697903324,
+        "lon": -56.084240728897235,
+        "tipo": "manual"
+    },
+    "NOVO PARAISO II": {
+        "lat": -15.540999840063249,
+        "lon": -56.05762985991603,
+        "tipo": "manual"
+    },
+    "PQ. AMPERCO": {
+        "lat": -15.574978336287936,
+        "lon": -56.12109425253028,
+        "tipo": "manual"
+    },
+    "M. DO OURO": {
+        "lat": -15.570466956227794,
+        "lon": -56.05879793889332,
+        "tipo": "manual"
+    },
+    "DESPRAIADO": {
+        "lat": -15.569420327909548,
+        "lon": -56.0913249543097,
+        "tipo": "manual"
+    },
+    "JOSE PINTO": {
+        "lat": -15.60970403655294,
+        "lon": -56.11282597173443,
+        "tipo": "manual"
+    },
+    "DT. SUCURI": {
+        "lat": -15.540403807408655,
+        "lon": -56.15658367118576,
+        "tipo": "manual"
+    },
+    "SUCURI": {
+        "lat": -15.55784571734126,
+        "lon": -56.13539320896327,
+        "tipo": "manual"
+    },
+    "Novo Mato Grosso": {
+        "lat": -15.7399151,
+        "lon": -56.1575282,
+        "tipo": "osm_auto"
+    },
+    "Setor C": {
+        "lat": -15.660146,
+        "lon": -56.0360674,
+        "tipo": "osm_auto"
+    },
+    "Setor A": {
+        "lat": -15.6636721,
+        "lon": -56.0343655,
+        "tipo": "osm_auto"
+    },
+    "Setor B": {
+        "lat": -15.660503,
+        "lon": -56.0310512,
+        "tipo": "osm_auto"
+    },
+    "Setor D": {
+        "lat": -15.658218,
+        "lon": -56.0329228,
+        "tipo": "osm_auto"
+    },
+    "Setor E": {
+        "lat": -15.6552963,
+        "lon": -56.0345355,
+        "tipo": "osm_auto"
+    },
+    "Assentamento Gamaliel": {
+        "lat": -15.5211909,
+        "lon": -56.0057094,
+        "tipo": "osm_auto"
+    },
+    "Nova Aliança": {
+        "lat": -15.6073115,
+        "lon": -56.1812619,
+        "tipo": "osm_auto"
+    },
+    "Nova Esperança": {
+        "lat": -15.7334869,
+        "lon": -56.0426858,
+        "tipo": "osm_auto"
+    },
+    "Colina Verde": {
+        "lat": -15.5464337,
+        "lon": -56.0106169,
+        "tipo": "osm_auto"
+    },
+    "Mirante do Pary": {
+        "lat": -15.5890831,
+        "lon": -56.1502284,
+        "tipo": "osm_auto"
+    },
+    "Jardim Imperial": {
+        "lat": -15.6257775,
+        "lon": -56.1731611,
+        "tipo": "osm_auto"
+    },
+    "Setor Centro Sul": {
+        "lat": -15.5709056,
+        "lon": -56.0603035,
+        "tipo": "osm_auto"
+    },
+    "Setor Centro Norte": {
+        "lat": -15.5659174,
+        "lon": -56.0608047,
+        "tipo": "osm_auto"
+    },
+    "Setor Oeste": {
+        "lat": -15.5718213,
+        "lon": -56.0659582,
+        "tipo": "osm_auto"
+    },
+    "Setor 4": {
+        "lat": -15.5713693,
+        "lon": -56.0425923,
+        "tipo": "osm_auto"
+    },
+    "Setor 3": {
+        "lat": -15.5727016,
+        "lon": -56.0469095,
+        "tipo": "osm_auto"
+    },
+    "Setor 2": {
+        "lat": -15.5639206,
+        "lon": -56.0406384,
+        "tipo": "osm_auto"
+    },
+    "Vila Rosa": {
+        "lat": -15.5757572,
+        "lon": -56.0408682,
+        "tipo": "osm_auto"
+    },
+    "Tancredo Neves": {
+        "lat": -15.5683774,
+        "lon": -56.0530041,
+        "tipo": "osm_auto"
+    },
+    "Arraial dos Freitas": {
+        "lat": -15.4841065,
+        "lon": -55.977219,
+        "tipo": "osm_auto"
+    },
+    "Comunidade Nossa Senhora da Assunção": {
+        "lat": -15.5274057,
+        "lon": -56.0468577,
+        "tipo": "osm_auto"
+    },
+    "Novo Renascer": {
+        "lat": -15.5771905,
+        "lon": -55.7765057,
+        "tipo": "osm_auto"
+    },
+    "Setor 1": {
+        "lat": -15.5660454,
+        "lon": -56.0455625,
+        "tipo": "osm_auto"
+    },
+    "Setor 5": {
+        "lat": -15.5695219,
+        "lon": -56.0344353,
+        "tipo": "osm_auto"
+    },
+    "CPA I": {
+        "lat": -15.5557948,
+        "lon": -56.0528091,
+        "tipo": "osm_auto"
+    },
+    "CPA II": {
+        "lat": -15.559357,
+        "lon": -56.0464566,
+        "tipo": "osm_auto"
+    },
+    "Vila Nova": {
+        "lat": -15.5513786,
+        "lon": -56.0506612,
+        "tipo": "osm_auto"
+    },
+    "São Tomé": {
+        "lat": -15.5500421,
+        "lon": -56.0375945,
+        "tipo": "osm_auto"
+    },
+    "Jardim das Oliveiras": {
+        "lat": -15.6611557,
+        "lon": -56.0620229,
+        "tipo": "osm_auto"
+    },
+    "Humaitá": {
+        "lat": -15.6631326,
+        "lon": -56.0551172,
+        "tipo": "osm_auto"
+    },
+    "Humaitá 1": {
+        "lat": -15.6685664,
+        "lon": -56.0574715,
+        "tipo": "osm_auto"
+    },
+    "Humaitá 2": {
+        "lat": -15.6709733,
+        "lon": -56.0552613,
+        "tipo": "osm_auto"
+    },
+    "Humaitá 3": {
+        "lat": -15.6744545,
+        "lon": -56.0556368,
+        "tipo": "osm_auto"
+    },
+    "Lula Brasil 1": {
+        "lat": -15.5950733,
+        "lon": -56.0090897,
+        "tipo": "osm_auto"
+    },
+    "Lula Brasil 2": {
+        "lat": -15.5944547,
+        "lon": -56.0201666,
+        "tipo": "osm_auto"
+    },
+    "Pipoca": {
+        "lat": -15.5913663,
+        "lon": -56.0112341,
+        "tipo": "osm_auto"
+    },
+    "Renato José dos Santos": {
+        "lat": -15.6532777,
+        "lon": -56.1765933,
+        "tipo": "osm_auto"
+    },
+    "Ataíde Ferreira da Silva": {
+        "lat": -15.6545071,
+        "lon": -56.1787713,
+        "tipo": "osm_auto"
+    },
+    "Asa Bela": {
+        "lat": -15.6563666,
+        "lon": -56.176647,
+        "tipo": "osm_auto"
+    },
+    "Asa Branca": {
+        "lat": -15.6549926,
+        "lon": -56.1735785,
+        "tipo": "osm_auto"
+    },
+    "Santa Izabel": {
+        "lat": -15.6513044,
+        "lon": -56.1724091,
+        "tipo": "osm_auto"
+    },
+    "Traíra": {
+        "lat": -15.6465315,
+        "lon": -56.1792648,
+        "tipo": "osm_auto"
+    },
+    "Parque Industrial Atlântico": {
+        "lat": -15.6446098,
+        "lon": -56.1725808,
+        "tipo": "osm_auto"
+    },
+    "Jardim dos Estados": {
+        "lat": -15.6389481,
+        "lon": -56.1742545,
+        "tipo": "osm_auto"
+    },
+    "Vale Verde": {
+        "lat": -15.7254235,
+        "lon": -56.1290615,
+        "tipo": "osm_auto"
+    },
+    "Centro Industrial": {
+        "lat": -15.7278194,
+        "lon": -56.1445968,
+        "tipo": "osm_auto"
+    },
+    "Sadia 1": {
+        "lat": -15.4971924,
+        "lon": -56.2704739,
+        "tipo": "osm_auto"
+    },
+    "Assentamento 21 de Abril": {
+        "lat": -15.613694,
+        "lon": -55.8186141,
+        "tipo": "osm_auto"
+    },
+    "Machado": {
+        "lat": -15.3271014,
+        "lon": -56.1076543,
+        "tipo": "osm_auto"
+    },
+    "Maria Levegilda": {
+        "lat": -15.577521,
+        "lon": -56.0113794,
+        "tipo": "osm_auto"
+    },
+    "Morro do Canta Galo": {
+        "lat": -15.5754138,
+        "lon": -56.1580813,
+        "tipo": "osm_auto"
+    },
+    "Loteamento Lagoa do Jacaré": {
+        "lat": -15.6542851,
+        "lon": -56.1024829,
+        "tipo": "osm_auto"
+    },
+    "Vila Vitória": {
+        "lat": -15.647759,
+        "lon": -56.0878687,
+        "tipo": "osm_auto"
+    },
+    "Liberdade": {
+        "lat": -15.6114494,
+        "lon": -55.9898417,
+        "tipo": "osm_auto"
+    },
+    "Novo Milênio": {
+        "lat": -15.6178403,
+        "lon": -56.0046124,
+        "tipo": "osm_auto"
+    },
+    "Residencial Aricá": {
+        "lat": -15.6238403,
+        "lon": -55.9890032,
+        "tipo": "osm_auto"
+    },
+    "Residencial Nico Baracat 1": {
+        "lat": -15.614816,
+        "lon": -55.9812876,
+        "tipo": "osm_auto"
+    },
+    "Residencial Nico Baracat 2": {
+        "lat": -15.6136909,
+        "lon": -55.9776843,
+        "tipo": "osm_auto"
+    },
+    "Belita Costa Maques": {
+        "lat": -15.6274817,
+        "lon": -55.9902748,
+        "tipo": "osm_auto"
+    },
+    "Nossa Senhora do Líbano": {
+        "lat": -15.6104165,
+        "lon": -56.126208,
+        "tipo": "osm_auto"
+    },
+    "Jardim Moura": {
+        "lat": -15.6094079,
+        "lon": -56.1217082,
+        "tipo": "osm_auto"
+    },
+    "Francisco Vilanova Filho": {
+        "lat": -15.6085839,
+        "lon": -56.1230331,
+        "tipo": "osm_auto"
+    },
+    "Jardim Kelly": {
+        "lat": -15.6068278,
+        "lon": -56.1236473,
+        "tipo": "osm_auto"
+    },
+    "Quadra 6": {
+        "lat": -15.652682,
+        "lon": -56.125271,
+        "tipo": "osm_auto"
+    },
+    "Residencial Alberto Canelas": {
+        "lat": -15.6626212,
+        "lon": -56.1538204,
+        "tipo": "osm_auto"
+    },
+    "Loteamento São João": {
+        "lat": -15.6691558,
+        "lon": -56.1516815,
+        "tipo": "osm_auto"
+    },
+    "Cohab São Gonçalo": {
+        "lat": -15.6753499,
+        "lon": -56.1341615,
+        "tipo": "osm_auto"
+    },
+    "Jardim da Flores": {
+        "lat": -15.6765776,
+        "lon": -56.1330918,
+        "tipo": "osm_auto"
+    },
+    "Santa Fé": {
+        "lat": -15.6755383,
+        "lon": -56.1330302,
+        "tipo": "osm_auto"
+    },
+    "Lot. São Jeronimo": {
+        "lat": -15.6738375,
+        "lon": -56.1318354,
+        "tipo": "osm_auto"
+    },
+    "Altos do São Gonçalo": {
+        "lat": -15.6586514,
+        "lon": -56.060629,
+        "tipo": "osm_auto"
+    },
+    "San Marino": {
+        "lat": -15.5938342,
+        "lon": -56.130729,
+        "tipo": "osm_auto"
+    },
+    "Novo Tempo": {
+        "lat": -15.568402906181518,
+        "lon": -56.13001384737144,
+        "tipo": "manual"
+    },
+    "Jardim Aquário": {
+        "lat": -15.6397814,
+        "lon": -56.0640496,
+        "tipo": "osm_auto"
+    },
+    "Assentamento Terra Prometida": {
+        "lat": -15.5346331,
+        "lon": -56.0438383,
+        "tipo": "osm_auto"
+    },
+    "Barreiro Branco": {
+        "lat": -15.5251239,
+        "lon": -56.0484297,
+        "tipo": "osm_auto"
+    },
+    "Quadra 01": {
+        "lat": -15.6175975,
+        "lon": -55.9519651,
+        "tipo": "osm_auto"
+    },
+    "Quadra 02": {
+        "lat": -15.617728,
+        "lon": -55.9516583,
+        "tipo": "osm_auto"
+    },
+    "Quadra 03": {
+        "lat": -15.6180695,
+        "lon": -55.9509118,
+        "tipo": "osm_auto"
+    },
+    "Residencial Novo Parque": {
+        "lat": -15.682597,
+        "lon": -56.0377422,
+        "tipo": "osm_auto"
+    },
+    "Jardim Eldorado": {
+        "lat": -15.587294,
+        "lon": -56.0490116,
+        "tipo": "osm_auto"
+    },
+    "Jardim Fortaleza": {
+        "lat": -15.6156782,
+        "lon": -55.9940151,
+        "tipo": "osm_auto"
+    },
+    "Santa Laura": {
+        "lat": -15.6191862,
+        "lon": -55.9929836,
+        "tipo": "osm_auto"
+    },
+    "Sol Nascente": {
+        "lat": -15.5864597,
+        "lon": -56.0454765,
+        "tipo": "osm_auto"
+    },
+    "São João Del Rei": {
+        "lat": -15.6148803,
+        "lon": -56.0023687,
+        "tipo": "osm_auto"
+    },
+    "Brasil 21": {
+        "lat": -15.6071692,
+        "lon": -55.9972707,
+        "tipo": "osm_auto"
+    },
+    "Cohab Nova Ipê": {
+        "lat": -15.6124372,
+        "lon": -56.1732909,
+        "tipo": "osm_auto"
+    },
+    "Village Flamboyant": {
+        "lat": -15.5918437,
+        "lon": -56.1282308,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santa Amália": {
+        "lat": -15.5920303,
+        "lon": -56.1349948,
+        "tipo": "osm_auto"
+    },
+    "Verdão": {
+        "lat": -15.60619,
+        "lon": -56.1181483,
+        "tipo": "osm_auto"
+    },
+    "Jardim Burity": {
+        "lat": -15.6372486,
+        "lon": -56.0462028,
+        "tipo": "osm_auto"
+    },
+    "Sesmaria São José": {
+        "lat": -15.6373014,
+        "lon": -56.0383659,
+        "tipo": "osm_auto"
+    },
+    "Jardim Paraiso": {
+        "lat": -15.63853,
+        "lon": -56.0434498,
+        "tipo": "osm_auto"
+    },
+    "Juscelino Kubitschek": {
+        "lat": -15.6159838,
+        "lon": -56.0477399,
+        "tipo": "osm_auto"
+    },
+    "Parque Boa Vista": {
+        "lat": -15.7382694,
+        "lon": -56.1305136,
+        "tipo": "osm_auto"
+    },
+    "Residencial Francisca Loureiro Borba": {
+        "lat": -15.6062847,
+        "lon": -55.987926,
+        "tipo": "osm_auto"
+    },
+    "Residencial Altos Do Cerrado": {
+        "lat": -15.6056689,
+        "lon": -55.992841,
+        "tipo": "osm_auto"
+    },
+    "Vila Formosa": {
+        "lat": -15.5164939,
+        "lon": -56.0634325,
+        "tipo": "osm_auto"
+    },
+    "CPA III - Setor 1": {
+        "lat": -15.565722,
+        "lon": -56.04611,
+        "tipo": "osm_auto"
+    },
+    "CPA III - Setor 2": {
+        "lat": -15.563716,
+        "lon": -56.0410393,
+        "tipo": "osm_auto"
+    },
+    "CPA III - Setor 5": {
+        "lat": -15.569703,
+        "lon": -56.0344724,
+        "tipo": "osm_auto"
+    },
+    "R. SALVADOR C. MARQUES": {
+        "lat": -15.625681956251084,
+        "lon": -55.99557446281804,
+        "tipo": "manual"
+    },
+    "R. AVELINO LIMA BARROS": {
+        "lat": -15.637075823267159,
+        "lon": -55.98807924916373,
+        "tipo": "manual"
+    },
+    "BOA ESPERANCA": {
+        "lat": -15.61349844618588,
+        "lon": -56.059852658969774,
+        "tipo": "manual"
+    },
+    "CHAC. DOS PINHEIROS": {
+        "lat": -15.623846705450246,
+        "lon": -56.053729930461664,
+        "tipo": "manual"
+    },
+    "CAMPOS ELISIOS": {
+        "lat": -15.623331052495907,
+        "lon": -56.07854784214451,
+        "tipo": "manual"
+    },
+    "BORDAS DA CHAPADA": {
+        "lat": -15.57157008691662,
+        "lon": -56.084571524931654,
+        "tipo": "manual"
+    },
+    "BOSQUE": {
+        "lat": -15.585384453844839,
+        "lon": -56.09611297751612,
+        "tipo": "manual"
+    },
+    "JD. BEIRA RIO": {
+        "lat": -15.61958369125836,
+        "lon": -56.13013269457656,
+        "tipo": "manual"
+    },
+    "JD. ANTONIO DIAS": {
+        "lat": -15.573278729653042,
+        "lon": -56.08205158478615,
+        "tipo": "manual"
+    },
+    "R. SUCURI": {
+        "lat": -15.562373519224717,
+        "lon": -56.11452114232722,
+        "tipo": "manual"
+    },
+    "SAO BENEDITO": {
+        "lat": -15.610225770947991,
+        "lon": -56.08185938171037,
+        "tipo": "manual"
+    },
+    "JD. IMPERIAL I": {
+        "lat": -15.608743855382741,
+        "lon": -56.027778553993166,
+        "tipo": "manual"
+    },
+    "PQ. NOVA ESPER. I": {
+        "lat": -15.644925003245085,
+        "lon": -55.96322565779043,
+        "tipo": "manual"
+    },
+    "R. NICO BARACAT II": {
+        "lat": -15.612751545627447,
+        "lon": -55.97798625240655,
+        "tipo": "manual"
+    },
+    "R. STA. TEREZINHA II": {
+        "lat": -15.659030462292707,
+        "lon": -56.03344994624016,
+        "tipo": "manual"
+    },
+    "R. STA. TEREZINHA": {
+        "lat": -15.659071784828708,
+        "lon": -56.03362160762249,
+        "tipo": "manual"
+    },
+    "R. ALTOS DO PARQUE": {
+        "lat": -15.684593764272517,
+        "lon": -56.03241392218069,
+        "tipo": "manual"
+    },
+    "ALTOS DA SERRA II": {
+        "lat": -15.585030220458789,
+        "lon": -56.024956313349776,
+        "tipo": "manual"
+    },
+    "vila mutum": {
+        "lat": -15.643475136722524,
+        "lon": -56.05304163126906,
+        "tipo": "manual"
+    },
+    "R. NICO BARACAT": {
+        "lat": -15.613739099556803,
+        "lon": -55.97890750654739,
+        "tipo": "manual"
+    },
+    "R. MAR. RONDON": {
+        "lat": -15.635621231113321,
+        "lon": -55.986928586149,
+        "tipo": "manual"
+    },
+    "ALTOS DO COXIPO": {
+        "lat": -15.63181525272906,
+        "lon": -56.023764341308905,
+        "tipo": "manual"
+    },
+    "R. NOVO PARQUE": {
+        "lat": -15.683745838012843,
+        "lon": -56.03974682032599,
+        "tipo": "manual"
+    },
+    "R. STA. INES": {
+        "lat": -15.588320254003595,
+        "lon": -56.05601575394043,
+        "tipo": "manual"
+    },
+    "STA. TEREZA": {
+        "lat": -15.542489520313067,
+        "lon": -56.06088215439889,
+        "tipo": "manual"
+    },
+    "R. BURITIS": {
+        "lat": -15.531327053662823,
+        "lon": -56.031667736781245,
+        "tipo": "manual"
+    },
+    "PQ. R. DAS NACOES": {
+        "lat": -15.543144230416356,
+        "lon": -56.082133773732686,
+        "tipo": "manual"
+    },
+    "CPA IV": {
+        "lat": -15.556985947240758,
+        "lon": -56.043041913785686,
+        "tipo": "manual"
+    },
+    "Santa Felicidade": {
+        "lat": -25.4026959,
+        "lon": -49.3285775,
+        "tipo": "osm_auto"
+    },
+    "Campo Comprido": {
+        "lat": -25.4533397,
+        "lon": -49.3284321,
+        "tipo": "osm_auto"
+    },
+    "Pinheirinho": {
+        "lat": -25.5256989,
+        "lon": -49.2930736,
+        "tipo": "osm_auto"
+    },
+    "Novo Mundo": {
+        "lat": -25.4869659,
+        "lon": -49.2960629,
+        "tipo": "osm_auto"
+    },
+    "Tatuquara": {
+        "lat": -25.5642128,
+        "lon": -49.3335459,
+        "tipo": "osm_auto"
+    },
+    "Umbará": {
+        "lat": -25.5681693,
+        "lon": -49.2856994,
+        "tipo": "osm_auto"
+    },
+    "Fazendinha": {
+        "lat": -25.481273,
+        "lon": -49.3253888,
+        "tipo": "osm_auto"
+    },
+    "Uberaba": {
+        "lat": -25.4849252,
+        "lon": -49.2153133,
+        "tipo": "osm_auto"
+    },
+    "Boqueirão": {
+        "lat": -25.500728,
+        "lon": -49.2411054,
+        "tipo": "osm_auto"
+    },
+    "Guabirotuba": {
+        "lat": -25.4624958,
+        "lon": -49.2433392,
+        "tipo": "osm_auto"
+    },
+    "Jardim das Américas": {
+        "lat": -25.4579236,
+        "lon": -49.2296277,
+        "tipo": "osm_auto"
+    },
+    "Jardim Botânico": {
+        "lat": -25.4407956,
+        "lon": -49.2453133,
+        "tipo": "osm_auto"
+    },
+    "Hauer": {
+        "lat": -25.4786086,
+        "lon": -49.2534651,
+        "tipo": "osm_auto"
+    },
+    "Prado Velho": {
+        "lat": -25.4533706,
+        "lon": -49.2544113,
+        "tipo": "osm_auto"
+    },
+    "Parolin": {
+        "lat": -25.4599763,
+        "lon": -49.2637669,
+        "tipo": "osm_auto"
+    },
+    "Rebouças": {
+        "lat": -25.4444772,
+        "lon": -49.2646681,
+        "tipo": "osm_auto"
+    },
+    "Centro": {
+        "lat": -25.4312608,
+        "lon": -49.2712771,
+        "tipo": "osm_auto"
+    },
+    "Portão": {
+        "lat": -25.4737001,
+        "lon": -49.302414,
+        "tipo": "osm_auto"
+    },
+    "Santa Quitéria": {
+        "lat": -25.462602,
+        "lon": -49.3109435,
+        "tipo": "osm_auto"
+    },
+    "Cajuru": {
+        "lat": -25.4533496,
+        "lon": -49.2130027,
+        "tipo": "osm_auto"
+    },
+    "Bom Retiro": {
+        "lat": -23.5251634,
+        "lon": -46.6381644,
+        "tipo": "osm_auto"
+    },
+    "São João": {
+        "lat": -25.3914534,
+        "lon": -49.3114794,
+        "tipo": "osm_auto"
+    },
+    "Vista Alegre": {
+        "lat": -25.4067665,
+        "lon": -49.2955782,
+        "tipo": "osm_auto"
+    },
+    "Pilarzinho": {
+        "lat": -25.3964045,
+        "lon": -49.2875411,
+        "tipo": "osm_auto"
+    },
+    "São Francisco": {
+        "lat": -25.4237543,
+        "lon": -49.2770883,
+        "tipo": "osm_auto"
+    },
+    "Cascatinha": {
+        "lat": -25.4152363,
+        "lon": -49.3105765,
+        "tipo": "osm_auto"
+    },
+    "Santo Inácio": {
+        "lat": -25.4252057,
+        "lon": -49.3285776,
+        "tipo": "osm_auto"
+    },
+    "Batel": {
+        "lat": -25.4387449,
+        "lon": -49.287052,
+        "tipo": "osm_auto"
+    },
+    "Campina do Siqueira": {
+        "lat": -25.4387255,
+        "lon": -49.3087222,
+        "tipo": "osm_auto"
+    },
+    "Alto Boqueirão": {
+        "lat": -25.532668,
+        "lon": -49.2390629,
+        "tipo": "osm_auto"
+    },
+    "Sítio Cercado": {
+        "lat": -25.5427012,
+        "lon": -49.2691056,
+        "tipo": "osm_auto"
+    },
+    "Augusta": {
+        "lat": -25.4743152,
+        "lon": -49.3714784,
+        "tipo": "osm_auto"
+    },
+    "Alto da Glória": {
+        "lat": -25.4194476,
+        "lon": -49.2621486,
+        "tipo": "osm_auto"
+    },
+    "Alto da Rua XV": {
+        "lat": -25.4280673,
+        "lon": -49.2511966,
+        "tipo": "osm_auto"
+    },
+    "Capão Raso": {
+        "lat": -25.504632,
+        "lon": -49.2985781,
+        "tipo": "osm_auto"
+    },
+    "Capão da Imbuia": {
+        "lat": -25.4372102,
+        "lon": -49.2120387,
+        "tipo": "osm_auto"
+    },
+    "Centro Cívico": {
+        "lat": -25.4143755,
+        "lon": -49.2683269,
+        "tipo": "osm_auto"
+    },
+    "Cidade Industrial de Curitiba": {
+        "lat": -25.497993,
+        "lon": -49.334522,
+        "tipo": "osm_auto"
+    },
+    "Cristo Rei": {
+        "lat": -25.4336461,
+        "lon": -49.2445794,
+        "tipo": "osm_auto"
+    },
+    "Fanny": {
+        "lat": -25.4791996,
+        "lon": -49.2661377,
+        "tipo": "osm_auto"
+    },
+    "Guaíra": {
+        "lat": -25.4700425,
+        "lon": -49.2752424,
+        "tipo": "osm_auto"
+    },
+    "Lindóia": {
+        "lat": -25.479004,
+        "lon": -49.2776917,
+        "tipo": "osm_auto"
+    },
+    "Tarumã": {
+        "lat": -25.4243559,
+        "lon": -49.2221039,
+        "tipo": "osm_auto"
+    },
+    "Xaxim": {
+        "lat": -25.5008748,
+        "lon": -49.2678646,
+        "tipo": "osm_auto"
+    },
+    "Campo de Santana": {
+        "lat": -25.6003501,
+        "lon": -49.33376,
+        "tipo": "osm_auto"
+    },
+    "Caximba": {
+        "lat": -25.6208968,
+        "lon": -49.347262,
+        "tipo": "osm_auto"
+    },
+    "Ganchinho": {
+        "lat": -25.5720763,
+        "lon": -49.2636674,
+        "tipo": "osm_auto"
+    },
+    "Mossunguê": {
+        "lat": -25.4347057,
+        "lon": -49.330387,
+        "tipo": "osm_auto"
+    },
+    "Orleans": {
+        "lat": -25.4284385,
+        "lon": -49.3575305,
+        "tipo": "osm_auto"
+    },
+    "Riviera": {
+        "lat": -25.4366101,
+        "lon": -49.3813372,
+        "tipo": "osm_auto"
+    },
+    "Seminário": {
+        "lat": -25.4489103,
+        "lon": -49.3051474,
+        "tipo": "osm_auto"
+    },
+    "São Miguel": {
+        "lat": -23.4948785,
+        "lon": -46.4390788,
+        "tipo": "osm_auto"
+    },
+    "Vila Izabel": {
+        "lat": -25.4563261,
+        "lon": -49.2939793,
+        "tipo": "osm_auto"
+    },
+    "Água Verde": {
+        "lat": -25.4552633,
+        "lon": -49.2828084,
+        "tipo": "osm_auto"
+    },
+    "Bigorrilho": {
+        "lat": -25.4339089,
+        "lon": -49.2994023,
+        "tipo": "osm_auto"
+    },
+    "São Braz": {
+        "lat": -25.4182261,
+        "lon": -49.350834,
+        "tipo": "osm_auto"
+    },
+    "Ahú": {
+        "lat": -25.3998414,
+        "lon": -49.2619428,
+        "tipo": "osm_auto"
+    },
+    "Butiatuvinha": {
+        "lat": -25.4001938,
+        "lon": -49.3562253,
+        "tipo": "osm_auto"
+    },
+    "Juvevê": {
+        "lat": -25.4160133,
+        "lon": -49.2544262,
+        "tipo": "osm_auto"
+    },
+    "Mercês": {
+        "lat": -25.4246085,
+        "lon": -49.2905022,
+        "tipo": "osm_auto"
+    },
+    "São Lourenço": {
+        "lat": -25.3887613,
+        "lon": -49.266281,
+        "tipo": "osm_auto"
+    },
+    "Taboão": {
+        "lat": -25.3733813,
+        "lon": -49.2807648,
+        "tipo": "osm_auto"
+    },
+    "Abranches": {
+        "lat": -25.3614742,
+        "lon": -49.272054,
+        "tipo": "osm_auto"
+    },
+    "Atuba": {
+        "lat": -25.3875003,
+        "lon": -49.2066058,
+        "tipo": "osm_auto"
+    },
+    "Bacacheri": {
+        "lat": -25.3968497,
+        "lon": -49.2344563,
+        "tipo": "osm_auto"
+    },
+    "Bairro Alto": {
+        "lat": -25.4058225,
+        "lon": -49.2076602,
+        "tipo": "osm_auto"
+    },
+    "Barreirinha": {
+        "lat": -25.3685642,
+        "lon": -49.2604545,
+        "tipo": "osm_auto"
+    },
+    "Boa Vista": {
+        "lat": -25.3851343,
+        "lon": -49.2460489,
+        "tipo": "osm_auto"
+    },
+    "Cabral": {
+        "lat": -25.4074203,
+        "lon": -49.2515182,
+        "tipo": "osm_auto"
+    },
+    "Hugo Lange": {
+        "lat": -25.4199794,
+        "lon": -49.2462298,
+        "tipo": "osm_auto"
+    },
+    "Jardim Social": {
+        "lat": -25.4196583,
+        "lon": -49.234537,
+        "tipo": "osm_auto"
+    },
+    "Santa Cândida": {
+        "lat": -25.3696063,
+        "lon": -49.2303981,
+        "tipo": "osm_auto"
+    },
+    "Tingui": {
+        "lat": -25.385354,
+        "lon": -49.2240749,
+        "tipo": "osm_auto"
+    },
+    "Casa": {
+        "lat": -25.5125869,
+        "lon": -49.2744701,
+        "tipo": "osm_auto"
+    },
+    "Vila Olinda II": {
+        "lat": -25.5811563,
+        "lon": -49.3218112,
+        "tipo": "osm_auto"
+    },
+    "Núcleo Habitacional Nossa Senhora da Luz dos Pinhais": {
+        "lat": -25.5045685,
+        "lon": -49.3237503,
+        "tipo": "osm_auto"
+    },
+    "Vivendas Janaína": {
+        "lat": -25.5996804,
+        "lon": -49.3298185,
+        "tipo": "osm_auto"
+    },
+    "Moradias Santa Rita": {
+        "lat": -25.5631392,
+        "lon": -49.3353766,
+        "tipo": "osm_auto"
+    },
+    "Moradias Dalagassa": {
+        "lat": -25.5591543,
+        "lon": -49.3153329,
+        "tipo": "osm_auto"
+    },
+    "Conjunto Osvaldo Cruz I": {
+        "lat": -25.5133187,
+        "lon": -49.3218572,
+        "tipo": "osm_auto"
+    },
+    "Centro Histórico": {
+        "lat": -25.4283535,
+        "lon": -49.2737204,
+        "tipo": "osm_auto"
+    },
+    "Interlagos": {
+        "lat": -23.7011674,
+        "lon": -46.7082912,
+        "tipo": "osm_auto"
+    },
+    "Tatuapé": {
+        "lat": -23.5408911,
+        "lon": -46.5750093,
+        "tipo": "osm_auto"
+    },
+    "Marsilac": {
+        "lat": -23.9083907,
+        "lon": -46.7061053,
+        "tipo": "osm_auto"
+    },
+    "Parelheiros": {
+        "lat": -23.827312,
+        "lon": -46.7277941,
+        "tipo": "osm_auto"
+    },
+    "São Mateus": {
+        "lat": -15.622108671252372,
+        "lon": -56.09226175636069,
+        "tipo": "manual"
+    },
+    "Sapopemba": {
+        "lat": -23.6043265,
+        "lon": -46.5098851,
+        "tipo": "osm_auto"
+    },
+    "Santa Margarida Paulista": {
+        "lat": -23.518102,
+        "lon": -46.39891,
+        "tipo": "osm_auto"
+    },
+    "Vila Leopoldina": {
+        "lat": -23.5275027,
+        "lon": -46.732947,
+        "tipo": "osm_auto"
+    },
+    "Casa Verde": {
+        "lat": -23.5059269,
+        "lon": -46.6561379,
+        "tipo": "osm_auto"
+    },
+    "Limão": {
+        "lat": -23.5033149,
+        "lon": -46.6752722,
+        "tipo": "osm_auto"
+    },
+    "Cerqueira César": {
+        "lat": -23.5610386,
+        "lon": -46.6657633,
+        "tipo": "osm_auto"
+    },
+    "Perdizes": {
+        "lat": -23.5399887,
+        "lon": -46.6709816,
+        "tipo": "osm_auto"
+    },
+    "Sumaré": {
+        "lat": -23.5453787,
+        "lon": -46.6811739,
+        "tipo": "osm_auto"
+    },
+    "Pacaembu": {
+        "lat": -23.5483884,
+        "lon": -46.6678702,
+        "tipo": "osm_auto"
+    },
+    "Alto de Pinheiros": {
+        "lat": -23.5499064,
+        "lon": -46.7076422,
+        "tipo": "osm_auto"
+    },
+    "Vila Madalena": {
+        "lat": -23.5555025,
+        "lon": -46.6911869,
+        "tipo": "osm_auto"
+    },
+    "Vila Beatriz": {
+        "lat": -23.5499684,
+        "lon": -46.6977786,
+        "tipo": "osm_auto"
+    },
+    "Alto da Lapa": {
+        "lat": -23.5273913,
+        "lon": -46.7130594,
+        "tipo": "osm_auto"
+    },
+    "Pompéia": {
+        "lat": -23.5305556,
+        "lon": -46.6849797,
+        "tipo": "osm_auto"
+    },
+    "Higienópolis": {
+        "lat": -23.5442937,
+        "lon": -46.6544499,
+        "tipo": "osm_auto"
+    },
+    "City Pinheirinho": {
+        "lat": -23.4822822,
+        "lon": -46.7353022,
+        "tipo": "osm_auto"
+    },
+    "Vila Maria Eugênia": {
+        "lat": -23.4916257,
+        "lon": -46.752774,
+        "tipo": "osm_auto"
+    },
+    "Jardim Líbano": {
+        "lat": -23.485661,
+        "lon": -46.7327022,
+        "tipo": "osm_auto"
+    },
+    "Residencial Vista Verde": {
+        "lat": -23.4743023,
+        "lon": -46.7523012,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santa Mônica": {
+        "lat": -23.4769042,
+        "lon": -46.7469233,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santo Elias": {
+        "lat": -23.5049115,
+        "lon": -46.7587873,
+        "tipo": "osm_auto"
+    },
+    "Jardim Mangalot": {
+        "lat": -23.4916257,
+        "lon": -46.747597,
+        "tipo": "osm_auto"
+    },
+    "Jardim Maristela": {
+        "lat": -23.4884604,
+        "lon": -46.7524431,
+        "tipo": "osm_auto"
+    },
+    "Parque Maria Domitila": {
+        "lat": -23.4912443,
+        "lon": -46.7398845,
+        "tipo": "osm_auto"
+    },
+    "São Domingos": {
+        "lat": -23.4938759,
+        "lon": -46.7421942,
+        "tipo": "osm_auto"
+    },
+    "Morro Doce": {
+        "lat": -23.4459858,
+        "lon": -46.7958736,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santa Fé": {
+        "lat": -23.8312661,
+        "lon": -46.7124536,
+        "tipo": "osm_auto"
+    },
+    "Lapa": {
+        "lat": -23.5215756,
+        "lon": -46.7043491,
+        "tipo": "osm_auto"
+    },
+    "Jardim Vila Mariana": {
+        "lat": -23.5923787,
+        "lon": -46.6261595,
+        "tipo": "osm_auto"
+    },
+    "Aricanduva": {
+        "lat": -23.5780239,
+        "lon": -46.511454,
+        "tipo": "osm_auto"
+    },
+    "Jardim Europa": {
+        "lat": -23.5737047,
+        "lon": -46.6823072,
+        "tipo": "osm_auto"
+    },
+    "Paraíso": {
+        "lat": -23.5738424,
+        "lon": -46.6482539,
+        "tipo": "osm_auto"
+    },
+    "Jardim Melo": {
+        "lat": -23.6865424,
+        "lon": -46.635203,
+        "tipo": "osm_auto"
+    },
+    "Jardim Apurá": {
+        "lat": -23.7123738,
+        "lon": -46.6584285,
+        "tipo": "osm_auto"
+    },
+    "Ermelino Matarazzo": {
+        "lat": -23.4902552,
+        "lon": -46.4824048,
+        "tipo": "osm_auto"
+    },
+    "Ponte Rasa": {
+        "lat": -23.5110455,
+        "lon": -46.4870517,
+        "tipo": "osm_auto"
+    },
+    "Jardim Rosa Maria": {
+        "lat": -23.5918247,
+        "lon": -46.77103,
+        "tipo": "osm_auto"
+    },
+    "Jardim Pedro José Nunes": {
+        "lat": -23.5015079,
+        "lon": -46.465787,
+        "tipo": "osm_auto"
+    },
+    "Jardim Arpoador": {
+        "lat": -23.5949812,
+        "lon": -46.7910827,
+        "tipo": "osm_auto"
+    },
+    "Jardim João XXIII": {
+        "lat": -23.6028459,
+        "lon": -46.7927124,
+        "tipo": "osm_auto"
+    },
+    "Jardim Boa Vista": {
+        "lat": -23.5815403,
+        "lon": -46.7913503,
+        "tipo": "osm_auto"
+    },
+    "Parque Ipê": {
+        "lat": -23.5957714,
+        "lon": -46.7971705,
+        "tipo": "osm_auto"
+    },
+    "Parque dos Príncipes": {
+        "lat": -23.574122,
+        "lon": -46.7738679,
+        "tipo": "osm_auto"
+    },
+    "Jardim D'Abril": {
+        "lat": -23.5738706,
+        "lon": -46.7795188,
+        "tipo": "osm_auto"
+    },
+    "Vila Ipojuca": {
+        "lat": -23.5335192,
+        "lon": -46.7084654,
+        "tipo": "osm_auto"
+    },
+    "Vila Anglo-Brasileira": {
+        "lat": -23.5400826,
+        "lon": -46.69492,
+        "tipo": "osm_auto"
+    },
+    "Bairro Siciliano": {
+        "lat": -23.5343382,
+        "lon": -46.6983219,
+        "tipo": "osm_auto"
+    },
+    "Bela Aliança": {
+        "lat": -23.5248526,
+        "lon": -46.7225147,
+        "tipo": "osm_auto"
+    },
+    "Boaçava": {
+        "lat": -23.540313,
+        "lon": -46.7226097,
+        "tipo": "osm_auto"
+    },
+    "Sumarezinho": {
+        "lat": -23.5471111,
+        "lon": -46.6921511,
+        "tipo": "osm_auto"
+    },
+    "Vila Argentina": {
+        "lat": -23.5375059,
+        "lon": -46.7048754,
+        "tipo": "osm_auto"
+    },
+    "Vila Hamburguesa": {
+        "lat": -23.5334607,
+        "lon": -46.7262582,
+        "tipo": "osm_auto"
+    },
+    "Vila Ida": {
+        "lat": -23.5431007,
+        "lon": -46.7074196,
+        "tipo": "osm_auto"
+    },
+    "Vila Anastácio": {
+        "lat": -23.5155169,
+        "lon": -46.7182463,
+        "tipo": "osm_auto"
+    },
+    "Parque Monteiro Soares": {
+        "lat": -23.4904769,
+        "lon": -46.6877119,
+        "tipo": "osm_auto"
+    },
+    "Jaguara": {
+        "lat": -23.513823,
+        "lon": -46.7472338,
+        "tipo": "osm_auto"
+    },
+    "Vila Amélia": {
+        "lat": -23.471303,
+        "lon": -46.6528931,
+        "tipo": "osm_auto"
+    },
+    "Cidade Tiradentes": {
+        "lat": -23.5801711,
+        "lon": -46.3970559,
+        "tipo": "osm_auto"
+    },
+    "Jardim Vera Cruz": {
+        "lat": -23.7413263,
+        "lon": -46.784792,
+        "tipo": "osm_auto"
+    },
+    "Bixiga": {
+        "lat": -23.5577085,
+        "lon": -46.6468132,
+        "tipo": "osm_auto"
+    },
+    "Parque Mandaqui": {
+        "lat": -23.4684544,
+        "lon": -46.6343109,
+        "tipo": "osm_auto"
+    },
+    "Jardim Iporã": {
+        "lat": -23.7839695,
+        "lon": -46.7117903,
+        "tipo": "osm_auto"
+    },
+    "Jardim Herplin": {
+        "lat": -23.7888291,
+        "lon": -46.7153683,
+        "tipo": "osm_auto"
+    },
+    "Vila Mirante": {
+        "lat": -23.4690823,
+        "lon": -46.7220013,
+        "tipo": "osm_auto"
+    },
+    "Santana": {
+        "lat": -23.5021339,
+        "lon": -46.6265039,
+        "tipo": "osm_auto"
+    },
+    "Tremembé": {
+        "lat": -23.4482881,
+        "lon": -46.6029761,
+        "tipo": "osm_auto"
+    },
+    "Vila Maria": {
+        "lat": -23.5131836,
+        "lon": -46.5891557,
+        "tipo": "osm_auto"
+    },
+    "Vila Marcelo": {
+        "lat": -23.7908718,
+        "lon": -46.723855,
+        "tipo": "osm_auto"
+    },
+    "Parque Continental": {
+        "lat": -23.5445527,
+        "lon": -46.7582103,
+        "tipo": "osm_auto"
+    },
+    "Jardim Três Marias": {
+        "lat": -23.517715,
+        "lon": -46.4934118,
+        "tipo": "osm_auto"
+    },
+    "Jardim Lisboa": {
+        "lat": -23.5196635,
+        "lon": -46.4977812,
+        "tipo": "osm_auto"
+    },
+    "Jardim Nordeste": {
+        "lat": -23.5331087,
+        "lon": -46.4845035,
+        "tipo": "osm_auto"
+    },
+    "Parque das Paineiras": {
+        "lat": -23.537549,
+        "lon": -46.4829875,
+        "tipo": "osm_auto"
+    },
+    "Vila São Francisco": {
+        "lat": -23.5187828,
+        "lon": -46.4911783,
+        "tipo": "osm_auto"
+    },
+    "Cidade Antônio Estêvão de Carvalho": {
+        "lat": -23.5354377,
+        "lon": -46.4699282,
+        "tipo": "osm_auto"
+    },
+    "Jardim Popular": {
+        "lat": -23.5189103,
+        "lon": -46.5109445,
+        "tipo": "osm_auto"
+    },
+    "Vila Ré": {
+        "lat": -23.5283751,
+        "lon": -46.4978419,
+        "tipo": "osm_auto"
+    },
+    "Vila Granada": {
+        "lat": -23.5235058,
+        "lon": -46.5143047,
+        "tipo": "osm_auto"
+    },
+    "Vila Marieta": {
+        "lat": -23.5163924,
+        "lon": -46.5231628,
+        "tipo": "osm_auto"
+    },
+    "Vila Rio Branco": {
+        "lat": -23.5119382,
+        "lon": -46.494894,
+        "tipo": "osm_auto"
+    },
+    "Burgo Paulista": {
+        "lat": -23.5228434,
+        "lon": -46.4848585,
+        "tipo": "osm_auto"
+    },
+    "Artur Alvim": {
+        "lat": -23.5404687,
+        "lon": -46.4897914,
+        "tipo": "osm_auto"
+    },
+    "Vila Costa Melo": {
+        "lat": -23.5153984,
+        "lon": -46.5140675,
+        "tipo": "osm_auto"
+    },
+    "Vila Buenos Aires": {
+        "lat": -23.5091576,
+        "lon": -46.5147421,
+        "tipo": "osm_auto"
+    },
+    "Engenheiro Goulart": {
+        "lat": -23.5004492,
+        "lon": -46.527816,
+        "tipo": "osm_auto"
+    },
+    "Vila Operária Maria Zélia": {
+        "lat": -23.5329892,
+        "lon": -46.5980899,
+        "tipo": "osm_auto"
+    },
+    "Rio Pequeno": {
+        "lat": -23.5708857,
+        "lon": -46.7586552,
+        "tipo": "osm_auto"
+    },
+    "Vila Carrão": {
+        "lat": -23.5498671,
+        "lon": -46.5385802,
+        "tipo": "osm_auto"
+    },
+    "Itaquera": {
+        "lat": -23.5360799,
+        "lon": -46.4555099,
+        "tipo": "osm_auto"
+    },
+    "República": {
+        "lat": -23.5437248,
+        "lon": -46.6409783,
+        "tipo": "osm_auto"
+    },
+    "Sé": {
+        "lat": -23.5488069,
+        "lon": -46.6317734,
+        "tipo": "osm_auto"
+    },
+    "Moema": {
+        "lat": -23.597085,
+        "lon": -46.6628884,
+        "tipo": "osm_auto"
+    },
+    "Grajaú": {
+        "lat": -23.7799713,
+        "lon": -46.6737655,
+        "tipo": "osm_auto"
+    },
+    "Barra Funda": {
+        "lat": -23.5210941,
+        "lon": -46.6736608,
+        "tipo": "osm_auto"
+    },
+    "Bela Vista": {
+        "lat": -23.5601219,
+        "lon": -46.6500338,
+        "tipo": "osm_auto"
+    },
+    "Brás": {
+        "lat": -23.5429572,
+        "lon": -46.6172504,
+        "tipo": "osm_auto"
+    },
+    "Consolação": {
+        "lat": -23.5492405,
+        "lon": -46.6601294,
+        "tipo": "osm_auto"
+    },
+    "Pedreira": {
+        "lat": -23.7079449,
+        "lon": -46.6519145,
+        "tipo": "osm_auto"
+    },
+    "Santo Amaro": {
+        "lat": -23.6405602,
+        "lon": -46.7007164,
+        "tipo": "osm_auto"
+    },
+    "Mooca": {
+        "lat": -23.5606808,
+        "lon": -46.5971924,
+        "tipo": "osm_auto"
+    },
+    "Raposo Tavares": {
+        "lat": -23.5909877,
+        "lon": -46.785197,
+        "tipo": "osm_auto"
+    },
+    "São Rafael": {
+        "lat": -23.6270938,
+        "lon": -46.455405,
+        "tipo": "osm_auto"
+    },
+    "Freguesia do Ó": {
+        "lat": -23.4874636,
+        "lon": -46.6951317,
+        "tipo": "osm_auto"
+    },
+    "Sacomã": {
+        "lat": -23.6115054,
+        "lon": -46.5969515,
+        "tipo": "osm_auto"
+    },
+    "Capão Redondo": {
+        "lat": -23.6710997,
+        "lon": -46.7798413,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Luís": {
+        "lat": -23.6739274,
+        "lon": -46.7407377,
+        "tipo": "osm_auto"
+    },
+    "Socorro": {
+        "lat": -23.6840338,
+        "lon": -46.7092524,
+        "tipo": "osm_auto"
+    },
+    "Campo Grande": {
+        "lat": -23.6708976,
+        "lon": -46.6892543,
+        "tipo": "osm_auto"
+    },
+    "Cidade Ademar": {
+        "lat": -23.6730116,
+        "lon": -46.6552806,
+        "tipo": "osm_auto"
+    },
+    "Campo Limpo": {
+        "lat": -23.6361999,
+        "lon": -46.7627968,
+        "tipo": "osm_auto"
+    },
+    "Vila Andrade": {
+        "lat": -23.625687,
+        "lon": -46.7269894,
+        "tipo": "osm_auto"
+    },
+    "Belém": {
+        "lat": -23.5348833,
+        "lon": -46.5949387,
+        "tipo": "osm_auto"
+    },
+    "Água Rasa": {
+        "lat": -23.5661088,
+        "lon": -46.5707669,
+        "tipo": "osm_auto"
+    },
+    "Vila Prudente": {
+        "lat": -23.5915159,
+        "lon": -46.5726471,
+        "tipo": "osm_auto"
+    },
+    "São Lucas": {
+        "lat": -23.5948313,
+        "lon": -46.5430627,
+        "tipo": "osm_auto"
+    },
+    "Vila Matilde": {
+        "lat": -23.536179,
+        "lon": -46.524605,
+        "tipo": "osm_auto"
+    },
+    "Jabaquara": {
+        "lat": -23.6487101,
+        "lon": -46.645451,
+        "tipo": "osm_auto"
+    },
+    "Iguatemi": {
+        "lat": -23.6110664,
+        "lon": -46.4250404,
+        "tipo": "osm_auto"
+    },
+    "Guaianases": {
+        "lat": -23.5522554,
+        "lon": -46.4069533,
+        "tipo": "osm_auto"
+    },
+    "José Bonifácio": {
+        "lat": -23.5665859,
+        "lon": -46.4353534,
+        "tipo": "osm_auto"
+    },
+    "Lajeado": {
+        "lat": -23.5348823,
+        "lon": -46.4088939,
+        "tipo": "osm_auto"
+    },
+    "Vila Medeiros": {
+        "lat": -23.487707,
+        "lon": -46.5844955,
+        "tipo": "osm_auto"
+    },
+    "Parque Taipas": {
+        "lat": -23.4270224,
+        "lon": -46.7133959,
+        "tipo": "osm_auto"
+    },
+    "Vila Buarque": {
+        "lat": -23.5445621,
+        "lon": -46.647552,
+        "tipo": "osm_auto"
+    },
+    "Santa Cecília": {
+        "lat": -23.5379492,
+        "lon": -46.6573587,
+        "tipo": "osm_auto"
+    },
+    "Jardim Paulista": {
+        "lat": -23.5652185,
+        "lon": -46.6601846,
+        "tipo": "osm_auto"
+    },
+    "Cambuci": {
+        "lat": -23.5673017,
+        "lon": -46.618471,
+        "tipo": "osm_auto"
+    },
+    "Campo Belo": {
+        "lat": -23.6299339,
+        "lon": -46.670417,
+        "tipo": "osm_auto"
+    },
+    "Jardim Previdência": {
+        "lat": -23.6225846,
+        "lon": -46.6175165,
+        "tipo": "osm_auto"
+    },
+    "Ipiranga": {
+        "lat": -23.5945353,
+        "lon": -46.6026685,
+        "tipo": "osm_auto"
+    },
+    "Vila Mariana": {
+        "lat": -23.5925361,
+        "lon": -46.6357123,
+        "tipo": "osm_auto"
+    },
+    "Vila Sônia": {
+        "lat": -23.5986562,
+        "lon": -46.7392935,
+        "tipo": "osm_auto"
+    },
+    "Vila Mazzei": {
+        "lat": -23.4729562,
+        "lon": -46.6008217,
+        "tipo": "osm_auto"
+    },
+    "Bortolândia": {
+        "lat": -23.4546742,
+        "lon": -46.598442,
+        "tipo": "osm_auto"
+    },
+    "Vila Guilhermina": {
+        "lat": -23.533387,
+        "lon": -46.5153418,
+        "tipo": "osm_auto"
+    },
+    "Cangaíba": {
+        "lat": -23.5058996,
+        "lon": -46.5314253,
+        "tipo": "osm_auto"
+    },
+    "Jardim França": {
+        "lat": -23.4771766,
+        "lon": -46.6143865,
+        "tipo": "osm_auto"
+    },
+    "Parque Palmas do Tremembé": {
+        "lat": -23.4605731,
+        "lon": -46.6075123,
+        "tipo": "osm_auto"
+    },
+    "Vila Azevedo": {
+        "lat": -23.5426905,
+        "lon": -46.5713601,
+        "tipo": "osm_auto"
+    },
+    "Vila Isolina Mazzei": {
+        "lat": -23.4930386,
+        "lon": -46.6038231,
+        "tipo": "osm_auto"
+    },
+    "Vila Albertina": {
+        "lat": -23.4520555,
+        "lon": -46.6113118,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Paulo": {
+        "lat": -23.5595714,
+        "lon": -46.4036929,
+        "tipo": "osm_auto"
+    },
+    "Vila Aurora": {
+        "lat": -23.4742267,
+        "lon": -46.6256,
+        "tipo": "osm_auto"
+    },
+    "Jardim Peri": {
+        "lat": -23.4570897,
+        "lon": -46.6668812,
+        "tipo": "osm_auto"
+    },
+    "Jaraguá": {
+        "lat": -23.455682,
+        "lon": -46.7395122,
+        "tipo": "osm_auto"
+    },
+    "Parque Nações Unidas": {
+        "lat": -23.4463355,
+        "lon": -46.7375747,
+        "tipo": "osm_auto"
+    },
+    "Jardim Britânia": {
+        "lat": -23.4345532,
+        "lon": -46.7835995,
+        "tipo": "osm_auto"
+    },
+    "Jardim Danfer": {
+        "lat": -23.5024969,
+        "lon": -46.5067477,
+        "tipo": "osm_auto"
+    },
+    "Jardim Robru": {
+        "lat": -23.5220964,
+        "lon": -46.4122035,
+        "tipo": "osm_auto"
+    },
+    "Parque da Mooca": {
+        "lat": -23.5705085,
+        "lon": -46.5869081,
+        "tipo": "osm_auto"
+    },
+    "Glicério": {
+        "lat": -23.5530554,
+        "lon": -46.6290085,
+        "tipo": "osm_auto"
+    },
+    "Penha": {
+        "lat": -23.523683,
+        "lon": -46.5437815,
+        "tipo": "osm_auto"
+    },
+    "Vila Esperança": {
+        "lat": -23.5255852,
+        "lon": -46.5277235,
+        "tipo": "osm_auto"
+    },
+    "Limoeiro": {
+        "lat": -23.5093496,
+        "lon": -46.4660017,
+        "tipo": "osm_auto"
+    },
+    "Parque Edu Chaves": {
+        "lat": -23.475745,
+        "lon": -46.5668027,
+        "tipo": "osm_auto"
+    },
+    "Jardim Brasil": {
+        "lat": -23.4819102,
+        "lon": -46.5764471,
+        "tipo": "osm_auto"
+    },
+    "Parque Novo Mundo": {
+        "lat": -23.5144938,
+        "lon": -46.5684596,
+        "tipo": "osm_auto"
+    },
+    "Jardim Japão": {
+        "lat": -23.5021791,
+        "lon": -46.5808888,
+        "tipo": "osm_auto"
+    },
+    "Imirim": {
+        "lat": -23.4910951,
+        "lon": -46.6470601,
+        "tipo": "osm_auto"
+    },
+    "Parque Guarani": {
+        "lat": -23.5181608,
+        "lon": -46.4629905,
+        "tipo": "osm_auto"
+    },
+    "Vila Chavantes": {
+        "lat": -23.5147409,
+        "lon": -46.4422707,
+        "tipo": "osm_auto"
+    },
+    "Parque Savoy City": {
+        "lat": -23.5632664,
+        "lon": -46.4894831,
+        "tipo": "osm_auto"
+    },
+    "Jardim Imperador": {
+        "lat": -23.5863755,
+        "lon": -46.4995977,
+        "tipo": "osm_auto"
+    },
+    "Jardim Anália Franco": {
+        "lat": -23.5557765,
+        "lon": -46.5622613,
+        "tipo": "osm_auto"
+    },
+    "Piqueri": {
+        "lat": -23.499963,
+        "lon": -46.7123753,
+        "tipo": "osm_auto"
+    },
+    "Vila Laís": {
+        "lat": -23.5179561,
+        "lon": -46.5418779,
+        "tipo": "osm_auto"
+    },
+    "Cidade Patriarca": {
+        "lat": -23.5390931,
+        "lon": -46.5039285,
+        "tipo": "osm_auto"
+    },
+    "Jardim Camargo Novo": {
+        "lat": -23.5043429,
+        "lon": -46.3837673,
+        "tipo": "osm_auto"
+    },
+    "Itaim Paulista": {
+        "lat": -23.5017648,
+        "lon": -46.3996091,
+        "tipo": "osm_auto"
+    },
+    "Canindé": {
+        "lat": -23.5269919,
+        "lon": -46.6205256,
+        "tipo": "osm_auto"
+    },
+    "Pari": {
+        "lat": -23.532976,
+        "lon": -46.6158488,
+        "tipo": "osm_auto"
+    },
+    "Vila Guilherme": {
+        "lat": -23.5170972,
+        "lon": -46.6079618,
+        "tipo": "osm_auto"
+    },
+    "Vila Ede": {
+        "lat": -23.4936595,
+        "lon": -46.5933904,
+        "tipo": "osm_auto"
+    },
+    "Vila Gustavo": {
+        "lat": -23.480713,
+        "lon": -46.5958215,
+        "tipo": "osm_auto"
+    },
+    "Parque Vitória": {
+        "lat": -23.4713113,
+        "lon": -46.5947064,
+        "tipo": "osm_auto"
+    },
+    "Jaçanã": {
+        "lat": -23.4629935,
+        "lon": -46.582443,
+        "tipo": "osm_auto"
+    },
+    "Vila Nilo": {
+        "lat": -23.4601735,
+        "lon": -46.574454,
+        "tipo": "osm_auto"
+    },
+    "Jardim Guapira": {
+        "lat": -23.4573682,
+        "lon": -46.5887224,
+        "tipo": "osm_auto"
+    },
+    "Furnas": {
+        "lat": -23.4431295,
+        "lon": -46.59357,
+        "tipo": "osm_auto"
+    },
+    "Jardim Fontalis": {
+        "lat": -23.4358302,
+        "lon": -46.5770716,
+        "tipo": "osm_auto"
+    },
+    "Horto Florestal": {
+        "lat": -23.4543776,
+        "lon": -46.6287381,
+        "tipo": "osm_auto"
+    },
+    "Parada Inglesa": {
+        "lat": -23.4861894,
+        "lon": -46.6091055,
+        "tipo": "osm_auto"
+    },
+    "Água Fria": {
+        "lat": -23.4817879,
+        "lon": -46.62499,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Bento": {
+        "lat": -23.501804,
+        "lon": -46.6472561,
+        "tipo": "osm_auto"
+    },
+    "Jardim Nossa Senhora do Ó": {
+        "lat": -23.5029723,
+        "lon": -46.7041697,
+        "tipo": "osm_auto"
+    },
+    "Parque São Jorge": {
+        "lat": -23.5299682,
+        "lon": -46.5660668,
+        "tipo": "osm_auto"
+    },
+    "Itaim Bibi": {
+        "lat": -23.5843807,
+        "lon": -46.6784441,
+        "tipo": "osm_auto"
+    },
+    "Vila Olímpia": {
+        "lat": -23.5940375,
+        "lon": -46.6842299,
+        "tipo": "osm_auto"
+    },
+    "Cidade Jardim": {
+        "lat": -23.5898336,
+        "lon": -46.6990243,
+        "tipo": "osm_auto"
+    },
+    "Morumbi": {
+        "lat": -23.5974288,
+        "lon": -46.7067746,
+        "tipo": "osm_auto"
+    },
+    "Indianópolis": {
+        "lat": -23.6074637,
+        "lon": -46.6689221,
+        "tipo": "osm_auto"
+    },
+    "Brooklin Novo": {
+        "lat": -23.6214866,
+        "lon": -46.6883182,
+        "tipo": "osm_auto"
+    },
+    "Paraisópolis": {
+        "lat": -23.6153036,
+        "lon": -46.7257516,
+        "tipo": "osm_auto"
+    },
+    "Jaguaré": {
+        "lat": -23.5492216,
+        "lon": -46.7440686,
+        "tipo": "osm_auto"
+    },
+    "Casa Verde Alta": {
+        "lat": -23.497698,
+        "lon": -46.6565761,
+        "tipo": "osm_auto"
+    },
+    "Alto de Santana": {
+        "lat": -23.4887815,
+        "lon": -46.6300515,
+        "tipo": "osm_auto"
+    },
+    "Água Branca": {
+        "lat": -23.5117516,
+        "lon": -46.7021626,
+        "tipo": "osm_auto"
+    },
+    "Vila Romana": {
+        "lat": -23.5287714,
+        "lon": -46.7037412,
+        "tipo": "osm_auto"
+    },
+    "Pinheiros": {
+        "lat": -23.560754,
+        "lon": -46.6882506,
+        "tipo": "osm_auto"
+    },
+    "Jardim Marajoara": {
+        "lat": -23.6553634,
+        "lon": -46.6849371,
+        "tipo": "osm_auto"
+    },
+    "Cidade Líder": {
+        "lat": -23.5627696,
+        "lon": -46.4943334,
+        "tipo": "osm_auto"
+    },
+    "Jardim Romano": {
+        "lat": -23.4803818,
+        "lon": -46.3838298,
+        "tipo": "osm_auto"
+    },
+    "Jardim Ângela": {
+        "lat": -23.7125278,
+        "lon": -46.7687195,
+        "tipo": "osm_auto"
+    },
+    "Pirituba": {
+        "lat": -23.485533,
+        "lon": -46.7219385,
+        "tipo": "osm_auto"
+    },
+    "Vila Sabrina": {
+        "lat": -23.4897198,
+        "lon": -46.5730621,
+        "tipo": "osm_auto"
+    },
+    "Brasilândia": {
+        "lat": -23.4649661,
+        "lon": -46.6913891,
+        "tipo": "osm_auto"
+    },
+    "Tucuruvi": {
+        "lat": -23.480623,
+        "lon": -46.6052628,
+        "tipo": "osm_auto"
+    },
+    "Jardim Leonor Mendes de Barros": {
+        "lat": -23.4662424,
+        "lon": -46.6106314,
+        "tipo": "osm_auto"
+    },
+    "Vila Paulicéia": {
+        "lat": -23.4882686,
+        "lon": -46.6146814,
+        "tipo": "osm_auto"
+    },
+    "Vila Curuçá": {
+        "lat": -23.5027103,
+        "lon": -46.4240451,
+        "tipo": "osm_auto"
+    },
+    "Chácara Jaraguá": {
+        "lat": -23.4380214,
+        "lon": -46.7912194,
+        "tipo": "osm_auto"
+    },
+    "Vila Aricanduva": {
+        "lat": -23.536301,
+        "lon": -46.5415824,
+        "tipo": "osm_auto"
+    },
+    "Vila Nova Curuça": {
+        "lat": -23.5171184,
+        "lon": -46.4191889,
+        "tipo": "osm_auto"
+    },
+    "Santa Ifigênia": {
+        "lat": -23.5376199,
+        "lon": -46.6391827,
+        "tipo": "osm_auto"
+    },
+    "Bairro da Luz": {
+        "lat": -23.5336388,
+        "lon": -46.6319611,
+        "tipo": "osm_auto"
+    },
+    "Chacara Cruzeiro do Sul": {
+        "lat": -23.5107749,
+        "lon": -46.5340548,
+        "tipo": "osm_auto"
+    },
+    "Vila Brasilândia": {
+        "lat": -23.4759277,
+        "lon": -46.7054131,
+        "tipo": "osm_auto"
+    },
+    "Lauzane Paulista": {
+        "lat": -23.4713573,
+        "lon": -46.6445383,
+        "tipo": "osm_auto"
+    },
+    "Jardim Etelvina": {
+        "lat": -23.5301752,
+        "lon": -46.4192543,
+        "tipo": "osm_auto"
+    },
+    "Jardim Ipê": {
+        "lat": -23.5002153,
+        "lon": -46.414543,
+        "tipo": "osm_auto"
+    },
+    "Vila Jacuí": {
+        "lat": -23.5051091,
+        "lon": -46.4519529,
+        "tipo": "osm_auto"
+    },
+    "Ferreira": {
+        "lat": -23.5914253,
+        "lon": -46.736585,
+        "tipo": "osm_auto"
+    },
+    "Vila Clementino": {
+        "lat": -23.5980058,
+        "lon": -46.6434179,
+        "tipo": "osm_auto"
+    },
+    "Mandaqui": {
+        "lat": -23.4636929,
+        "lon": -46.6416113,
+        "tipo": "osm_auto"
+    },
+    "Cachoeirinha": {
+        "lat": -23.4630177,
+        "lon": -46.6610721,
+        "tipo": "osm_auto"
+    },
+    "Butantã": {
+        "lat": -23.5693582,
+        "lon": -46.7278225,
+        "tipo": "osm_auto"
+    },
+    "Parque do Carmo": {
+        "lat": -23.5787082,
+        "lon": -46.458056,
+        "tipo": "osm_auto"
+    },
+    "Vila Alpina": {
+        "lat": -23.5958577,
+        "lon": -46.5589304,
+        "tipo": "osm_auto"
+    },
+    "Parada XV de Novembro": {
+        "lat": -23.5302754,
+        "lon": -46.4344073,
+        "tipo": "osm_auto"
+    },
+    "Vila Dalila": {
+        "lat": -23.5463973,
+        "lon": -46.5203526,
+        "tipo": "osm_auto"
+    },
+    "Jardim Aurélia": {
+        "lat": -23.5959428,
+        "lon": -46.6241604,
+        "tipo": "osm_auto"
+    },
+    "Jardim da Glória": {
+        "lat": -23.5827197,
+        "lon": -46.6219813,
+        "tipo": "osm_auto"
+    },
+    "Aclimação": {
+        "lat": -23.5671021,
+        "lon": -46.6268011,
+        "tipo": "osm_auto"
+    },
+    "Vila Monumento": {
+        "lat": -23.5764219,
+        "lon": -46.6137805,
+        "tipo": "osm_auto"
+    },
+    "São Judas": {
+        "lat": -23.6253816,
+        "lon": -46.6356704,
+        "tipo": "osm_auto"
+    },
+    "VIla Prado": {
+        "lat": -23.493709,
+        "lon": -46.6754694,
+        "tipo": "osm_auto"
+    },
+    "Vila Dom Pedro I": {
+        "lat": -23.6019303,
+        "lon": -46.6136603,
+        "tipo": "osm_auto"
+    },
+    "Vila Gumercindo": {
+        "lat": -23.6046683,
+        "lon": -46.6209505,
+        "tipo": "osm_auto"
+    },
+    "Jardim Novo Parelheiros": {
+        "lat": -23.829801,
+        "lon": -46.7266951,
+        "tipo": "osm_auto"
+    },
+    "Jardim Almeida": {
+        "lat": -23.8013288,
+        "lon": -46.7284859,
+        "tipo": "osm_auto"
+    },
+    "São João Climaco": {
+        "lat": -23.6242684,
+        "lon": -46.5941503,
+        "tipo": "osm_auto"
+    },
+    "Vila Moinho Velho": {
+        "lat": -23.6120298,
+        "lon": -46.6032972,
+        "tipo": "osm_auto"
+    },
+    "Jardim Imperador (Zona Sul)": {
+        "lat": -23.6432748,
+        "lon": -46.6071139,
+        "tipo": "osm_auto"
+    },
+    "Vila Gomes Cardim": {
+        "lat": -23.542472,
+        "lon": -46.566848,
+        "tipo": "osm_auto"
+    },
+    "Parque Santa Rita": {
+        "lat": -23.5158081,
+        "lon": -46.4175029,
+        "tipo": "osm_auto"
+    },
+    "Alto Alegre": {
+        "lat": -23.613395,
+        "lon": -46.4317462,
+        "tipo": "osm_auto"
+    },
+    "Jardim Vila Carrão": {
+        "lat": -23.6183101,
+        "lon": -46.4545343,
+        "tipo": "osm_auto"
+    },
+    "Jardim Laranjeiras": {
+        "lat": -23.6033675,
+        "lon": -46.4325187,
+        "tipo": "osm_auto"
+    },
+    "Fortaleza": {
+        "lat": -23.6062382,
+        "lon": -46.4388058,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santa Terezinha": {
+        "lat": -23.8525559,
+        "lon": -46.6965545,
+        "tipo": "osm_auto"
+    },
+    "Jardim Marília": {
+        "lat": -23.5668273,
+        "lon": -46.4966351,
+        "tipo": "osm_auto"
+    },
+    "Parque Boa Esperança": {
+        "lat": -23.5964282,
+        "lon": -46.4538314,
+        "tipo": "osm_auto"
+    },
+    "Chacára Três Meninas": {
+        "lat": -23.4745691,
+        "lon": -46.425597,
+        "tipo": "osm_auto"
+    },
+    "Vila Natalia": {
+        "lat": -23.6271334,
+        "lon": -46.5963136,
+        "tipo": "osm_auto"
+    },
+    "Jardim Ipanema": {
+        "lat": -23.5623389,
+        "lon": -46.4973724,
+        "tipo": "osm_auto"
+    },
+    "Vila Penteado": {
+        "lat": -23.4704303,
+        "lon": -46.6872619,
+        "tipo": "osm_auto"
+    },
+    "Jardim Guaraú": {
+        "lat": -23.5954435,
+        "lon": -46.7666459,
+        "tipo": "osm_auto"
+    },
+    "Jardim Silva Teles": {
+        "lat": -23.5011873,
+        "lon": -46.4079303,
+        "tipo": "osm_auto"
+    },
+    "Vila do Sol": {
+        "lat": -23.7358923,
+        "lon": -46.7829024,
+        "tipo": "osm_auto"
+    },
+    "Vila São José": {
+        "lat": -23.6101775,
+        "lon": -46.5409633,
+        "tipo": "osm_auto"
+    },
+    "Jardim Itajaí": {
+        "lat": -23.7628543,
+        "lon": -46.6896022,
+        "tipo": "osm_auto"
+    },
+    "Jardim Porto Velho": {
+        "lat": -23.7734292,
+        "lon": -46.6762287,
+        "tipo": "osm_auto"
+    },
+    "Jardim Noronha": {
+        "lat": -23.7696883,
+        "lon": -46.677779,
+        "tipo": "osm_auto"
+    },
+    "Jardim Moraes Prado": {
+        "lat": -23.7739157,
+        "lon": -46.6822741,
+        "tipo": "osm_auto"
+    },
+    "Jardim das Pedras": {
+        "lat": -23.7790076,
+        "lon": -46.6847563,
+        "tipo": "osm_auto"
+    },
+    "Jardim Almeida Prado": {
+        "lat": -23.7798947,
+        "lon": -46.6899923,
+        "tipo": "osm_auto"
+    },
+    "Jardim Três Corações": {
+        "lat": -23.7695695,
+        "lon": -46.6833609,
+        "tipo": "osm_auto"
+    },
+    "Chácara do Sol": {
+        "lat": -23.7789374,
+        "lon": -46.6754595,
+        "tipo": "osm_auto"
+    },
+    "Bairro Toca do Tatu": {
+        "lat": -23.7784102,
+        "lon": -46.661062,
+        "tipo": "osm_auto"
+    },
+    "Jardim Guarujá": {
+        "lat": -23.6937284,
+        "lon": -46.7898945,
+        "tipo": "osm_auto"
+    },
+    "Parque Novo Santo Amaro": {
+        "lat": -23.6988272,
+        "lon": -46.7830281,
+        "tipo": "osm_auto"
+    },
+    "Jardim Ranieri": {
+        "lat": -23.6935908,
+        "lon": -46.781011,
+        "tipo": "osm_auto"
+    },
+    "Parque Independência": {
+        "lat": -23.6870868,
+        "lon": -46.7865686,
+        "tipo": "osm_auto"
+    },
+    "Jardim Caiçara": {
+        "lat": -23.6847698,
+        "lon": -46.7761457,
+        "tipo": "osm_auto"
+    },
+    "Jardim Parque Morumbi": {
+        "lat": -23.6231623,
+        "lon": -46.7287918,
+        "tipo": "osm_auto"
+    },
+    "Vila Santa Lúcia": {
+        "lat": -23.6891068,
+        "lon": -46.7640554,
+        "tipo": "osm_auto"
+    },
+    "Jardim das Flôres": {
+        "lat": -23.6800386,
+        "lon": -46.763341,
+        "tipo": "osm_auto"
+    },
+    "Jardim Paulo VI": {
+        "lat": -23.5997211,
+        "lon": -46.7872301,
+        "tipo": "osm_auto"
+    },
+    "Vila Cardoso Franco": {
+        "lat": -23.6250707,
+        "lon": -46.5061704,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Roberto": {
+        "lat": -23.6199445,
+        "lon": -46.5008895,
+        "tipo": "osm_auto"
+    },
+    "Fazenda da Juta": {
+        "lat": -23.6199234,
+        "lon": -46.4902795,
+        "tipo": "osm_auto"
+    },
+    "Jardim Alvorada": {
+        "lat": -23.664217,
+        "lon": -46.7840623,
+        "tipo": "osm_auto"
+    },
+    "Jardim Amélia": {
+        "lat": -23.6662167,
+        "lon": -46.7891753,
+        "tipo": "osm_auto"
+    },
+    "Chácara Flora": {
+        "lat": -23.646765,
+        "lon": -46.6854358,
+        "tipo": "osm_auto"
+    },
+    "Vila Pirituba": {
+        "lat": -23.4821207,
+        "lon": -46.7462644,
+        "tipo": "osm_auto"
+    },
+    "Jardim Brasília": {
+        "lat": -23.5546442,
+        "lon": -46.4927353,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Luís (Zona leste)": {
+        "lat": -23.4961343,
+        "lon": -46.3862855,
+        "tipo": "osm_auto"
+    },
+    "Vila Itaim": {
+        "lat": -23.4913907,
+        "lon": -46.4007568,
+        "tipo": "osm_auto"
+    },
+    "Vila Independência": {
+        "lat": -23.5973624,
+        "lon": -46.5934559,
+        "tipo": "osm_auto"
+    },
+    "Santa Teresinha": {
+        "lat": -23.4905833,
+        "lon": -46.6343071,
+        "tipo": "osm_auto"
+    },
+    "Vila Santo Estéfano": {
+        "lat": -23.6234977,
+        "lon": -46.6242477,
+        "tipo": "osm_auto"
+    },
+    "Bosque da Saúde": {
+        "lat": -23.6094152,
+        "lon": -46.6251697,
+        "tipo": "osm_auto"
+    },
+    "Jardim da Saúde": {
+        "lat": -23.6171973,
+        "lon": -46.6185362,
+        "tipo": "osm_auto"
+    },
+    "Vila das Mercês": {
+        "lat": -23.6231613,
+        "lon": -46.6085346,
+        "tipo": "osm_auto"
+    },
+    "Mirandópolis": {
+        "lat": -23.608307,
+        "lon": -46.6424478,
+        "tipo": "osm_auto"
+    },
+    "Chácara Inglesa": {
+        "lat": -23.608307,
+        "lon": -46.6323198,
+        "tipo": "osm_auto"
+    },
+    "Morro dos Ingleses": {
+        "lat": -23.5615632,
+        "lon": -46.6473877,
+        "tipo": "osm_auto"
+    },
+    "Vila Monte Alegre": {
+        "lat": -23.6275981,
+        "lon": -46.6352361,
+        "tipo": "osm_auto"
+    },
+    "Parque Imperial": {
+        "lat": -23.6220795,
+        "lon": -46.6352066,
+        "tipo": "osm_auto"
+    },
+    "Vila Guarani": {
+        "lat": -23.6366083,
+        "lon": -46.6366761,
+        "tipo": "osm_auto"
+    },
+    "Vila Géa": {
+        "lat": -23.6741496,
+        "lon": -46.6875771,
+        "tipo": "osm_auto"
+    },
+    "Jardim Cruzeiro": {
+        "lat": -23.7158352,
+        "lon": -46.7101555,
+        "tipo": "osm_auto"
+    },
+    "Vila Sebastião Afonso": {
+        "lat": -23.6774929,
+        "lon": -46.6340288,
+        "tipo": "osm_auto"
+    },
+    "Vila Cirenaica": {
+        "lat": -23.6761713,
+        "lon": -46.6312232,
+        "tipo": "osm_auto"
+    },
+    "Vila Recanto da Moeda": {
+        "lat": -23.6743044,
+        "lon": -46.6330793,
+        "tipo": "osm_auto"
+    },
+    "Conjuto Habitacional Turistica": {
+        "lat": -23.4749971,
+        "lon": -46.7566895,
+        "tipo": "osm_auto"
+    },
+    "Jardim Nardini": {
+        "lat": -23.4808055,
+        "lon": -46.7612869,
+        "tipo": "osm_auto"
+    },
+    "Vila Jaraguá": {
+        "lat": -23.4839667,
+        "lon": -46.7649668,
+        "tipo": "osm_auto"
+    },
+    "Favela CEU Atlantica": {
+        "lat": -23.4817822,
+        "lon": -46.7632395,
+        "tipo": "osm_auto"
+    },
+    "Vila Rosária": {
+        "lat": -23.5023493,
+        "lon": -46.4343626,
+        "tipo": "osm_auto"
+    },
+    "Vila Firmiano Pinto": {
+        "lat": -23.5989037,
+        "lon": -46.6194234,
+        "tipo": "osm_auto"
+    },
+    "Chácara Dona Olivia": {
+        "lat": -23.5132484,
+        "lon": -46.3882878,
+        "tipo": "osm_auto"
+    },
+    "Vila da Saúde": {
+        "lat": -23.6186644,
+        "lon": -46.6366592,
+        "tipo": "osm_auto"
+    },
+    "Vila do Bosque": {
+        "lat": -23.6204028,
+        "lon": -46.6299228,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Carlos": {
+        "lat": -23.5102697,
+        "lon": -46.4721111,
+        "tipo": "osm_auto"
+    },
+    "Vila Fernandes": {
+        "lat": -23.5600682,
+        "lon": -46.5320115,
+        "tipo": "osm_auto"
+    },
+    "Vila Simone": {
+        "lat": -23.5034685,
+        "lon": -46.4002839,
+        "tipo": "osm_auto"
+    },
+    "Parque Colonial": {
+        "lat": -23.7263545,
+        "lon": -46.6841448,
+        "tipo": "osm_auto"
+    },
+    "Parque das Nações Unidas": {
+        "lat": -23.7286228,
+        "lon": -46.6905848,
+        "tipo": "osm_auto"
+    },
+    "Vila Carmosina": {
+        "lat": -23.540372,
+        "lon": -46.4541709,
+        "tipo": "osm_auto"
+    },
+    "Parque Residencial Cocaia Cantinho do Céu": {
+        "lat": -23.7445995,
+        "lon": -46.6592609,
+        "tipo": "osm_auto"
+    },
+    "Jardim Silveira": {
+        "lat": -23.852003,
+        "lon": -46.7130808,
+        "tipo": "osm_auto"
+    },
+    "Vargem Grande": {
+        "lat": -23.860568,
+        "lon": -46.7076294,
+        "tipo": "osm_auto"
+    },
+    "Jardim Varginha": {
+        "lat": -23.7855608,
+        "lon": -46.684585,
+        "tipo": "osm_auto"
+    },
+    "Jardim Horizonte Azul": {
+        "lat": -23.740912,
+        "lon": -46.7817446,
+        "tipo": "osm_auto"
+    },
+    "Jardim dos Álamos": {
+        "lat": -23.8115094,
+        "lon": -46.7374865,
+        "tipo": "osm_auto"
+    },
+    "Recanto Campo Belo": {
+        "lat": -23.7919588,
+        "lon": -46.7326935,
+        "tipo": "osm_auto"
+    },
+    "Parque Brasil": {
+        "lat": -23.7360922,
+        "lon": -46.6933446,
+        "tipo": "osm_auto"
+    },
+    "Vila Roschel": {
+        "lat": -23.8392599,
+        "lon": -46.7337785,
+        "tipo": "osm_auto"
+    },
+    "Jardim Germânia": {
+        "lat": -23.6572228,
+        "lon": -46.7592181,
+        "tipo": "osm_auto"
+    },
+    "Jardim Shangrila": {
+        "lat": -23.7598431,
+        "lon": -46.6676058,
+        "tipo": "osm_auto"
+    },
+    "Jardim Alpino": {
+        "lat": -23.7462103,
+        "lon": -46.7113451,
+        "tipo": "osm_auto"
+    },
+    "Vila Cunha Bueno": {
+        "lat": -23.6037371,
+        "lon": -46.5141677,
+        "tipo": "osm_auto"
+    },
+    "Vila Yolanda": {
+        "lat": -23.587506,
+        "lon": -46.3812835,
+        "tipo": "osm_auto"
+    },
+    "Vila Odete": {
+        "lat": -23.535029,
+        "lon": -46.4099915,
+        "tipo": "osm_auto"
+    },
+    "Lagoa Grande": {
+        "lat": -23.8449471,
+        "lon": -46.7771147,
+        "tipo": "osm_auto"
+    },
+    "Jardim Sabiá": {
+        "lat": -23.7831588,
+        "lon": -46.6911375,
+        "tipo": "osm_auto"
+    },
+    "Vila Pereira Cerca": {
+        "lat": -23.4949919,
+        "lon": -46.7126086,
+        "tipo": "osm_auto"
+    },
+    "Jardim Myrna": {
+        "lat": -23.770667,
+        "lon": -46.6936448,
+        "tipo": "osm_auto"
+    },
+    "Conjunto Inácio Monteiro": {
+        "lat": -23.5712893,
+        "lon": -46.4044867,
+        "tipo": "osm_auto"
+    },
+    "Vila Sá Barbosa": {
+        "lat": -23.5310216,
+        "lon": -46.6271835,
+        "tipo": "osm_auto"
+    },
+    "Parque Fernanda": {
+        "lat": -23.6767146,
+        "lon": -46.7939672,
+        "tipo": "osm_auto"
+    },
+    "Jardim Arantes": {
+        "lat": -23.6229301,
+        "lon": -46.4169461,
+        "tipo": "osm_auto"
+    },
+    "Colônia": {
+        "lat": -23.8491678,
+        "lon": -46.6990131,
+        "tipo": "osm_auto"
+    },
+    "Vila Arriete": {
+        "lat": -23.6821499,
+        "lon": -46.6824429,
+        "tipo": "osm_auto"
+    },
+    "Jardim Iracema": {
+        "lat": -23.6419243,
+        "lon": -46.7867032,
+        "tipo": "osm_auto"
+    },
+    "Conjunto Habitacional Padre Manoel da Nobrega": {
+        "lat": -23.5454002,
+        "lon": -46.4790104,
+        "tipo": "osm_auto"
+    },
+    "Jardim Soares": {
+        "lat": -23.5463615,
+        "lon": -46.4024515,
+        "tipo": "osm_auto"
+    },
+    "Jardim Jussara": {
+        "lat": -23.5955395,
+        "lon": -46.7597237,
+        "tipo": "osm_auto"
+    },
+    "Jardim Modelo": {
+        "lat": -23.4678052,
+        "lon": -46.5756811,
+        "tipo": "osm_auto"
+    },
+    "Chácara Everest": {
+        "lat": -23.5952396,
+        "lon": -46.8070705,
+        "tipo": "osm_auto"
+    },
+    "Jardim Dracena": {
+        "lat": -23.5927619,
+        "lon": -46.7597262,
+        "tipo": "osm_auto"
+    },
+    "Jardim Papai Noel": {
+        "lat": -23.8252331,
+        "lon": -46.7021657,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Norberto": {
+        "lat": -23.8197035,
+        "lon": -46.705151,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Nicolau": {
+        "lat": -23.8273906,
+        "lon": -46.6975329,
+        "tipo": "osm_auto"
+    },
+    "Cidade Dutra": {
+        "lat": -23.7139643,
+        "lon": -46.6990882,
+        "tipo": "osm_auto"
+    },
+    "Jardim Presidente": {
+        "lat": -23.7303056,
+        "lon": -46.702083,
+        "tipo": "osm_auto"
+    },
+    "Jardim Iporanga": {
+        "lat": -23.7271039,
+        "lon": -46.7040885,
+        "tipo": "osm_auto"
+    },
+    "Jardim Jordanópolis": {
+        "lat": -23.7327797,
+        "lon": -46.6990066,
+        "tipo": "osm_auto"
+    },
+    "Vila Liviero": {
+        "lat": -23.6532514,
+        "lon": -46.6005327,
+        "tipo": "osm_auto"
+    },
+    "Vila Santa Tereza": {
+        "lat": -23.6474828,
+        "lon": -46.5952478,
+        "tipo": "osm_auto"
+    },
+    "Jardim Manacá da Serra": {
+        "lat": -23.7959604,
+        "lon": -46.707454,
+        "tipo": "osm_auto"
+    },
+    "Vila Zatt": {
+        "lat": -23.4773196,
+        "lon": -46.7156998,
+        "tipo": "osm_auto"
+    },
+    "Jardim Casa Grande": {
+        "lat": -23.79647,
+        "lon": -46.712762,
+        "tipo": "osm_auto"
+    },
+    "Cohab Monet": {
+        "lat": -23.6478026,
+        "lon": -46.7891447,
+        "tipo": "osm_auto"
+    },
+    "Jardim Dom José": {
+        "lat": -23.6749048,
+        "lon": -46.795916,
+        "tipo": "osm_auto"
+    },
+    "Jardim América da Penha": {
+        "lat": -23.518679,
+        "lon": -46.5532763,
+        "tipo": "osm_auto"
+    },
+    "Vila Bandeirantes": {
+        "lat": -23.6150802,
+        "lon": -46.600522,
+        "tipo": "osm_auto"
+    },
+    "Vila Alexandria": {
+        "lat": -23.6418705,
+        "lon": -46.6714284,
+        "tipo": "osm_auto"
+    },
+    "Casa Verde Baixa": {
+        "lat": -23.510486,
+        "lon": -46.6571046,
+        "tipo": "osm_auto"
+    },
+    "Campinha": {
+        "lat": -23.6753654,
+        "lon": -46.6849086,
+        "tipo": "osm_auto"
+    },
+    "Jardim Ester": {
+        "lat": -23.5813704,
+        "lon": -46.7655688,
+        "tipo": "osm_auto"
+    },
+    "Jardim Jaqueline": {
+        "lat": -23.5945788,
+        "lon": -46.7536592,
+        "tipo": "osm_auto"
+    },
+    "City Jaraguá": {
+        "lat": -23.4385795,
+        "lon": -46.7343069,
+        "tipo": "osm_auto"
+    },
+    "Jardim Pirituba": {
+        "lat": -23.4367799,
+        "lon": -46.7205286,
+        "tipo": "osm_auto"
+    },
+    "Vila Jaguara": {
+        "lat": -23.5076149,
+        "lon": -46.754978,
+        "tipo": "osm_auto"
+    },
+    "Jardim Miriam": {
+        "lat": -23.6810039,
+        "lon": -46.6396596,
+        "tipo": "osm_auto"
+    },
+    "Vila Pereira Barreto": {
+        "lat": -23.4895362,
+        "lon": -46.7185545,
+        "tipo": "osm_auto"
+    },
+    "Nova Heliópolis": {
+        "lat": -23.6125972,
+        "lon": -46.5910089,
+        "tipo": "osm_auto"
+    },
+    "Vila Progresso": {
+        "lat": -23.5175108,
+        "lon": -46.4324327,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santa Cruz": {
+        "lat": -23.6406118,
+        "lon": -46.5974152,
+        "tipo": "osm_auto"
+    },
+    "Vila Renato": {
+        "lat": -23.4724953,
+        "lon": -46.7191354,
+        "tipo": "osm_auto"
+    },
+    "Jardim Helena": {
+        "lat": -23.479635,
+        "lon": -46.4196826,
+        "tipo": "osm_auto"
+    },
+    "Parada de Taípas": {
+        "lat": -23.4352886,
+        "lon": -46.7169586,
+        "tipo": "osm_auto"
+    },
+    "Vila Souza": {
+        "lat": -23.434319,
+        "lon": -46.7165213,
+        "tipo": "osm_auto"
+    },
+    "Vila do Encontro": {
+        "lat": -23.651586,
+        "lon": -46.6399293,
+        "tipo": "osm_auto"
+    },
+    "Vila Arapuã": {
+        "lat": -23.6350916,
+        "lon": -46.5906251,
+        "tipo": "osm_auto"
+    },
+    "Jardim Maia": {
+        "lat": -23.4940321,
+        "lon": -46.4140362,
+        "tipo": "osm_auto"
+    },
+    "Cidade Domitila": {
+        "lat": -23.6628425,
+        "lon": -46.6483528,
+        "tipo": "osm_auto"
+    },
+    "Jardim Itacolomi": {
+        "lat": -23.6625583,
+        "lon": -46.6519454,
+        "tipo": "osm_auto"
+    },
+    "Parque Fongaro": {
+        "lat": -23.6335456,
+        "lon": -46.5941876,
+        "tipo": "osm_auto"
+    },
+    "Jardim Patente": {
+        "lat": -23.6276252,
+        "lon": -46.586882,
+        "tipo": "osm_auto"
+    },
+    "Vila Guaraciaba": {
+        "lat": -23.4844116,
+        "lon": -46.4970776,
+        "tipo": "osm_auto"
+    },
+    "Conjunto Promorar Raposo Tavares": {
+        "lat": -23.5869391,
+        "lon": -46.7993803,
+        "tipo": "osm_auto"
+    },
+    "Vila Grão Mogol": {
+        "lat": -23.4899885,
+        "lon": -46.4043778,
+        "tipo": "osm_auto"
+    },
+    "Vila Aymoré": {
+        "lat": -23.4876712,
+        "lon": -46.4013898,
+        "tipo": "osm_auto"
+    },
+    "Grand Reserva Paulista": {
+        "lat": -23.5015989,
+        "lon": -46.7196339,
+        "tipo": "osm_auto"
+    },
+    "Jardim Keralux": {
+        "lat": -23.4823774,
+        "lon": -46.4936394,
+        "tipo": "osm_auto"
+    },
+    "Metalúrgicos": {
+        "lat": -23.5997695,
+        "lon": -46.4008756,
+        "tipo": "osm_auto"
+    },
+    "Prestes Maia": {
+        "lat": -23.5679281,
+        "lon": -46.4097528,
+        "tipo": "osm_auto"
+    },
+    "Inácio Monteiro": {
+        "lat": -23.5716262,
+        "lon": -46.399928,
+        "tipo": "osm_auto"
+    },
+    "Parque Santa Etelvina": {
+        "lat": -23.5836365,
+        "lon": -46.412184,
+        "tipo": "osm_auto"
+    },
+    "Nascer do Sol": {
+        "lat": -23.5918537,
+        "lon": -46.4126624,
+        "tipo": "osm_auto"
+    },
+    "Vila Paulista": {
+        "lat": -23.5777908,
+        "lon": -46.4071103,
+        "tipo": "osm_auto"
+    },
+    "Jardim Castro Alves": {
+        "lat": -23.5819596,
+        "lon": -46.4050088,
+        "tipo": "osm_auto"
+    },
+    "Jardim Wilma Flôr": {
+        "lat": -23.5754624,
+        "lon": -46.3962945,
+        "tipo": "osm_auto"
+    },
+    "Sarandi": {
+        "lat": -23.5765923,
+        "lon": -46.4137136,
+        "tipo": "osm_auto"
+    },
+    "Jardim Pedra Branca": {
+        "lat": -23.5814545,
+        "lon": -46.4190468,
+        "tipo": "osm_auto"
+    },
+    "Fazenda do Carmo": {
+        "lat": -23.5655942,
+        "lon": -46.4231457,
+        "tipo": "osm_auto"
+    },
+    "Ferroviários": {
+        "lat": -23.5989536,
+        "lon": -46.395073,
+        "tipo": "osm_auto"
+    },
+    "Gráficos": {
+        "lat": -23.6086694,
+        "lon": -46.3994266,
+        "tipo": "osm_auto"
+    },
+    "Bancários": {
+        "lat": -23.6023,
+        "lon": -46.4046221,
+        "tipo": "osm_auto"
+    },
+    "Sitío Conceição": {
+        "lat": -23.5792817,
+        "lon": -46.3926899,
+        "tipo": "osm_auto"
+    },
+    "Barro Branco": {
+        "lat": -23.5862992,
+        "lon": -46.3938408,
+        "tipo": "osm_auto"
+    },
+    "Jardim Maravilha": {
+        "lat": -23.5887344,
+        "lon": -46.387057,
+        "tipo": "osm_auto"
+    },
+    "Jardim Dom Ângelo": {
+        "lat": -23.5806022,
+        "lon": -46.3833228,
+        "tipo": "osm_auto"
+    },
+    "Jardim Ferraz": {
+        "lat": -23.5723085,
+        "lon": -46.387844,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Carlos (Guaianazes)": {
+        "lat": -23.5579131,
+        "lon": -46.4123205,
+        "tipo": "osm_auto"
+    },
+    "Pq. Saturnino Pereira": {
+        "lat": -23.564566,
+        "lon": -46.4172075,
+        "tipo": "osm_auto"
+    },
+    "Jardim dos Cunhas": {
+        "lat": -23.5663067,
+        "lon": -46.4138386,
+        "tipo": "osm_auto"
+    },
+    "Jardim Cruz das Almas": {
+        "lat": -23.5697338,
+        "lon": -46.4153836,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Tomé": {
+        "lat": -23.5865048,
+        "lon": -46.3995698,
+        "tipo": "osm_auto"
+    },
+    "Jardim Davidenko": {
+        "lat": -23.5870677,
+        "lon": -46.3930317,
+        "tipo": "osm_auto"
+    },
+    "Buritizinho": {
+        "lat": -23.5836108,
+        "lon": -46.4234562,
+        "tipo": "osm_auto"
+    },
+    "Caboré - Vila Gil": {
+        "lat": -23.5922311,
+        "lon": -46.4373311,
+        "tipo": "osm_auto"
+    },
+    "Jardim Iguatemi": {
+        "lat": -23.5971899,
+        "lon": -46.441005,
+        "tipo": "osm_auto"
+    },
+    "Jardim Roseli": {
+        "lat": -23.5980591,
+        "lon": -46.4363475,
+        "tipo": "osm_auto"
+    },
+    "Jardim Bandeirantes": {
+        "lat": -23.6036763,
+        "lon": -46.4382091,
+        "tipo": "osm_auto"
+    },
+    "Jardim Augusto": {
+        "lat": -23.5968656,
+        "lon": -46.4486002,
+        "tipo": "osm_auto"
+    },
+    "Jardim Conquista": {
+        "lat": -23.6073592,
+        "lon": -46.4481325,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santa Edwiges": {
+        "lat": -23.5870593,
+        "lon": -46.4103438,
+        "tipo": "osm_auto"
+    },
+    "Jardim Texas": {
+        "lat": -23.5981058,
+        "lon": -46.4077691,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santa Etelvina": {
+        "lat": -23.5850015,
+        "lon": -46.4051855,
+        "tipo": "osm_auto"
+    },
+    "Nova América": {
+        "lat": -23.8651749,
+        "lon": -46.6742608,
+        "tipo": "osm_auto"
+    },
+    "Vila Marisa": {
+        "lat": -23.5084859,
+        "lon": -46.7602587,
+        "tipo": "osm_auto"
+    },
+    "Vila Piratininga": {
+        "lat": -23.5033305,
+        "lon": -46.5374529,
+        "tipo": "osm_auto"
+    },
+    "Estrada Vitório Trentin": {
+        "lat": -23.7230447,
+        "lon": -46.797964,
+        "tipo": "osm_auto"
+    },
+    "Vila Mascote": {
+        "lat": -23.6459168,
+        "lon": -46.6675551,
+        "tipo": "osm_auto"
+    },
+    "Chácara Nani": {
+        "lat": -23.7092582,
+        "lon": -46.7916925,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santo Antoninho": {
+        "lat": -23.6568915,
+        "lon": -46.6665927,
+        "tipo": "osm_auto"
+    },
+    "Vila São Paulo": {
+        "lat": -23.6571626,
+        "lon": -46.6702223,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Bernardo": {
+        "lat": -23.7559882,
+        "lon": -46.7007901,
+        "tipo": "osm_auto"
+    },
+    "União de Vila Nova": {
+        "lat": -23.4844126,
+        "lon": -46.4585784,
+        "tipo": "osm_auto"
+    },
+    "Jardim Almanara": {
+        "lat": -23.4745802,
+        "lon": -46.6750343,
+        "tipo": "osm_auto"
+    },
+    "Bairro da Coroa": {
+        "lat": -23.5190497,
+        "lon": -46.6130701,
+        "tipo": "osm_auto"
+    },
+    "jardim piratininga": {
+        "lat": -23.5004749,
+        "lon": -46.5344374,
+        "tipo": "osm_auto"
+    },
+    "Iguaçu": {
+        "lat": -23.6130815,
+        "lon": -46.5218753,
+        "tipo": "osm_auto"
+    },
+    "Jardim Sapopemba": {
+        "lat": -23.6094924,
+        "lon": -46.4927394,
+        "tipo": "osm_auto"
+    },
+    "Conjunto Habitacional Teotônio Vilela": {
+        "lat": -23.6060541,
+        "lon": -46.5036559,
+        "tipo": "osm_auto"
+    },
+    "Mata da Juta": {
+        "lat": -23.6169885,
+        "lon": -46.4901832,
+        "tipo": "osm_auto"
+    },
+    "Vila Bancária": {
+        "lat": -23.5895946,
+        "lon": -46.5229995,
+        "tipo": "osm_auto"
+    },
+    "Vila Tolstói": {
+        "lat": -23.5991361,
+        "lon": -46.5249038,
+        "tipo": "osm_auto"
+    },
+    "Carandiru": {
+        "lat": -23.5122768,
+        "lon": -46.6256481,
+        "tipo": "osm_auto"
+    },
+    "Vila Nova Jaguaré": {
+        "lat": -23.544936,
+        "lon": -46.7427087,
+        "tipo": "osm_auto"
+    },
+    "Jardim São Jorge": {
+        "lat": -23.5891782,
+        "lon": -46.7862945,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santa Bárbara": {
+        "lat": -23.6082474,
+        "lon": -46.4575485,
+        "tipo": "osm_auto"
+    },
+    "Jardim Regina": {
+        "lat": -23.4737622,
+        "lon": -46.7420131,
+        "tipo": "osm_auto"
+    },
+    "Vila Clarice": {
+        "lat": -23.4687491,
+        "lon": -46.7505897,
+        "tipo": "osm_auto"
+    },
+    "Parque São Domingos": {
+        "lat": -23.499517,
+        "lon": -46.7380514,
+        "tipo": "osm_auto"
+    },
+    "City América": {
+        "lat": -23.4994224,
+        "lon": -46.7334067,
+        "tipo": "osm_auto"
+    },
+    "Cidade Vargas": {
+        "lat": -23.6463946,
+        "lon": -46.636193,
+        "tipo": "osm_auto"
+    },
+    "Vila Santa Catarina": {
+        "lat": -23.6516782,
+        "lon": -46.6569566,
+        "tipo": "osm_auto"
+    },
+    "Parque Boturussu": {
+        "lat": -23.4986599,
+        "lon": -46.4838764,
+        "tipo": "osm_auto"
+    },
+    "Perus": {
+        "lat": -23.407529,
+        "lon": -46.7520629,
+        "tipo": "osm_auto"
+    },
+    "Anhanguera": {
+        "lat": -23.4209929,
+        "lon": -46.8079644,
+        "tipo": "osm_auto"
+    },
+    "Vila Caiuba": {
+        "lat": -23.3996607,
+        "lon": -46.7497404,
+        "tipo": "osm_auto"
+    },
+    "Cursino": {
+        "lat": -23.635293,
+        "lon": -46.6213002,
+        "tipo": "osm_auto"
+    },
+    "Chácara Santo Antônio": {
+        "lat": -23.6298197,
+        "lon": -46.7038751,
+        "tipo": "osm_auto"
+    },
+    "Caxingui": {
+        "lat": -23.5804466,
+        "lon": -46.7165496,
+        "tipo": "osm_auto"
+    },
+    "Jardins": {
+        "lat": -23.5738078,
+        "lon": -46.6678314,
+        "tipo": "osm_auto"
+    },
+    "Jardim América": {
+        "lat": -23.569636,
+        "lon": -46.6720116,
+        "tipo": "osm_auto"
+    },
+    "Vila Alto da Alegria": {
+        "lat": -23.7448189,
+        "lon": -46.6928005,
+        "tipo": "osm_auto"
+    },
+    "Granja Julieta": {
+        "lat": -23.6358906,
+        "lon": -46.7057896,
+        "tipo": "osm_auto"
+    },
+    "Jardim Santo Amaro": {
+        "lat": -23.6521728,
+        "lon": -46.6960195,
+        "tipo": "osm_auto"
+    },
+    "Jardim Petrópolis": {
+        "lat": -23.6316703,
+        "lon": -46.6839133,
+        "tipo": "osm_auto"
+    },
+    "Brooklin Velho": {
+        "lat": -23.6271355,
+        "lon": -46.6801055,
+        "tipo": "osm_auto"
+    },
+    "Chácara Monte Alegre": {
+        "lat": -23.644373,
+        "lon": -46.6769894,
+        "tipo": "osm_auto"
+    },
+    "Vila Conde do Pinhal": {
+        "lat": -23.6180521,
+        "lon": -46.5937959,
+        "tipo": "osm_auto"
+    },
+    "Vila Campanela São Paulo": {
+        "lat": -23.5373914,
+        "lon": -46.4620811,
+        "tipo": "osm_auto"
+    },
+    "Vila Breno Acioli": {
+        "lat": -23.5221353,
+        "lon": -46.4943925,
+        "tipo": "osm_auto"
+    },
+    "Comunidade Jardim das Palmas": {
+        "lat": -23.6202329,
+        "lon": -46.74558,
+        "tipo": "osm_auto"
+    },
+    "Alto do Rivieira": {
+        "lat": -23.6993644,
+        "lon": -46.7617207,
+        "tipo": "osm_auto"
+    },
+    "Vila Cristina": {
+        "lat": -23.652791,
+        "lon": -46.6053847,
+        "tipo": "osm_auto"
+    },
+    "Vila Córrego da Água Vermelha": {
+        "lat": -23.5170325,
+        "lon": -46.4170277,
+        "tipo": "osm_auto"
+    },
+    "Vila Dersa": {
+        "lat": -23.6685436,
+        "lon": -46.6334435,
+        "tipo": "osm_auto"
+    },
+    "Vila Dom Macário": {
+        "lat": -23.6195251,
+        "lon": -46.6132669,
+        "tipo": "osm_auto"
+    },
+    "Vila Galpozani": {
+        "lat": -23.6493334,
+        "lon": -46.7751722,
+        "tipo": "osm_auto"
+    },
+    "Vila Gruta das Princesas": {
+        "lat": -23.4827445,
+        "lon": -46.3941705,
+        "tipo": "osm_auto"
+    },
+    "Jardim Helga": {
+        "lat": -23.6429602,
+        "lon": -46.7738845,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Ana Maria": {
+        "lat": -23.6250705,
+        "lon": -46.762381,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Maia": {
+        "lat": -23.48307,
+        "lon": -46.4160535,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Maristela": {
+        "lat": -23.4873096,
+        "lon": -46.7543482,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Morro Oriente": {
+        "lat": -23.636186,
+        "lon": -46.759134,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Olinda": {
+        "lat": -23.63113,
+        "lon": -46.7559495,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Pantanal": {
+        "lat": -23.4802409,
+        "lon": -46.4094535,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Paris": {
+        "lat": -23.638339,
+        "lon": -46.7713064,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Planalto": {
+        "lat": -23.6117825,
+        "lon": -46.518559,
+        "tipo": "osm_auto"
+    },
+    "Jardim Rosana": {
+        "lat": -23.6465184,
+        "lon": -46.7744491,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim São Matinho": {
+        "lat": -23.4831745,
+        "lon": -46.4134315,
+        "tipo": "osm_auto"
+    },
+    "Vila Jardim Umuarama": {
+        "lat": -23.6469435,
+        "lon": -46.7688085,
+        "tipo": "osm_auto"
+    },
+    "Vila Joaquim Meira": {
+        "lat": -23.5753015,
+        "lon": -46.4870235,
+        "tipo": "osm_auto"
+    },
+    "Vila Leônidas Moreira": {
+        "lat": -23.6432505,
+        "lon": -46.7781605,
+        "tipo": "osm_auto"
+    },
+    "Vila Machado Nunes": {
+        "lat": -23.578604,
+        "lon": -46.4853297,
+        "tipo": "osm_auto"
+    },
+    "Vila Margarida": {
+        "lat": -23.482405,
+        "lon": -46.390027,
+        "tipo": "osm_auto"
+    },
+    "Vila Missionária": {
+        "lat": -23.647039,
+        "lon": -46.7711615,
+        "tipo": "osm_auto"
+    },
+    "Vila Monforte de Lemos": {
+        "lat": -23.648431,
+        "lon": -46.771574,
+        "tipo": "osm_auto"
+    },
+    "Vila Morada do Sol": {
+        "lat": -23.571209,
+        "lon": -46.492748,
+        "tipo": "osm_auto"
+    },
+    "Vila Pantanal": {
+        "lat": -23.4748717,
+        "lon": -46.4178337,
+        "tipo": "osm_auto"
+    },
+    "Vila Pantanal 2": {
+        "lat": -23.4845531,
+        "lon": -46.4517915,
+        "tipo": "osm_auto"
+    },
+    "Vila Parque Guaianases": {
+        "lat": -23.5214762,
+        "lon": -46.415589,
+        "tipo": "osm_auto"
+    },
+    "Vila Professora Nina Stocco": {
+        "lat": -23.6283744,
+        "lon": -46.7609091,
+        "tipo": "osm_auto"
+    },
+    "Vila Regina": {
+        "lat": -23.6381514,
+        "lon": -46.76013,
+        "tipo": "osm_auto"
+    },
+    "Vila Rio Fartura": {
+        "lat": -23.55764,
+        "lon": -46.4115168,
+        "tipo": "osm_auto"
+    },
+    "Vila Roland Berigan": {
+        "lat": -23.485231,
+        "lon": -46.4408498,
+        "tipo": "osm_auto"
+    },
+    "Vila Rua Itaguara": {
+        "lat": -23.651277,
+        "lon": -46.634394,
+        "tipo": "osm_auto"
+    },
+    "Vila Safira": {
+        "lat": -23.4753097,
+        "lon": -46.412505,
+        "tipo": "osm_auto"
+    },
+    "Vila São Pedro": {
+        "lat": -23.6523384,
+        "lon": -46.5968905,
+        "tipo": "osm_auto"
+    },
+    "Jerusalem": {
+        "lat": -23.6648612,
+        "lon": -46.7608001,
+        "tipo": "osm_auto"
+    },
+    "Valquiria": {
+        "lat": -23.6544541,
+        "lon": -46.7787576,
+        "tipo": "osm_auto"
+    },
+    "Cohab Taipas 1": {
+        "lat": -23.4435012,
+        "lon": -46.7156719,
+        "tipo": "osm_auto"
+    },
+    "Comunidade Corrego Jaboticabal": {
+        "lat": -23.6424831,
+        "lon": -46.6035071,
+        "tipo": "osm_auto"
+    },
+    "Vila Rizieri": {
+        "lat": -23.6342031,
+        "lon": -46.591719,
+        "tipo": "osm_auto"
+    },
+    "Jardim Amaralina": {
+        "lat": -23.604204,
+        "lon": -46.7986354,
+        "tipo": "osm_auto"
+    },
+    "PQ. NOVA ESPER. II": {
+        "lat": -15.642691295169824,
+        "lon": -55.963141402172695,
+        "tipo": "manual"
+    },
+    "PQ. NOVA ESPER. III": {
+        "lat": -15.64517083072005,
+        "lon": -55.963313063528155,
+        "tipo": "manual"
+    },
+    "PQ. UNIVERSITARIO": {
+        "lat": -15.61731579662193,
+        "lon": -56.034875464980395,
+        "tipo": "manual"
+    },
+    "R. ALTOS DO PARQUE II": {
+        "lat": -15.686581666291813,
+        "lon": -56.02745036632626,
+        "tipo": "manual"
+    },
+    "JD. 1 DE MARCO": {
+        "lat": -15.549129567566105,
+        "lon": -56.03327881883425,
+        "tipo": "manual"
+    },
+    "CENTRO AMERICA": {
+        "lat": -15.562261080718569,
+        "lon": -56.057532566527016,
+        "tipo": "manual"
+    },
+    "R. BELITA C. MARQUES": {
+        "lat": -15.625195567254194,
+        "lon": -55.99394261907557,
+        "tipo": "manual"
+    },
+    "R. SONHO MEU": {
+        "lat": -15.629731143180098,
+        "lon": -55.94953075874073,
+        "tipo": "manual"
+    },
+    "R. ARICA": {
+        "lat": -15.622844174105733,
+        "lon": -55.99008048654698,
+        "tipo": "manual"
+    },
+    "C.R. RIO CLARO": {
+        "lat": -15.608940784429784,
+        "lon": -56.02026224379214,
+        "tipo": "manual"
+    },
+    "JD. PAULICEIA": {
+        "lat": -15.678916133262868,
+        "lon": -56.03729872111832,
+        "tipo": "manual"
+    },
+    "R. ALICE NOVAK": {
+        "lat": -15.64764584716544,
+        "lon": -55.996667420437696,
+        "tipo": "manual"
+    },
+    "R. FRANCISCA LOUREIRO BORBA": {
+        "lat": -15.606002618424217,
+        "lon": -55.986353406061994,
+        "tipo": "manual"
+    },
+    "R. TROPICAL VILLE": {
+        "lat": -15.554186518526935,
+        "lon": -56.11742969203662,
+        "tipo": "manual"
+    },
+    "MANDURI": {
+        "lat": -15.627977730645378,
+        "lon": -55.986722945679446,
+        "tipo": "manual"
+    },
+    "C.R. FLOR DO CERRADO": {
+        "lat": -15.622099716996157,
+        "lon": -56.011911825982736,
+        "tipo": "manual"
+    },
+    "C.R. RIO CACHOERINHA": {
+        "lat": -15.609731732453143,
+        "lon": -56.017193649673516,
+        "tipo": "manual"
+    },
+    "R. ALTOS DO CERRADO": {
+        "lat": -15.607360040133159,
+        "lon": -55.991862350208756,
+        "tipo": "manual"
+    },
+    "C.R. RIO JANGADA": {
+        "lat": -15.61005234620317,
+        "lon": -56.017741012861265,
+        "tipo": "manual"
+    },
+    "ALTOS DA SERRA": {
+        "lat": -15.581130066860831,
+        "lon": -56.02461868696052,
+        "tipo": "manual"
+    },
+    "JD. UMUARAMA I": {
+        "lat": -15.548152412493447,
+        "lon": -56.023498439195876,
+        "tipo": "manual"
+    },
+    "JD. UMUARAMA II": {
+        "lat": -15.548194284778885,
+        "lon": -56.02340020961503,
+        "tipo": "manual"
+    },
+    "JD. UBATA": {
+        "lat": -15.616528312828782,
+        "lon": -56.124706541668864,
+        "tipo": "manual"
+    },
+    "JD.UNIAO": {
+        "lat": -15.545434017882439,
+        "lon": -56.074545069790865,
+        "tipo": "manual"
+    },
+    "STA. ANGELITA": {
+        "lat": -15.596943640965604,
+        "lon": -56.139990863871496,
+        "tipo": "manual"
+    },
+    "R. ILZA TEREZINHA PAGOT": {
+        "lat": -15.536852448965364,
+        "lon": -56.03298764884853,
+        "tipo": "manual"
+    },
+    "R. VILLA DO SOL": {
+        "lat": -15.544265733898571,
+        "lon": -56.05070900133544,
+        "tipo": "manual"
+    },
+    "SERRA DOURADA": {
+        "lat": -15.546310944893284,
+        "lon": -56.04573947863648,
+        "tipo": "manual"
+    },
+    "ALTOS DA GLORIA": {
+        "lat": -15.544257329036766,
+        "lon": -56.02296722486963,
+        "tipo": "manual"
+    },
+    "R. DR. FABIO LEITE II": {
+        "lat": -15.5685322438983,
+        "lon": -56.02140407629857,
+        "tipo": "manual"
+    },
+    "NOVO M. GROSSO": {
+        "lat": -15.580001558805572,
+        "lon": -56.04604399002341,
+        "tipo": "manual"
+    },
+    "ROD. PARQUE": {
+        "lat": -15.577572646706917,
+        "lon": -56.09067574646704,
+        "tipo": "manual"
+    },
+    "R. JAMIL B. NADAF": {
+        "lat": -15.53312429572081,
+        "lon": -56.03528863757426,
+        "tipo": "manual"
+    },
+    "R. NOVA CANAA": {
+        "lat": -15.554137301912688,
+        "lon": -56.018764912258426,
+        "tipo": "manual"
+    },
+    "REAL PARQUE": {
+        "lat": -15.672800334599653,
+        "lon": -56.03840307856132,
+        "tipo": "manual"
+    },
+    "JD. ALENCASTRO": {
+        "lat": -15.631610625125987,
+        "lon": -56.05330036155875,
+        "tipo": "manual"
+    },
+    "JD. PRESIDENTE I": {
+        "lat": -15.646337811555446,
+        "lon": -56.0268787048026,
+        "tipo": "manual"
+    },
+    "JD. ARACA": {
+        "lat": -15.59644827122233,
+        "lon": -56.13680103122436,
+        "tipo": "manual"
+    },
+    "C.R. FLORAIS CUIABA": {
+        "lat": -15.542204688338074,
+        "lon": -56.097532435251175,
+        "tipo": "manual"
+    },
+    "VILA REAL": {
+        "lat": -15.566231753339865,
+        "lon": -56.09227097794282,
+        "tipo": "manual"
+    },
+    "JD. PRIMAVERA": {
+        "lat": -15.600133740586699,
+        "lon": -56.12406378052263,
+        "tipo": "manual"
+    },
+    "Vila Nova Coxipó": {
+        "lat": -15.6190628,
+        "lon": -55.9988462,
+        "tipo": "osm_auto"
+    },
+    "Residencial Nico Baracat 3": {
+        "lat": -15.6116729,
+        "lon": -55.9778628,
+        "tipo": "osm_auto"
+    },
+    "R. PAIAGUAS II": {
+        "lat": -15.56127303186937,
+        "lon": -56.08209171312577,
+        "tipo": "manual"
+    },
+    "SAO JOSE II": {
+        "lat": -12.550012068870057,
+        "lon": -55.751728145370684,
+        "tipo": "manual"
+    },
+    "BAU": {
+        "lat": -15.591883182256838,
+        "lon": -56.08699528379716,
+        "tipo": "manual"
+    },
+    "LUCIANOPOLIS": {
+        "lat": -15.629136242232521,
+        "lon": -56.06041601853353,
+        "tipo": "manual"
+    },
+    "C.R. RIO SAO LOURENCO": {
+        "lat": -15.605925150562944,
+        "lon": -56.01999966132408,
+        "tipo": "manual"
+    },
+    "JD. KENNEDY": {
+        "lat": -15.614612598209654,
+        "lon": -56.07742962947535,
+        "tipo": "manual"
+    },
+    "LOT. PQ. BELA CONQUISTA": {
+        "lat": -15.646984758892614,
+        "lon": -56.01960429871389,
+        "tipo": "manual"
+    },
+    "JD. UNIAO": {
+        "lat": -15.545280747315633,
+        "lon": -56.07493454647985,
+        "tipo": "manual"
+    },
+    "CONSIL": {
+        "lat": -15.581879460393086,
+        "lon": -56.086670095991096,
+        "tipo": "manual"
+    },
+    "M. DO SOL": {
+        "lat": -15.582907308745709,
+        "lon": -56.098204526665185,
+        "tipo": "manual"
+    },
+    "R. ANTARTICA": {
+        "lat": -15.571576026657242,
+        "lon": -56.12557363506721,
+        "tipo": "manual"
+    },
+    "São Jerônimo": {
+        "lat": -15.4628492,
+        "lon": -55.9028947,
+        "tipo": "osm_auto"
+    },
+    "Residencial Recanto Bela Vista": {
+        "lat": -15.6058573,
+        "lon": -55.9832371,
+        "tipo": "osm_auto"
+    },
+    "R. ITAMARATI I": {
+        "lat": -15.586674254072646,
+        "lon": -56.03737446756484,
+        "tipo": "manual"
+    },
+    "JOCKEY CLUB": {
+        "lat": -15.65760534213083,
+        "lon": -56.047648860856185,
+        "tipo": "manual"
+    },
+    "VILA VERDE": {
+        "lat": -15.64357787535571,
+        "lon": -56.022203134823286,
+        "tipo": "manual"
+    },
+    "R. ITAPAJE": {
+        "lat": -15.652566274461755,
+        "lon": -56.027148783997546,
+        "tipo": "manual"
+    },
+    "PQ. R. COXIPO": {
+        "lat": -15.651587104772899,
+        "lon": -56.0319414803754,
+        "tipo": "manual"
+    },
+    "OURO FINO": {
+        "lat": -15.550843259371677,
+        "lon": -56.04888239189002,
+        "tipo": "manual"
+    },
+    "STA. TEREZINHA": {
+        "lat": -15.660611789135276,
+        "lon": -56.03275322858589,
+        "tipo": "manual"
+    },
+    "M. DO OURO II": {
+        "lat": -15.567123925570034,
+        "lon": -56.05747741698256,
+        "tipo": "manual"
+    },
+    "R. COXIPO": {
+        "lat": -15.651238022510825,
+        "lon": -56.03221615486669,
+        "tipo": "manual"
+    },
+    "DOM AQUINO": {
+        "lat": -15.611031079821263,
+        "lon": -56.09386511823313,
+        "tipo": "manual"
+    },
+    "C.R. SERRA AZUL": {
+        "lat": -15.547145150466095,
+        "lon": -56.04077139126274,
+        "tipo": "manual"
+    },
+    "JD. DAS AROEIRAS": {
+        "lat": -15.5418489430763,
+        "lon": -56.03989720765624,
+        "tipo": "manual"
+    },
+    "LOT. SAO TOME": {
+        "lat": -15.550362723896198,
+        "lon": -56.03744486296334,
+        "tipo": "manual"
+    },
+    "C.R. FAVAL": {
+        "lat": -15.642118272590682,
+        "lon": -56.017429672241384,
+        "tipo": "manual"
+    },
+    "LOT. SAO PAULO": {
+        "lat": -15.637328023660631,
+        "lon": -55.95956334232536,
+        "tipo": "manual"
+    },
+    "V. NOVA DO COXIPO": {
+        "lat": -15.606131640069227,
+        "lon": -55.99705643235372,
+        "tipo": "manual"
+    },
+    "R. SAO CARLOS": {
+        "lat": -15.583734571821779,
+        "lon": -56.05067210083721,
+        "tipo": "manual"
+    },
+    "JD. INDEPENDENCIA": {
+        "lat": -15.604254811941095,
+        "lon": -56.115191674843864,
+        "tipo": "manual"
+    },
+    "C.R. RECANTO": {
+        "lat": -15.608179814565393,
+        "lon": -56.03499857652279,
+        "tipo": "manual"
+    },
+    "MIRANTE DO PARQUE": {
+        "lat": -15.617351920289737,
+        "lon": -55.98479245096874,
+        "tipo": "manual"
+    },
+    "R. NILCE P. BARRETO": {
+        "lat": -15.638359127083993,
+        "lon": -55.99431286028331,
+        "tipo": "manual"
+    },
+    "R. ANA MARIA": {
+        "lat": -15.5496991232087,
+        "lon": -56.042889419961135,
+        "tipo": "manual"
+    },
+    "ALTOS DA BOA VISTA": {
+        "lat": -15.575715921107031,
+        "lon": -56.097018817285964,
+        "tipo": "manual"
+    },
+    "R. NOVO PRAEIRO": {
+        "lat": -15.633368926347966,
+        "lon": -56.07425608777766,
+        "tipo": "manual"
+    },
+    "JD. DAS FLORES": {
+        "lat": -15.637455723323763,
+        "lon": -55.95922852964352,
+        "tipo": "manual"
+    },
+    "COHAB NOVA": {
+        "lat": -15.612723476718838,
+        "lon": -56.11757257597877,
+        "tipo": "manual"
+    },
+    "R. CASTELO BRANCO": {
+        "lat": -15.583873021865406,
+        "lon": -56.06696653524638,
+        "tipo": "manual"
+    },
+    "R. DR. FABIO LEITE": {
+        "lat": -15.569526576888226,
+        "lon": -56.02227280541671,
+        "tipo": "manual"
+    },
+    "JOAO B. PINHEIRO": {
+        "lat": -15.549606464695877,
+        "lon": -56.035037100837975,
+        "tipo": "manual"
+    },
+    "VALE DOS LIRIOS": {
+        "lat": -15.550989677287507,
+        "lon": -56.096580969328535,
+        "tipo": "manual"
+    },
+    "R. WANTUIL FREITAS": {
+        "lat": -15.542613488964955,
+        "lon": -56.02879299052811,
+        "tipo": "manual"
+    },
+    "R. MILTON FIGUEIREDO": {
+        "lat": -15.54028186262871,
+        "lon": -56.080761375980416,
+        "tipo": "manual"
+    },
+    "JD. INDUST. II": {
+        "lat": -15.647027539995012,
+        "lon": -55.976806630785944,
+        "tipo": "manual"
+    },
+    "JD. ITALIA I": {
+        "lat": -15.596271432440247,
+        "lon": -56.06162600055309,
+        "tipo": "manual"
+    },
+    "R. FRANCISCA LOUREIRO": {
+        "lat": -15.606109618425354,
+        "lon": -55.98651550481392,
+        "tipo": "manual"
+    },
+    "TRES PODERES": {
+        "lat": -15.556422879324721,
+        "lon": -56.079278070719454,
+        "tipo": "manual"
+    },
+    "LOT. SALIM": {
+        "lat": -15.660402545505667,
+        "lon": -56.04149422374008,
+        "tipo": "manual"
+    },
+    "DT. N. SRA. DA GUIA": {
+        "lat": -15.353895141876421,
+        "lon": -56.23274559226783,
+        "tipo": "manual"
+    },
+    "Assentamento Mineira": {
+        "lat": -15.2723262,
+        "lon": -56.0869009,
+        "tipo": "osm_auto"
+    },
+    "C.R. MONACO": {
+        "lat": -15.54580812315197,
+        "lon": -56.084132338860705,
+        "tipo": "manual"
+    },
+    "LOT. PAIAGUAS III": {
+        "lat": -15.56146135107026,
+        "lon": -56.08253807198662,
+        "tipo": "manual"
+    },
+    "R. CATEDRAL": {
+        "lat": -15.56447719564297,
+        "lon": -56.08467006301417,
+        "tipo": "manual"
+    },
+    "C.R. DUNAS DO AREAO": {
+        "lat": -15.600468349773324,
+        "lon": -56.08443839701536,
+        "tipo": "manual"
+    },
+    "C.R. STO ANTONIO": {
+        "lat": -15.647726647811316,
+        "lon": -56.05558253903242,
+        "tipo": "manual"
+    },
+    "C.R. IPE AMARELO": {
+        "lat": -15.642261675690627,
+        "lon": -56.03350283364839,
+        "tipo": "manual"
+    },
+    "JD. GUANABARA": {
+        "lat": -15.603411485915053,
+        "lon": -56.08145954695068,
+        "tipo": "manual"
+    },
+    "R. FLOR DE LIZ": {
+        "lat": -15.62771931526487,
+        "lon": -55.962088612830534,
+        "tipo": "manual"
+    },
+    "C.R. FLORAIS DOS LAGOS": {
+        "lat": -15.534858458008767,
+        "lon": -56.09379590481557,
+        "tipo": "manual"
+    },
+    "JD. BOTANICO": {
+        "lat": -15.635720039223456,
+        "lon": -56.05826026822037,
+        "tipo": "manual"
+    },
+    "C.R. POMERI": {
+        "lat": -15.578747099464119,
+        "lon": -56.040884562484955,
+        "tipo": "manual"
+    },
+    "R. AGUAS CLARAS": {
+        "lat": -15.646680378587499,
+        "lon": -55.99403090481302,
+        "tipo": "manual"
+    },
+    "C.R. MONTENEGRO": {
+        "lat": -15.542253869427652,
+        "lon": -56.082453189793455,
+        "tipo": "manual"
+    },
+    "C.R. RESERVA DO PARQUE": {
+        "lat": -15.56749989162041,
+        "lon": -56.09667086244306,
+        "tipo": "manual"
+    },
+    "R. SEN. JONAS PINHEIRO": {
+        "lat": -15.538543571838023,
+        "lon": -56.02926692562602,
+        "tipo": "manual"
+    },
+    "NOVA CUIABA": {
+        "lat": -15.611597202245187,
+        "lon": -56.11536406470349,
+        "tipo": "manual"
+    },
+    "DT. COXIPO DO OURO": {
+        "lat": -15.450669272504078,
+        "lon": -55.983007044896304,
+        "tipo": "manual"
+    },
+    "R. PADOVA": {
+        "lat": -15.54512823954719,
+        "lon": -56.04859434340854,
+        "tipo": "manual"
+    },
+    "VILA SIZENANDO": {
+        "lat": -15.641656771614247,
+        "lon": -56.029933074144154,
+        "tipo": "manual"
+    },
+    "LOT. BOM JESUS": {
+        "lat": -15.608017045707808,
+        "lon": -56.00969549318441,
+        "tipo": "manual"
+    },
+    "LEBLON": {
+        "lat": -15.593145419849925,
+        "lon": -56.07189580235458,
+        "tipo": "manual"
+    },
+    "R. JK": {
+        "lat": -15.615434773347934,
+        "lon": -56.04783671409604,
+        "tipo": "manual"
+    },
+    "JD. LUCIANA": {
+        "lat": -15.630281848715533,
+        "lon": -56.072139492172276,
+        "tipo": "manual"
+    },
+    "VISTA DA CHAPADA": {
+        "lat": -15.620324812812507,
+        "lon": -55.952165758871,
+        "tipo": "manual"
+    },
+    "JD. COSTA DO SOL": {
+        "lat": -15.628185113311426,
+        "lon": -56.06752120650344,
+        "tipo": "manual"
+    },
+    "C.R. PRIMOR DAS TORRES": {
+        "lat": -15.621451051202445,
+        "lon": -56.00558254194553,
+        "tipo": "manual"
+    },
+    "JD. BOM CLIMA": {
+        "lat": -15.560961166982514,
+        "lon": -56.09838501923256,
+        "tipo": "manual"
+    },
+    "LOT. BELA VISTA": {
+        "lat": -15.60733896802499,
+        "lon": -55.983196642327194,
+        "tipo": "manual"
+    },
+    "JD. IMPERIAL II": {
+        "lat": -15.620002829701328,
+        "lon": -56.02366809177762,
+        "tipo": "manual"
+    },
+    "PQ. ATALAIA": {
+        "lat": -15.66195081564258,
+        "lon": -56.05611026517418,
+        "tipo": "manual"
+    },
+    "C.R. JD VITORIA A": {
+        "lat": -15.537867190954435,
+        "lon": -56.06877147462626,
+        "tipo": "manual"
+    }
+}

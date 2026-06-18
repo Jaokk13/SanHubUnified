@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d0e6236e04ca81694ed6eda6051fd613 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_d0e6236e04ca81694ed6eda6051fd613" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d0e6236e04ca81694ed6eda6051fd613 = L.map(
+                "map_d0e6236e04ca81694ed6eda6051fd613",
+                {
+                    center: [-15.635673, -56.023234],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_96cc3317068e8bbeea11ce188744a745 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_96cc3317068e8bbeea11ce188744a745.addTo(map_d0e6236e04ca81694ed6eda6051fd613);
+        
+    
+            var poly_line_4fd1dc0ac9e6b4d69bca5d2d2cb7939c = L.polyline(
+                [[-15.635673, -56.023234], [-15.629939, -56.0534009], [-15.6127975, -56.0605101], [-15.587988, -56.0830139], [-15.635673, -56.023234]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2.5}
+            ).addTo(map_d0e6236e04ca81694ed6eda6051fd613);
+        
+    
+            var marker_f9ec16f7a64970781b681522954aaa2f = L.marker(
+                [-15.635673, -56.023234],
+                {
+}
+            ).addTo(map_d0e6236e04ca81694ed6eda6051fd613);
+        
+    
+            var icon_b9371e13ddd1cf1a1833562f5ea6f125 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_10cd7bbb32b729a3cbfd4e3f074111b0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6410a9a02fe1cfd881d1fa22d6cb02c3 = $(`<div id="html_6410a9a02fe1cfd881d1fa22d6cb02c3" style="width: 100.0%; height: 100.0%;"><b>0. BASE (Tijucal)</b><br>Fonte: Base</div>`)[0];
+                popup_10cd7bbb32b729a3cbfd4e3f074111b0.setContent(html_6410a9a02fe1cfd881d1fa22d6cb02c3);
+            
+        
+
+        marker_f9ec16f7a64970781b681522954aaa2f.bindPopup(popup_10cd7bbb32b729a3cbfd4e3f074111b0)
+        ;
+
+        
+    
+    
+                marker_f9ec16f7a64970781b681522954aaa2f.setIcon(icon_b9371e13ddd1cf1a1833562f5ea6f125);
+            
+    
+            var marker_ec8a78196cbe48933c9352d8dc9705ff = L.marker(
+                [-15.629939, -56.0534009],
+                {
+}
+            ).addTo(map_d0e6236e04ca81694ed6eda6051fd613);
+        
+    
+            var icon_7f3c777b169c3d8908f7f7df600e552a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_649281e4bcfd7bfdf43c757a421d7682 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_678bc3dfdb3763ecfb6e4ef96992d724 = $(`<div id="html_678bc3dfdb3763ecfb6e4ef96992d724" style="width: 100.0%; height: 100.0%;"><b>1. Av. Fernando Corrêa, Coxipó</b><br>Fonte: Geopy (Endereço)</div>`)[0];
+                popup_649281e4bcfd7bfdf43c757a421d7682.setContent(html_678bc3dfdb3763ecfb6e4ef96992d724);
+            
+        
+
+        marker_ec8a78196cbe48933c9352d8dc9705ff.bindPopup(popup_649281e4bcfd7bfdf43c757a421d7682)
+        ;
+
+        
+    
+    
+                marker_ec8a78196cbe48933c9352d8dc9705ff.setIcon(icon_7f3c777b169c3d8908f7f7df600e552a);
+            
+    
+            var marker_762ea29081ab20a241cd9b300e85ddfa = L.marker(
+                [-15.6127975, -56.0605101],
+                {
+}
+            ).addTo(map_d0e6236e04ca81694ed6eda6051fd613);
+        
+    
+            var icon_f22c90e4df3d960c234257721757acc4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cfbe027078a3c1842a44508e7fd154bf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c0db405a3cb8263527fc371dd6d01bdb = $(`<div id="html_c0db405a3cb8263527fc371dd6d01bdb" style="width: 100.0%; height: 100.0%;"><b>2. Rua 1, Boa Esperança</b><br>Fonte: Geopy (Endereço)</div>`)[0];
+                popup_cfbe027078a3c1842a44508e7fd154bf.setContent(html_c0db405a3cb8263527fc371dd6d01bdb);
+            
+        
+
+        marker_762ea29081ab20a241cd9b300e85ddfa.bindPopup(popup_cfbe027078a3c1842a44508e7fd154bf)
+        ;
+
+        
+    
+    
+                marker_762ea29081ab20a241cd9b300e85ddfa.setIcon(icon_f22c90e4df3d960c234257721757acc4);
+            
+    
+            var marker_b7d55b7c8333b02d00d2ef6d33801283 = L.marker(
+                [-15.587988, -56.0830139],
+                {
+}
+            ).addTo(map_d0e6236e04ca81694ed6eda6051fd613);
+        
+    
+            var icon_e00e0bf91cbec88e4730d2d9b77b3e10 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5bbff4b81a10cfd673eda4c8b3d67980 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_243443fe36fa5610eb5148a0bf59295b = $(`<div id="html_243443fe36fa5610eb5148a0bf59295b" style="width: 100.0%; height: 100.0%;"><b>3. Av. Historiador Rubens de Mendonça, Bosque da Saúde</b><br>Fonte: Geopy (Endereço)</div>`)[0];
+                popup_5bbff4b81a10cfd673eda4c8b3d67980.setContent(html_243443fe36fa5610eb5148a0bf59295b);
+            
+        
+
+        marker_b7d55b7c8333b02d00d2ef6d33801283.bindPopup(popup_5bbff4b81a10cfd673eda4c8b3d67980)
+        ;
+
+        
+    
+    
+                marker_b7d55b7c8333b02d00d2ef6d33801283.setIcon(icon_e00e0bf91cbec88e4730d2d9b77b3e10);
+            
+    
+            var marker_d4c4c49ebaf3231190c8ffadda20be34 = L.marker(
+                [-15.635673, -56.023234],
+                {
+}
+            ).addTo(map_d0e6236e04ca81694ed6eda6051fd613);
+        
+    
+            var icon_9a328bc5fde011e2d1983476964d0fcd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_627ef22f54c3153bc9a3161e129b38b1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f87e9b2bca107c40b7e0e1d6a3c7fab9 = $(`<div id="html_f87e9b2bca107c40b7e0e1d6a3c7fab9" style="width: 100.0%; height: 100.0%;"><b>4. BASE (Tijucal) (Retorno)</b><br>Fonte: Base</div>`)[0];
+                popup_627ef22f54c3153bc9a3161e129b38b1.setContent(html_f87e9b2bca107c40b7e0e1d6a3c7fab9);
+            
+        
+
+        marker_d4c4c49ebaf3231190c8ffadda20be34.bindPopup(popup_627ef22f54c3153bc9a3161e129b38b1)
+        ;
+
+        
+    
+    
+                marker_d4c4c49ebaf3231190c8ffadda20be34.setIcon(icon_9a328bc5fde011e2d1983476964d0fcd);
+            
+</script>
+</html>

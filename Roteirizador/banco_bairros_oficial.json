@@ -1,0 +1,417 @@
+{
+    "JD. BRASIL": {
+        "lat": -15.564493226379508,
+        "lon": -56.03137481761201,
+        "tipo": "manual"
+    },
+    "SAO BENEDITO": {
+        "lat": -15.610330853614558,
+        "lon": -56.08187486169473,
+        "tipo": "manual"
+    },
+    "R. NICO BARACAT II": {
+        "lat": -15.613317744393424,
+        "lon": -55.978465296151846,
+        "tipo": "manual"
+    },
+    "R. FRANCISCA LOUREIRO BORBA": {
+        "lat": -15.606065033270646,
+        "lon": -55.98631738195978,
+        "tipo": "manual"
+    },
+    "LOT. BELA VISTA": {
+        "lat": -15.60733896802499,
+        "lon": -55.983196642327194,
+        "tipo": "manual"
+    },
+    "JD. IMPERIAL II": {
+        "lat": -15.620002829701328,
+        "lon": -56.02366809177762,
+        "tipo": "manual"
+    },
+    "R. ALTOS DO PARQUE": {
+        "lat": -15.68466313395343,
+        "lon": -56.032225941070585,
+        "tipo": "manual"
+    },
+    "PQ. ATALAIA": {
+        "lat": -15.66195081564258,
+        "lon": -56.05611026517418,
+        "tipo": "manual"
+    },
+    "SETOR C": {
+        "lat": -15.6600425,
+        "lon": -56.0365049,
+        "tipo": "importado_osm"
+    },
+    "SETOR A": {
+        "lat": -15.6637138,
+        "lon": -56.0343553,
+        "tipo": "importado_osm"
+    },
+    "SETOR B": {
+        "lat": -15.6606356,
+        "lon": -56.0309189,
+        "tipo": "importado_osm"
+    },
+    "SETOR D": {
+        "lat": -15.6580758,
+        "lon": -56.0328492,
+        "tipo": "importado_osm"
+    },
+    "SETOR E": {
+        "lat": -15.6553404,
+        "lon": -56.0348146,
+        "tipo": "importado_osm"
+    },
+    "ASSENTAMENTO GAMALIEL": {
+        "lat": -15.5211909,
+        "lon": -56.0057094,
+        "tipo": "importado_osm"
+    },
+    "NOVA ESPERANÇA": {
+        "lat": -15.7334869,
+        "lon": -56.0426858,
+        "tipo": "importado_osm"
+    },
+    "COLINA VERDE": {
+        "lat": -15.5464337,
+        "lon": -56.0106169,
+        "tipo": "importado_osm"
+    },
+    "SETOR CENTRO SUL": {
+        "lat": -15.5709056,
+        "lon": -56.0603035,
+        "tipo": "importado_osm"
+    },
+    "SETOR CENTRO NORTE": {
+        "lat": -15.5659174,
+        "lon": -56.0608047,
+        "tipo": "importado_osm"
+    },
+    "SETOR OESTE": {
+        "lat": -15.5718213,
+        "lon": -56.0659582,
+        "tipo": "importado_osm"
+    },
+    "SETOR 4": {
+        "lat": -15.5713693,
+        "lon": -56.0425923,
+        "tipo": "importado_osm"
+    },
+    "SETOR 3": {
+        "lat": -15.5727016,
+        "lon": -56.0469095,
+        "tipo": "importado_osm"
+    },
+    "SETOR 2": {
+        "lat": -15.5697757,
+        "lon": -56.0568064,
+        "tipo": "importado_osm"
+    },
+    "VILA ROSA": {
+        "lat": -15.5757572,
+        "lon": -56.0408682,
+        "tipo": "importado_osm"
+    },
+    "TANCREDO NEVES": {
+        "lat": -15.5683774,
+        "lon": -56.0530041,
+        "tipo": "importado_osm"
+    },
+    "ARRAIAL DOS FREITAS": {
+        "lat": -15.4841065,
+        "lon": -55.977219,
+        "tipo": "importado_osm"
+    },
+    "COMUNIDADE NOSSA SENHORA DA ASSUNÇÃO": {
+        "lat": -15.5274057,
+        "lon": -56.0468577,
+        "tipo": "importado_osm"
+    },
+    "NOVO RENASCER": {
+        "lat": -15.5771905,
+        "lon": -55.7765057,
+        "tipo": "importado_osm"
+    },
+    "SETOR 1": {
+        "lat": -15.5660454,
+        "lon": -56.0455625,
+        "tipo": "importado_osm"
+    },
+    "SETOR 5": {
+        "lat": -15.5695219,
+        "lon": -56.0344353,
+        "tipo": "importado_osm"
+    },
+    "CPA I": {
+        "lat": -15.5557948,
+        "lon": -56.0528091,
+        "tipo": "importado_osm"
+    },
+    "CPA II": {
+        "lat": -15.559357,
+        "lon": -56.0464566,
+        "tipo": "importado_osm"
+    },
+    "VILA NOVA": {
+        "lat": -15.5513786,
+        "lon": -56.0506612,
+        "tipo": "importado_osm"
+    },
+    "SÃO TOMÉ": {
+        "lat": -15.5500421,
+        "lon": -56.0375945,
+        "tipo": "importado_osm"
+    },
+    "JARDIM DAS OLIVEIRAS": {
+        "lat": -15.6611557,
+        "lon": -56.0620229,
+        "tipo": "importado_osm"
+    },
+    "HUMAITÁ": {
+        "lat": -15.6610046,
+        "lon": -56.0553579,
+        "tipo": "importado_osm"
+    },
+    "HUMAITÁ 1": {
+        "lat": -15.6685664,
+        "lon": -56.0574715,
+        "tipo": "importado_osm"
+    },
+    "HUMAITÁ 2": {
+        "lat": -15.6709733,
+        "lon": -56.0552613,
+        "tipo": "importado_osm"
+    },
+    "HUMAITÁ 3": {
+        "lat": -15.6744545,
+        "lon": -56.0556368,
+        "tipo": "importado_osm"
+    },
+    "LULA BRASIL 1": {
+        "lat": -15.5950733,
+        "lon": -56.0090897,
+        "tipo": "importado_osm"
+    },
+    "LULA BRASIL 2": {
+        "lat": -15.5944547,
+        "lon": -56.0201666,
+        "tipo": "importado_osm"
+    },
+    "PIPOCA": {
+        "lat": -15.5913663,
+        "lon": -56.0112341,
+        "tipo": "importado_osm"
+    },
+    "ASSENTAMENTO 21 DE ABRIL": {
+        "lat": -15.613694,
+        "lon": -55.8186141,
+        "tipo": "importado_osm"
+    },
+    "MACHADO": {
+        "lat": -15.3271014,
+        "lon": -56.1076543,
+        "tipo": "importado_osm"
+    },
+    "MARIA LEVEGILDA": {
+        "lat": -15.577521,
+        "lon": -56.0113794,
+        "tipo": "importado_osm"
+    },
+    "LIBERDADE": {
+        "lat": -15.6114494,
+        "lon": -55.9898417,
+        "tipo": "importado_osm"
+    },
+    "NOVO MILÊNIO": {
+        "lat": -15.6177811,
+        "lon": -56.0047446,
+        "tipo": "importado_osm"
+    },
+    "RESIDENCIAL ARICÁ": {
+        "lat": -15.6238403,
+        "lon": -55.9890032,
+        "tipo": "importado_osm"
+    },
+    "RESIDENCIAL NICO BARACAT 1": {
+        "lat": -15.6150923,
+        "lon": -55.9807074,
+        "tipo": "importado_osm"
+    },
+    "RESIDENCIAL NICO BARACAT 2": {
+        "lat": -15.6125353,
+        "lon": -55.9777457,
+        "tipo": "importado_osm"
+    },
+    "BELITA COSTA MAQUES": {
+        "lat": -15.6274817,
+        "lon": -55.9902748,
+        "tipo": "importado_osm"
+    },
+    "NOSSA SENHORA DO LÍBANO": {
+        "lat": -15.6104165,
+        "lon": -56.126208,
+        "tipo": "importado_osm"
+    },
+    "JARDIM MOURA": {
+        "lat": -15.6094079,
+        "lon": -56.1217082,
+        "tipo": "importado_osm"
+    },
+    "FRANCISCO VILANOVA FILHO": {
+        "lat": -15.6085839,
+        "lon": -56.1230331,
+        "tipo": "importado_osm"
+    },
+    "JARDIM KELLY": {
+        "lat": -15.6068278,
+        "lon": -56.1236473,
+        "tipo": "importado_osm"
+    },
+    "ALTOS DO SÃO GONÇALO": {
+        "lat": -15.6586514,
+        "lon": -56.060629,
+        "tipo": "importado_osm"
+    },
+    "SAN MARINO": {
+        "lat": -15.5938342,
+        "lon": -56.130729,
+        "tipo": "importado_osm"
+    },
+    "NOVO TEMPO": {
+        "lat": -15.6022537,
+        "lon": -56.0017707,
+        "tipo": "importado_osm"
+    },
+    "JARDIM AQUÁRIO": {
+        "lat": -15.6397814,
+        "lon": -56.0640496,
+        "tipo": "importado_osm"
+    },
+    "ASSENTAMENTO TERRA PROMETIDA": {
+        "lat": -15.5346331,
+        "lon": -56.0438383,
+        "tipo": "importado_osm"
+    },
+    "BARREIRO BRANCO": {
+        "lat": -15.5251239,
+        "lon": -56.0484297,
+        "tipo": "importado_osm"
+    },
+    "QUADRA 01": {
+        "lat": -15.6175975,
+        "lon": -55.9519651,
+        "tipo": "importado_osm"
+    },
+    "QUADRA 02": {
+        "lat": -15.617728,
+        "lon": -55.9516583,
+        "tipo": "importado_osm"
+    },
+    "QUADRA 03": {
+        "lat": -15.6180695,
+        "lon": -55.9509118,
+        "tipo": "importado_osm"
+    },
+    "RESIDENCIAL NOVO PARQUE": {
+        "lat": -15.682597,
+        "lon": -56.0377422,
+        "tipo": "importado_osm"
+    },
+    "JARDIM ELDORADO": {
+        "lat": -15.587294,
+        "lon": -56.0490116,
+        "tipo": "importado_osm"
+    },
+    "JARDIM FORTALEZA": {
+        "lat": -15.6156782,
+        "lon": -55.9949977,
+        "tipo": "importado_osm"
+    },
+    "SANTA LAURA": {
+        "lat": -15.6191862,
+        "lon": -55.9902575,
+        "tipo": "importado_osm"
+    },
+    "SOL NASCENTE": {
+        "lat": -15.5864597,
+        "lon": -56.0454765,
+        "tipo": "importado_osm"
+    },
+    "SÃO JOÃO DEL REI": {
+        "lat": -15.6135938,
+        "lon": -56.0023687,
+        "tipo": "importado_osm"
+    },
+    "BRASIL 21": {
+        "lat": -15.6071692,
+        "lon": -55.9972707,
+        "tipo": "importado_osm"
+    },
+    "VILLAGE FLAMBOYANT": {
+        "lat": -15.5918437,
+        "lon": -56.1282308,
+        "tipo": "importado_osm"
+    },
+    "JARDIM SANTA AMÁLIA": {
+        "lat": -15.5920303,
+        "lon": -56.1349948,
+        "tipo": "importado_osm"
+    },
+    "VERDÃO": {
+        "lat": -15.60619,
+        "lon": -56.1181483,
+        "tipo": "importado_osm"
+    },
+    "JARDIM BURITY": {
+        "lat": -15.6372486,
+        "lon": -56.0462028,
+        "tipo": "importado_osm"
+    },
+    "SESMARIA SÃO JOSÉ": {
+        "lat": -15.6373014,
+        "lon": -56.0383659,
+        "tipo": "importado_osm"
+    },
+    "JARDIM PARAISO": {
+        "lat": -15.63853,
+        "lon": -56.0434498,
+        "tipo": "importado_osm"
+    },
+    "JUSCELINO KUBITSCHEK": {
+        "lat": -15.6159838,
+        "lon": -56.0477399,
+        "tipo": "importado_osm"
+    },
+    "RESIDENCIAL FRANCISCA LOUREIRO BORBA": {
+        "lat": -15.6061619,
+        "lon": -55.9866107,
+        "tipo": "importado_osm"
+    },
+    "RESIDENCIAL ALTOS DO CERRADO": {
+        "lat": -15.6056689,
+        "lon": -55.992841,
+        "tipo": "importado_osm"
+    },
+    "VILA FORMOSA": {
+        "lat": -15.5164939,
+        "lon": -56.0634325,
+        "tipo": "importado_osm"
+    },
+    "CPA III - SETOR 1": {
+        "lat": -15.565722,
+        "lon": -56.04611,
+        "tipo": "importado_osm"
+    },
+    "CPA III - SETOR 2": {
+        "lat": -15.563716,
+        "lon": -56.0410393,
+        "tipo": "importado_osm"
+    },
+    "CPA III - SETOR 5": {
+        "lat": -15.569703,
+        "lon": -56.0344724,
+        "tipo": "importado_osm"
+    }
+}
