@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initDragAndDrop();
     initFileInputs();
     
+    // Set default dates to today
+    const todayStr = new Date().toISOString().split('T')[0];
+    document.getElementById('prog-date').value = todayStr;
+    document.getElementById('route-date').value = todayStr;
+    
     // Load initial data
     loadDashboard();
     loadTeams();
@@ -37,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Programing
     document.getElementById('prog-filter-cat').addEventListener('change', loadProgramingData);
     document.getElementById('prog-team-select').addEventListener('change', loadProgramingData);
+    document.getElementById('prog-date').addEventListener('change', loadProgramingData);
+    document.getElementById('btn-reset-yesterday').addEventListener('click', resetYesterdayRoutes);
     
     // Checkboxes and Assignment
     document.getElementById('check-all-available').addEventListener('change', (e) => {
@@ -53,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Routing
     document.getElementById('route-team-select').addEventListener('change', handleRouteTeamSelect);
+    document.getElementById('route-date').addEventListener('change', handleRouteTeamSelect);
     document.getElementById('btn-calculate-route').addEventListener('click', calculateRoute);
 });
 
@@ -215,6 +223,80 @@ async function loadDashboard() {
         document.getElementById('bar-calcada').style.width = `${calcadaPct}%`;
         document.getElementById('bar-asfalto').style.width = `${asfaltoPct}%`;
     }, 100);
+    
+    // Load Chart Data
+    try {
+        const chartData = await fetchAPI('/api/stats/chart');
+        renderOsChart(chartData);
+    } catch(e) { console.error("Chart load error:", e); }
+}
+
+let osChartInstance = null;
+function renderOsChart(data) {
+    const ctx = document.getElementById('os-chart');
+    if (!ctx) return;
+    
+    if (osChartInstance) {
+        osChartInstance.destroy();
+    }
+    
+    const labels = data.map(d => {
+        // Format date from YYYY-MM-DD to DD/MM
+        const parts = d.date.split('-');
+        return `${parts[2]}/${parts[1]}`;
+    });
+    const totals = data.map(d => d.total);
+    const calcadas = data.map(d => d.calcada);
+    const asfaltos = data.map(d => d.asfalto);
+    
+    osChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Calçada',
+                    data: calcadas,
+                    backgroundColor: '#10b981', // var(--success)
+                    borderRadius: 4,
+                    maxBarThickness: 60
+                },
+                {
+                    label: 'Asfalto',
+                    data: asfaltos,
+                    backgroundColor: '#1e293b', // var(--dark-accent)
+                    borderRadius: 4,
+                    maxBarThickness: 60
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { color: '#94a3b8' }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    ticks: { color: '#94a3b8' },
+                    grid: { color: 'rgba(255,255,255,0.05)' }
+                },
+                y: {
+                    stacked: true,
+                    ticks: { color: '#94a3b8', stepSize: 1 },
+                    grid: { color: 'rgba(255,255,255,0.05)' }
+                }
+            }
+        }
+    });
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -424,13 +506,15 @@ function initDragAndDrop() {
 }
 
 async function loadProgramingData() {
-    const cat = document.getElementById('prog-filter-cat').value;
+    const filterCat = document.getElementById('prog-filter-cat').value;
     const teamId = document.getElementById('prog-team-select').value;
+    const progDate = document.getElementById('prog-date').value;
     
-    // 1. Available OS (Pendente, sem equipe)
-    const availParams = new URLSearchParams({ status: 'Pendente' });
-    if (cat) availParams.append('category', cat);
-    const availableOrders = await fetchAPI(`/api/orders?${availParams.toString()}`);
+    // Left: Available Orders
+    // Para OS sem equipe, não filtramos pela data (estão sempre disponíveis)
+    let availUrl = `/api/orders?status=Pendente`;
+    if (filterCat) availUrl += `&category=${filterCat}`;
+    const availableOrders = await fetchAPI(availUrl);
     
     const tbodyAvail = document.querySelector('#available-orders-table tbody');
     tbodyAvail.innerHTML = '';
@@ -446,6 +530,12 @@ async function loadProgramingData() {
     });
     
     // 2. Team OS
+    // Right: Team Orders
+    // Mostra as OSs atribuídas para esta equipe NESTA data específica
+    let teamUrl = `/api/orders?status=Pendente`;
+    if (teamId) teamUrl += `&team_id=${teamId}`;
+    if (progDate) teamUrl += `&date=${progDate}`;
+    
     const tbodyTeam = document.getElementById('team-orders-sortable');
     const emptyState = document.getElementById('team-empty');
     const badge = document.getElementById('prog-team-badge');
@@ -460,7 +550,7 @@ async function loadProgramingData() {
         return;
     }
     
-    const teamOrders = await fetchAPI(`/api/orders?status=Pendente&team_id=${teamId}`);
+    const teamOrders = await fetchAPI(teamUrl);
     
     if (teamOrders.length === 0) {
         emptyState.classList.remove('hidden');
@@ -483,7 +573,9 @@ async function loadProgramingData() {
 
 async function assignSelectedToTeam() {
     const teamId = document.getElementById('prog-team-select').value;
+    const progDate = document.getElementById('prog-date').value;
     if (!teamId) return alert('Selecione uma equipe na direita primeiro.');
+    if (!progDate) return alert('Selecione uma data para o agendamento.');
     
     const selected = Array.from(document.querySelectorAll('.chk-avail:checked')).map(cb => cb.value);
     if (selected.length === 0) return alert('Selecione pelo menos uma OS na esquerda.');
@@ -531,10 +623,12 @@ async function saveTeamOrder() {
 
 async function autoAssignSweep() {
     const cat = document.getElementById('prog-filter-cat').value;
+    const progDate = document.getElementById('prog-date').value;
     if (!cat) {
         alert("Selecione uma categoria específica (Calçada ou Asfalto) para realizar a divisão automática.");
         return;
     }
+    if (!progDate) return alert("Selecione uma data para programação.");
     
     const btn = document.getElementById('btn-auto-assign');
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Auto';
@@ -544,14 +638,54 @@ async function autoAssignSweep() {
         const res = await fetchAPI('/api/orders/auto-assign', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ category: cat })
+            body: JSON.stringify({ category: cat, date: progDate })
         });
         alert(res.message);
         loadProgramingData();
+        loadDashboard();
     } catch (e) {
         // Erro já tratado no fetchAPI
     } finally {
         btn.innerHTML = '<i class="fas fa-magic"></i> Auto';
+        btn.disabled = false;
+    }
+}
+
+async function resetYesterdayRoutes() {
+    const progDate = document.getElementById('prog-date').value;
+    if (!progDate) return alert("Selecione uma data para determinar qual será o dia anterior a ser zerado.");
+    
+    // Subtrai 1 dia
+    const d = new Date(progDate);
+    // JS dates can have timezone issues, use split components
+    const parts = progDate.split('-');
+    const localD = new Date(parts[0], parts[1] - 1, parts[2]);
+    localD.setDate(localD.getDate() - 1);
+    
+    const year = localD.getFullYear();
+    const month = String(localD.getMonth() + 1).padStart(2, '0');
+    const day = String(localD.getDate()).padStart(2, '0');
+    const yesterdayStr = `${year}-${month}-${day}`;
+    
+    if(!confirm(`Deseja zerar todas as atribuições que foram agendadas para o dia anterior (${yesterdayStr}) e não foram executadas?`)) return;
+    
+    const btn = document.getElementById('btn-reset-yesterday');
+    const oldHtml = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Zerando...';
+    btn.disabled = true;
+    
+    try {
+        const res = await fetchAPI('/api/reset-routes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ date: yesterdayStr })
+        });
+        alert(res.message);
+        loadProgramingData();
+        loadDashboard();
+    } catch (err) {
+    } finally {
+        btn.innerHTML = oldHtml;
         btn.disabled = false;
     }
 }
@@ -593,12 +727,16 @@ function handleRouteTeamSelect() {
 }
 
 async function autoLoadSavedRoute(teamId) {
+    const routeDate = document.getElementById('route-date').value;
     const btn = document.getElementById('btn-calculate-route');
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Carregando Rota...';
     btn.disabled = true;
     
+    let url = `/api/route/${teamId}`;
+    if (routeDate) url += `?date=${routeDate}`;
+    
     try {
-        const resRaw = await fetch(`/api/route/${teamId}`);
+        const resRaw = await fetch(url);
         if (!resRaw.ok) {
             // Se for 404, não tem rota salva
             if (resRaw.status === 404) {
@@ -623,6 +761,7 @@ async function autoLoadSavedRoute(teamId) {
 
 async function calculateRoute() {
     const teamId = document.getElementById('route-team-select').value;
+    const routeDate = document.getElementById('route-date').value;
     if (!teamId) return;
     
     // Alert user if they are calculating over unsaved changes
@@ -634,8 +773,11 @@ async function calculateRoute() {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Calculando...';
     btn.disabled = true;
     
+    let url = `/api/route/${teamId}`;
+    if (routeDate) url += `?date=${routeDate}`;
+    
     try {
-        const res = await fetchAPI(`/api/route/${teamId}`, { method: 'POST' });
+        const res = await fetchAPI(url, { method: 'POST' });
         renderRoute(res);
         
         window.unsavedRouteChanges = true;

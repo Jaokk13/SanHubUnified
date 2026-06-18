@@ -67,6 +67,12 @@ def init_db():
             INSERT OR IGNORE INTO settings VALUES ('center_lat', '-15.5989');
             INSERT OR IGNORE INTO settings VALUES ('center_lon', '-56.0949');
         """)
+        
+        # Migration para scheduled_date
+        try:
+            conn.execute("ALTER TABLE orders ADD COLUMN scheduled_date TEXT")
+        except sqlite3.OperationalError:
+            pass
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -148,6 +154,7 @@ def get_orders(
     category: Optional[str] = None,
     team_id: Optional[int] = None,
     search: Optional[str] = None,
+    scheduled_date: Optional[str] = None,
 ) -> list[dict]:
     """Retorna lista de OSs filtradas."""
     sql = """
@@ -170,7 +177,13 @@ def get_orders(
         sql += " AND (o.os_number LIKE ? OR o.neighborhood LIKE ? OR o.service_description LIKE ?)"
         like = f"%{search}%"
         params.extend([like, like, like])
-
+    if scheduled_date is not None:
+        if team_id is not None:
+            # Filtra pela data apenas se houver uma equipe, 
+            # as OSs não atribuídas (Sem Equipe) a gente lista todas
+            sql += " AND o.scheduled_date=?"
+            params.append(scheduled_date)
+            
     sql += " ORDER BY o.team_id, o.execution_order, o.os_number"
 
     with get_conn() as conn:
@@ -178,12 +191,20 @@ def get_orders(
         return [dict(r) for r in rows]
 
 
-def assign_order_to_team(os_number: str, team_id: Optional[int]):
+def assign_order_to_team(os_number: str, team_id: Optional[int], scheduled_date: Optional[str] = None):
     """Atribui (ou desatribui) uma OS a uma equipe."""
     with get_conn() as conn:
         conn.execute(
-            "UPDATE orders SET team_id=?, execution_order=NULL WHERE os_number=?",
-            (team_id, os_number),
+            "UPDATE orders SET team_id=?, scheduled_date=?, execution_order=NULL WHERE os_number=?",
+            (team_id, scheduled_date, os_number),
+        )
+
+def reset_past_routes(date_str: str):
+    """Remove a atribuição de equipes para OSs pendentes numa data específica."""
+    with get_conn() as conn:
+        conn.execute(
+            "UPDATE orders SET team_id=NULL, scheduled_date=NULL, execution_order=NULL WHERE scheduled_date=? AND status='Pendente'",
+            (date_str,)
         )
 
 
@@ -213,6 +234,23 @@ def get_stats() -> dict:
             "asfalto_pendente": asfalto,
             "sem_equipe": sem_equipe,
         }
+
+def get_chart_stats() -> list[dict]:
+    """Retorna dados agregados por data de importação para o gráfico."""
+    sql = """
+        SELECT 
+            import_date as date,
+            COUNT(os_number) as total,
+            SUM(CASE WHEN category = 'Calçada' THEN 1 ELSE 0 END) as calcada,
+            SUM(CASE WHEN category = 'Asfalto' THEN 1 ELSE 0 END) as asfalto
+        FROM orders
+        GROUP BY import_date
+        ORDER BY import_date ASC
+        LIMIT 30
+    """
+    with get_conn() as conn:
+        rows = conn.execute(sql).fetchall()
+        return [dict(r) for r in rows]
 
 
 # ─────────────────────────────────────────────────────────────────────────────

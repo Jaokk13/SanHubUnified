@@ -62,7 +62,7 @@ def _determinar_categoria(descricao: str) -> str:
     desc = str(descricao).upper()
     
     # Check for Calçada keywords first
-    if any(p in desc for p in ["CALÇADA", "CALCADA", "PASSEIO", "GUIA", "MEIO-FIO", "CIMENTADO"]):
+    if any(p in desc for p in ["CALÇADA", "CALCADA", "PASSEIO", "GUIA", "MEIO-FIO", "CIMENTADO", "LAJOTA"]):
         return "Calçada"
         
     # Then check for Asfalto keywords
@@ -157,18 +157,23 @@ async def import_samsys(
 def get_stats():
     return db.get_stats()
 
+@app.get("/api/stats/chart")
+def get_chart_stats():
+    return db.get_chart_stats()
+
 @app.get("/api/orders")
-def get_orders(status: Optional[str] = None, category: Optional[str] = None, team_id: Optional[int] = None, search: Optional[str] = None):
-    return db.get_orders(status, category, team_id, search)
+def get_orders(status: Optional[str] = None, category: Optional[str] = None, team_id: Optional[int] = None, search: Optional[str] = None, date: Optional[str] = None):
+    return db.get_orders(status, category, team_id, search, date)
 
 class AssignRequest(BaseModel):
     os_numbers: List[str]
     team_id: Optional[int] = None
+    date: Optional[str] = None
 
 @app.post("/api/orders/assign")
 def assign_orders(req: AssignRequest):
     for os_num in req.os_numbers:
-        db.assign_order_to_team(os_num, req.team_id)
+        db.assign_order_to_team(os_num, req.team_id, req.date)
     return {"success": True}
 
 class ReorderRequest(BaseModel):
@@ -182,6 +187,7 @@ def reorder_orders(req: ReorderRequest):
 
 class AutoAssignRequest(BaseModel):
     category: str
+    date: Optional[str] = None
 
 @app.post("/api/orders/auto-assign")
 def auto_assign_orders(req: AutoAssignRequest):
@@ -202,7 +208,7 @@ def auto_assign_orders(req: AutoAssignRequest):
     for i, team in enumerate(teams):
         if i in divisao:
             for os_num in divisao[i]:
-                db.assign_order_to_team(os_num, team["id"])
+                db.assign_order_to_team(os_num, team["id"], req.date)
                 
     return {"success": True, "message": "Divisão automática via Sweep concluída!"}
 
@@ -233,10 +239,10 @@ def delete_team(team_id: int):
 # ─────────────────────────────────────────────────────────────────────────────
 
 @app.post("/api/route/{team_id}")
-def calculate_route(team_id: int):
+def calculate_route(team_id: int, date: Optional[str] = None):
     import traceback
     try:
-        orders = db.get_orders(status="Pendente", team_id=team_id)
+        orders = db.get_orders(status="Pendente", team_id=team_id, scheduled_date=date)
         if not orders:
             raise HTTPException(status_code=400, detail="Nenhuma OS encontrada para esta equipe.")
         res = router.roteirizar_equipe(orders)
@@ -261,9 +267,9 @@ def confirm_route(team_id: int, os_list: list[str] = Body(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/route/{team_id}")
-def get_saved_route(team_id: int):
+def get_saved_route(team_id: int, date: Optional[str] = None):
     try:
-        orders = db.get_orders(status="Pendente", team_id=team_id)
+        orders = db.get_orders(status="Pendente", team_id=team_id, scheduled_date=date)
         if not orders:
             raise HTTPException(status_code=404, detail="Nenhuma OS para esta equipe.")
             
@@ -282,7 +288,18 @@ def get_saved_route(team_id: int):
 @app.delete("/api/cache")
 def clear_geocoding_cache():
     db.clear_cache()
-    return {"status": "ok", "message": "Cache limpo com sucesso"}
+    return {"success": True, "message": "Cache temporário apagado com sucesso."}
+
+class ResetRoutesRequest(BaseModel):
+    date: str
+
+@app.post("/api/reset-routes")
+def reset_routes(req: ResetRoutesRequest):
+    try:
+        db.reset_past_routes(req.date)
+        return {"success": True, "message": f"Rotas apagadas para a data {req.date}."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/settings")
 def get_settings():
