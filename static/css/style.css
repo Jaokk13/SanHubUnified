@@ -108,12 +108,12 @@ body.dark-theme {
 }
 
 .logo {
-    padding: 24px;
-    font-size: 1.5rem;
+    padding: 16px 20px;
+    font-size: 1.3rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -348,11 +348,34 @@ body.dark-theme {
 }
 
 .panel-header {
-    padding: 16px 24px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.panel-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.filters-small {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.filters-small select {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.85rem;
 }
 
 .panel-footer {
@@ -510,6 +533,8 @@ body.dark-theme {
 .sidebar-map {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .map-wrapper {
@@ -546,8 +571,7 @@ body.dark-theme {
 
 .route-list {
     list-style: none;
-    overflow-y: auto;
-    max-height: 400px;
+    overflow-y: visible;
     padding-right: 5px;
 }
 

@@ -179,21 +179,7 @@ def geocodificar(bairro: str, config: dict | None = None, log_fn=None) -> dict |
                 db.save_cached_address(bairro_clean, lat, lon, "json_fuzzy")
                 return {"lat": lat, "lon": lon, "source": "json_fuzzy"}
 
-    # ── TENTATIVA 3: Nominatim (OSM) ──
-    try:
-        geolocator = Nominatim(user_agent="sanhub_unified_v1")
-        geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1)
-        for nome_busca in variacoes:
-            q = {"neighborhood": nome_busca, "city": cidade, "state": estado}
-            loc = geocode(q)
-            if loc and validar_coordenadas(loc.latitude, loc.longitude, config):
-                _log(f"[Nominatim] {nome_busca}")
-                db.save_cached_address(bairro_clean, loc.latitude, loc.longitude, "nominatim")
-                return {"lat": loc.latitude, "lon": loc.longitude, "source": "nominatim"}
-    except Exception:
-        pass
-
-    # ── TENTATIVA 4: ArcGIS ──
+    # ── TENTATIVA 3: ArcGIS ──
     try:
         arcgis = ArcGIS()
         for nome_busca in variacoes:
@@ -218,7 +204,7 @@ def geocodificar(bairro: str, config: dict | None = None, log_fn=None) -> dict |
     except Exception:
         pass
 
-    # ── TENTATIVA 5: BrasilAPI (CEP) ──
+    # ── TENTATIVA 4: BrasilAPI (CEP) ──
     cep_match = re.search(r"\b\d{5}-?\d{3}\b", bairro)
     if cep_match:
         cep = cep_match.group().replace("-", "")
@@ -236,6 +222,20 @@ def geocodificar(bairro: str, config: dict | None = None, log_fn=None) -> dict |
                         return {"lat": lat, "lon": lon, "source": "brasilapi"}
         except Exception:
             pass
+
+    # ── TENTATIVA 5: Nominatim (OSM) ──
+    try:
+        geolocator = Nominatim(user_agent="sanhub_unified_v1")
+        geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1)
+        for nome_busca in variacoes:
+            q = {"neighborhood": nome_busca, "city": cidade, "state": estado}
+            loc = geocode(q)
+            if loc and validar_coordenadas(loc.latitude, loc.longitude, config):
+                _log(f"[Nominatim] {nome_busca}")
+                db.save_cached_address(bairro_clean, loc.latitude, loc.longitude, "nominatim")
+                return {"lat": loc.latitude, "lon": loc.longitude, "source": "nominatim"}
+    except Exception:
+        pass
 
     _log(f"[FALHA] Não encontrado: {bairro}")
     return None

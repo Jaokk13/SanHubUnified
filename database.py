@@ -222,7 +222,9 @@ def get_stats() -> dict:
 def get_teams() -> list[dict]:
     with get_conn() as conn:
         rows = conn.execute("""
-            SELECT t.*, COUNT(o.os_number) as os_count
+            SELECT t.*, 
+                   COUNT(o.os_number) as os_count,
+                   SUM(CASE WHEN o.execution_order IS NOT NULL THEN 1 ELSE 0 END) as routed_count
             FROM teams t
             LEFT JOIN orders o ON t.id = o.team_id AND o.status='Pendente'
             GROUP BY t.id
@@ -268,3 +270,23 @@ def save_cached_address(address: str, lat: float, lon: float, source: str):
                VALUES(?, ?, ?, ?, ?)""",
             (address, lat, lon, source, datetime.now().isoformat()),
         )
+
+def clear_cache():
+    with get_conn() as conn:
+        conn.execute("DELETE FROM cache_addresses")
+
+def get_settings() -> dict:
+    with get_conn() as conn:
+        rows = conn.execute("SELECT key, value FROM settings").fetchall()
+        return {r["key"]: r["value"] for r in rows}
+
+def get_setting(key: str, default: str = "") -> str:
+    with get_conn() as conn:
+        row = conn.execute("SELECT value FROM settings WHERE key=?", (key,)).fetchone()
+        if row:
+            return row["value"]
+        return default
+
+def save_setting(key: str, value: str):
+    with get_conn() as conn:
+        conn.execute("INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)", (key, value))

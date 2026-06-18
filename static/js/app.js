@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('import-form').addEventListener('submit', handleImport);
     document.getElementById('team-form').addEventListener('submit', handleTeamSubmit);
     document.getElementById('cache-import-form').addEventListener('submit', handleCacheImport);
+    document.getElementById('settings-form').addEventListener('submit', handleSettingsSubmit);
     
     // Filters
     document.getElementById('filter-status').addEventListener('change', loadTableData);
@@ -317,12 +318,17 @@ async function loadTeams() {
     if (tbody) {
         tbody.innerHTML = '';
         teams.forEach(t => {
+            const isRouted = t.os_count > 0 && t.routed_count === t.os_count;
+            const routeBadge = isRouted 
+                ? '<span class="badge bg-success-soft text-success" style="margin-left: 8px;"><i class="fas fa-route"></i> Roteirizada</span>'
+                : (t.os_count > 0 ? '<span class="badge bg-warning-soft text-warning" style="margin-left: 8px;">Sem Rota</span>' : '');
+                
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${t.id}</td>
                 <td class="font-bold">${t.name}</td>
                 <td>${getCategoryBadge(t.type)}</td>
-                <td><span class="badge bg-primary-soft text-primary">${t.os_count} Pendentes</span></td>
+                <td><span class="badge bg-primary-soft text-primary">${t.os_count} Pendentes</span>${routeBadge}</td>
                 <td>
                     <button class="btn btn-icon" onclick="deleteTeam(${t.id})"><i class="fas fa-trash text-danger"></i></button>
                 </td>
@@ -342,7 +348,9 @@ async function loadTeams() {
         const currentVal = select.value;
         select.innerHTML = '<option value="">Selecione uma Equipe...</option>';
         teams.forEach(t => {
-            select.innerHTML += `<option value="${t.id}">${t.name} (${t.type})</option>`;
+            const isRouted = t.os_count > 0 && t.routed_count === t.os_count;
+            const routeText = isRouted ? ' ✔ Roteirizada' : '';
+            select.innerHTML += `<option value="${t.id}">${t.name} (${t.type})${routeText}</option>`;
         });
         if (currentVal) select.value = currentVal;
     });
@@ -617,12 +625,22 @@ function renderRoute(res) {
 
         // Lista UI
         const li = document.createElement('li');
+        li.className = p.os_numbers[0] === 'BASE' ? '' : 'route-draggable';
+        li.dataset.lat = p.lat;
+        li.dataset.lon = p.lon;
+        li.dataset.os = JSON.stringify(p.os_numbers);
+        li.dataset.neighborhood = p.neighborhood;
+        li.dataset.idx = idx;
+        
+        const dragHandle = p.os_numbers[0] === 'BASE' ? '' : '<div style="cursor: grab; margin-left: 10px; color: var(--text-muted);"><i class="fas fa-bars"></i></div>';
+        
         li.innerHTML = `
             <div class="badge-num">${idx}</div>
             <div style="flex:1;">
                 ${titleHtml}
-                ${p.distance_km > 0 ? `<div class="text-sm text-primary mt-1">+${p.distance_km} km</div>` : ''}
+                <div class="route-dist-calc text-sm text-primary mt-1">${p.distance_km > 0 ? '+' + p.distance_km + ' km' : ''}</div>
             </div>
+            ${dragHandle}
         `;
         ul.appendChild(li);
         
@@ -655,5 +673,155 @@ function renderRoute(res) {
     
     if (res.not_found && res.not_found.length > 0) {
         alert(`Atenção: Não foi possível geocodificar as seguintes OS/Bairros:\n${res.not_found.join(', ')}`);
+    }
+    
+    // Init Sortable
+    if (window.routeSortable) window.routeSortable.destroy();
+    window.routeSortable = Sortable.create(ul, {
+        animation: 150,
+        filter: ':not(.route-draggable)', // Don't drag base
+        onEnd: function() {
+            recalcularRotaVisual();
+        }
+    });
+}
+
+function haversineDist(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+}
+
+function recalcularRotaVisual() {
+    const ul = document.getElementById('route-list-ul');
+    const items = Array.from(ul.children);
+    
+    markersLayer.clearLayers();
+    routeLayer.clearLayers();
+    
+    const latlngs = [];
+    let totalKm = 0;
+    
+    // Google Maps link generation
+    let gmapsUrl = "https://www.google.com/maps/dir/";
+    
+    items.forEach((li, idx) => {
+        const lat = parseFloat(li.dataset.lat);
+        const lon = parseFloat(li.dataset.lon);
+        const osList = JSON.parse(li.dataset.os);
+        const neighborhood = li.dataset.neighborhood;
+        
+        // Update numbering
+        li.querySelector('.badge-num').textContent = idx;
+        
+        // Calculate distance from previous
+        let distKm = 0;
+        if (idx > 0) {
+            const prevLi = items[idx-1];
+            const prevLat = parseFloat(prevLi.dataset.lat);
+            const prevLon = parseFloat(prevLi.dataset.lon);
+            distKm = haversineDist(prevLat, prevLon, lat, lon);
+            totalKm += distKm;
+            
+            const distDiv = li.querySelector('.route-dist-calc');
+            if (distDiv) distDiv.textContent = `+${distKm.toFixed(2)} km`;
+        }
+        
+        // Map markers
+        latlngs.push([lat, lon]);
+        gmapsUrl += `${lat},${lon}/`;
+        
+        let color = '#3b82f6';
+        if (osList[0] === 'BASE') color = '#ef4444';
+        
+        const markerHtml = `
+            <div style="background-color:${color}; color:white; width:24px; height:24px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold; border:2px solid white; box-shadow:0 2px 4px rgba(0,0,0,0.3);">
+                ${idx}
+            </div>
+        `;
+        const icon = L.divIcon({ html: markerHtml, className: '', iconSize: [24,24], iconAnchor: [12,12] });
+        
+        const popupText = osList[0] === 'BASE' 
+            ? `<b>BASE</b><br>${neighborhood}` 
+            : `<b>${neighborhood}</b><br>${osList.join(', ')}`;
+
+        L.marker([lat, lon], { icon }).bindPopup(popupText).addTo(markersLayer);
+    });
+    
+    // Draw line
+    L.polyline(latlngs, { color: '#3b82f6', weight: 4, opacity: 0.7, dashArray: '10, 10' }).addTo(routeLayer);
+    
+    // Update total dist and maps link
+    document.getElementById('route-dist').textContent = `${totalKm.toFixed(2)} km`;
+    document.getElementById('route-gmaps').href = gmapsUrl;
+}
+
+function reverseRoute() {
+    const ul = document.getElementById('route-list-ul');
+    const items = Array.from(ul.children);
+    if (items.length <= 2) return;
+    
+    // items[0] and items[items.length-1] might be BASE. Let's check them.
+    const isBaseFirst = JSON.parse(items[0].dataset.os)[0] === 'BASE';
+    const isBaseLast = JSON.parse(items[items.length - 1].dataset.os)[0] === 'BASE';
+    
+    let startIndex = isBaseFirst ? 1 : 0;
+    let endIndex = isBaseLast ? items.length - 1 : items.length;
+    
+    const middleItems = items.slice(startIndex, endIndex);
+    middleItems.reverse();
+    
+    // Re-append
+    for(let i=0; i<middleItems.length; i++) {
+        ul.insertBefore(middleItems[i], items[endIndex]);
+    }
+    
+    recalcularRotaVisual();
+}
+
+// Limpar cache temporário local
+async function clearLocalCache() {
+    if(!confirm("Tem certeza que deseja apagar o cache temporário de geocodificação do SQLite? Os bairros do JSON continuarão seguros.")) return;
+    
+    try {
+        const res = await fetchAPI('/api/cache', { method: 'DELETE' });
+        alert(res.message || "Cache limpo com sucesso!");
+    } catch (err) {
+        // Error já tratado no fetchAPI
+    }
+}
+
+// Configurações
+async function openSettingsModal() {
+    try {
+        const settings = await fetchAPI('/api/settings');
+        document.getElementById('base_lat').value = settings.base_lat || '';
+        document.getElementById('base_lon').value = settings.base_lon || '';
+        toggleModal('settings-modal');
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+async function handleSettingsSubmit(e) {
+    e.preventDefault();
+    const lat = document.getElementById('base_lat').value;
+    const lon = document.getElementById('base_lon').value;
+    
+    try {
+        const res = await fetchAPI('/api/settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ base_lat: lat, base_lon: lon })
+        });
+        alert(res.message);
+        toggleModal('settings-modal');
+    } catch (err) {
+        // Error já tratado no fetchAPI
     }
 }

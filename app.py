@@ -2,7 +2,7 @@ import os
 import io
 import pandas as pd
 from datetime import date
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Body
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -60,10 +60,15 @@ def _extrair_bairros_validos(file_content: bytes) -> set:
 
 def _determinar_categoria(descricao: str) -> str:
     desc = str(descricao).upper()
-    if any(p in desc for p in ["ASFALTO", "PAVIMENTO", "RECOMPOSIÇÃO"]):
-        return "Asfalto"
-    if any(p in desc for p in ["CALÇADA", "PASSEIO", "GUIA", "MEIO-FIO"]):
+    
+    # Check for Calçada keywords first
+    if any(p in desc for p in ["CALÇADA", "CALCADA", "PASSEIO", "GUIA", "MEIO-FIO", "CIMENTADO"]):
         return "Calçada"
+        
+    # Then check for Asfalto keywords
+    if any(p in desc for p in ["ASFALTO", "PAVIMENTO", "CBUQ", "TAPA", "BURACO", "RECOMPOSIÇÃO DE ASFALTO"]):
+        return "Asfalto"
+        
     return "Indefinido"
 
 @app.post("/api/import")
@@ -252,6 +257,25 @@ def calculate_route(team_id: int):
     except Exception as e:
         err_str = traceback.format_exc()
         raise HTTPException(status_code=500, detail=f"Erro interno: {err_str}")
+
+@app.delete("/api/cache")
+def clear_geocoding_cache():
+    db.clear_cache()
+    return {"status": "ok", "message": "Cache limpo com sucesso"}
+
+@app.get("/api/settings")
+def get_settings():
+    return db.get_settings()
+
+@app.post("/api/settings")
+def save_settings(data: dict = Body(...)):
+    base_lat = data.get("base_lat")
+    base_lon = data.get("base_lon")
+    if base_lat:
+        db.save_setting("base_lat", str(base_lat))
+    if base_lon:
+        db.save_setting("base_lon", str(base_lon))
+    return {"status": "ok", "message": "Configurações salvas com sucesso!"}
 
 @app.get("/api/export")
 def export_excel():
