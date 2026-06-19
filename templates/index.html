@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.v8.css">
 </head>
 <body class="dark-theme">
 
@@ -164,6 +164,39 @@
         </div>
     </div>
 
+    <!-- Modal Divisão Automática (Sweep) -->
+    <div id="auto-assign-modal" class="modal hidden">
+        <div class="modal-content glass" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Programador Automático</h2>
+                <button class="close-btn" onclick="toggleModal('auto-assign-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 15px; color: var(--text-muted);">Defina a quantidade máxima de OS a serem distribuídas e selecione as equipes que participarão da divisão.</p>
+                <div class="input-group">
+                    <label for="auto-assign-max"><i class="fas fa-list-ol"></i> Limite de OS (Opcional)</label>
+                    <input type="number" id="auto-assign-max" placeholder="Deixe em branco para distribuir todas">
+                </div>
+                <div class="input-group" style="margin-top: 15px;">
+                    <label for="auto-assign-os-list"><i class="fas fa-tasks"></i> Lista de OS Específica (Opcional)</label>
+                    <textarea id="auto-assign-os-list" placeholder="Ex: 12345, 67890, 11223 (Separe por vírgulas)" style="width: 100%; padding: 8px; border-radius: 6px; background: rgba(0,0,0,0.2); color: white; border: 1px solid var(--border-color); resize: vertical; min-height: 60px;"></textarea>
+                </div>
+                <div class="input-group" style="margin-top: 15px;">
+                    <label><i class="fas fa-users"></i> Equipes Disponíveis</label>
+                    <div id="auto-assign-teams-container" style="max-height: 200px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <!-- Injetado via JS -->
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-outline" style="flex:1" onclick="toggleModal('auto-assign-modal')">Cancelar</button>
+                    <button class="btn btn-primary" style="flex:1" onclick="confirmAutoAssign()">
+                        <i class="fas fa-magic"></i> Iniciar Divisão
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Barra Lateral -->
     <aside class="sidebar glass" id="sidebar">
         <div class="logo">
@@ -197,9 +230,9 @@
             <button class="btn btn-outline btn-block mb-3" onclick="toggleModal('cache-modal')">
                 <i class="fas fa-database"></i> <span>Gerenciar Bairros</span>
             </button>
-            <a href="/api/export" class="btn btn-outline btn-block mb-3" target="_blank">
-                <i class="fas fa-file-excel"></i> <span>Exportar Rota</span>
-            </a>
+            <button class="btn btn-outline btn-block mb-3" onclick="openExportModal()">
+                <i class="fas fa-file-excel"></i> <span>Exportar Planilha</span>
+            </button>
             <button class="btn btn-outline btn-block mb-3" onclick="openSettingsModal()">
                 <i class="fas fa-cog"></i> <span>Configurações</span>
             </button>
@@ -278,12 +311,13 @@
             <section id="view" class="view-section hidden">
                 <div class="glass panel">
                     <div class="panel-header">
-                        <div class="filters">
-                            <select id="filter-status" class="filter-select">
-                                <option value="">Todos os Status</option>
-                                <option value="Pendente" selected>Pendentes</option>
-                                <option value="Executado">Executados</option>
-                            </select>
+                        <div class="os-tabs">
+                            <button class="os-tab active" data-status="pendentes">Pendentes</button>
+                            <button class="os-tab" data-status="executadas">Executadas</button>
+                            <button class="os-tab" data-status="postergadas">Postergadas</button>
+                            <button class="os-tab" data-status="todas">Todas</button>
+                        </div>
+                        <div class="filters" style="margin-top: 15px;">
                             <select id="filter-category" class="filter-select">
                                 <option value="">Todas as Categorias</option>
                                 <option value="Calçada">Calçada</option>
@@ -495,6 +529,48 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/static/js/app.js?v=4"></script>
+    <script src="/static/js/app.v9.js"></script>
+    <!-- Modal Exportar -->
+    <div id="export-modal" class="modal hidden">
+        <div class="modal-content glass" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Exportar Planilha</h2>
+                <button class="close-btn" onclick="toggleModal('export-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <label>O que você deseja exportar?</label>
+                    <select id="export-type" onchange="toggleExportDate()" style="width: 100%; padding: 8px; border-radius: 6px; background: rgba(0,0,0,0.2); color: white; border: 1px solid var(--border-color);">
+                        <option value="programadas">Programadas (Filtra por Data)</option>
+                        <option value="executadas">Executadas</option>
+                        <option value="todas">Todas as OS do Sistema</option>
+                    </select>
+                </div>
+                <div class="input-group" id="export-date-group" style="margin-top: 15px;">
+                    <label>Data da Programação</label>
+                    <input type="date" id="export-date" style="width: 100%; padding: 8px; border-radius: 6px; background: rgba(0,0,0,0.2); color: white; border: 1px solid var(--border-color);">
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-outline" style="flex:1" onclick="toggleModal('export-modal')">Cancelar</button>
+                    <button class="btn btn-success" style="flex:1" onclick="confirmExport()">
+                        <i class="fas fa-file-excel"></i> Exportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Context Menu -->
+    <div id="os-context-menu" class="context-menu hidden">
+        <div class="context-menu-item" onclick="moveOsToState('pendentes')">
+            <i class="fas fa-clock text-warning"></i> Mover para Pendentes
+        </div>
+        <div class="context-menu-item" onclick="moveOsToState('executadas')">
+            <i class="fas fa-check-circle text-success"></i> Mover para Executadas
+        </div>
+        <div class="context-menu-item" onclick="moveOsToState('postergadas')">
+            <i class="fas fa-pause-circle text-danger"></i> Mover para Postergadas
+        </div>
+    </div>
 </body>
 </html>

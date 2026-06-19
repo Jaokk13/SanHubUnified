@@ -781,3 +781,63 @@ input[type="checkbox"] {
     background: rgba(30, 41, 59, 0.95);
     border: 1px solid var(--border-color);
 }
+
+
+
+/* ==========================================================================
+   OS Tabs & Context Menu
+   ========================================================================== */
+.os-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.os-tab {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.os-tab:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.os-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.context-menu {
+    position: fixed;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    z-index: 1000;
+    min-width: 200px;
+    padding: 8px 0;
+    backdrop-filter: blur(10px);
+}
+
+.context-menu-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-main);
+    transition: background 0.2s;
+}
+
+.context-menu-item:hover {
+    background: rgba(255,255,255,0.1);
+}

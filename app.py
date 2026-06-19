@@ -112,6 +112,7 @@ async def import_samsys(
         col_os = next((c for c in df_filtrado.columns if c.lower().strip() in ['número da os', 'numero da os', 'os', 'o.s']), None)
         col_data_sol = next((c for c in df_filtrado.columns if 'solicitação' in c.lower() or 'solicitacao' in c.lower()), None)
         col_bairro = next((c for c in df_filtrado.columns if 'bairro' in c.lower()), None)
+        col_endereco = next((c for c in df_filtrado.columns if c.lower().strip() in ['endereço', 'endereco', 'logradouro', 'rua']), None)
         col_servico = 'Serviço'
         col_data_limite = next((c for c in df_filtrado.columns if 'limite' in c.lower()), None)
         
@@ -133,16 +134,24 @@ async def import_samsys(
             parecer_val = str(row[col_parecer]) if col_parecer in row else ""
             
             is_post = "POSTERGADO" in situacao_val or "POSTERGADA" in situacao_val
+            postergo_reason = parecer_val if is_post else ""
             
+            # Se a OS for Cortada, ela eh considerada ativa (is_postergada = False)
+            if is_post and postergo_reason:
+                is_cortada = bool(re.search(r'\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?', postergo_reason, re.IGNORECASE))
+                if is_cortada:
+                    is_post = False
+
             orders_to_insert.append({
                 "os_number": os_number,
                 "solicitation_date": str(row[col_data_sol]) if col_data_sol in row else "",
                 "neighborhood": str(row[col_bairro]) if col_bairro in row else "",
+                "address": str(row[col_endereco]) if col_endereco in row else "",
                 "service_description": servico_desc,
                 "limit_date": str(row[col_data_limite]) if col_data_limite in row else "",
                 "category": _determinar_categoria(servico_desc),
                 "is_postergada": is_post,
-                "postergo_reason": parecer_val if is_post else ""
+                "postergo_reason": postergo_reason
             })
 
         # Insere novas OS
@@ -195,17 +204,33 @@ def reorder_orders(req: ReorderRequest):
     db.set_execution_orders(req.team_id, req.os_numbers)
     return {"success": True}
 
+class UpdateStateRequest(BaseModel):
+    state: str
+
+@app.post("/api/orders/{os_number}/state")
+def update_os_state(os_number: str, req: UpdateStateRequest):
+    db.update_os_state(os_number, req.state)
+    return {"success": True}
+
 class AutoAssignRequest(BaseModel):
     category: str
     date: Optional[str] = None
     task_type: str
+    max_orders: Optional[int] = None
+    team_ids: Optional[List[int]] = None
+    specific_os_list: Optional[str] = None
 
 @app.post("/api/orders/auto-assign")
 def auto_assign_orders(req: AutoAssignRequest):
     # 1. Obter todas as equipes dessa categoria e dessa função (Prévia ou Execução)
     teams = [t for t in db.get_teams() if t["type"] == req.category and t["task_type"] == req.task_type]
+    
+    # 1.5 Filtrar apenas as equipes selecionadas pelo usuário (se enviado)
+    if req.team_ids is not None:
+        teams = [t for t in teams if t["id"] in req.team_ids]
+        
     if not teams:
-        raise HTTPException(status_code=400, detail="Nenhuma equipe cadastrada para esta Categoria e Função.")
+        raise HTTPException(status_code=400, detail="Nenhuma equipe cadastrada ou selecionada para esta Categoria e Função.")
     
     # 2. Obter todas as OSs pendentes dessa categoria sem equipe
     all_orders = db.get_orders(status="Pendente", category=req.category, team_id=None)
@@ -216,21 +241,33 @@ def auto_assign_orders(req: AutoAssignRequest):
     orders = []
     import re
     for o in all_orders:
-        is_cortada = False
-        if o.get('is_postergada') and o.get('postergo_reason'):
-            is_cortada = bool(re.search(r'\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?', o['postergo_reason'], re.IGNORECASE))
-        
-        if req.task_type == 'Execução' and is_cortada:
-            orders.append(o)
-        elif req.task_type == 'Prévia' and not is_cortada:
-            orders.append(o)
+        if o.get('is_postergada'):
+            continue  # Ignorar OS postergadas no Programador Automático
+            
+        if req.category == 'Calçada':
+            # Para calçada, todas as OS são consideradas como Execução
+            if req.task_type == 'Execução':
+                orders.append(o)
+        else:
+            is_cortada = False
+            if o.get('is_postergada') and o.get('postergo_reason'):
+                is_cortada = bool(re.search(r'\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?', o['postergo_reason'], re.IGNORECASE))
+            
+            if req.task_type == 'Execução' and is_cortada:
+                orders.append(o)
+            elif req.task_type == 'Prévia' and not is_cortada:
+                orders.append(o)
+
+    # Filtro adicional por lista específica de OS
+    if req.specific_os_list:
+        specific_os_set = {os.strip() for os in req.specific_os_list.split(',')}
+        orders = [o for o in orders if str(o['os_number']).strip() in specific_os_set]
 
     if not orders:
-        raise HTTPException(status_code=400, detail="Nenhuma OS pendente sem equipe se encaixa nesta Função (Prévia/Execução).")
-    
+        raise HTTPException(status_code=400, detail="Nenhuma OS pendente sem equipe se encaixa nesta Função (Prévia/Execução) ou na lista fornecida.")
     # 4. Aplicar algoritmo Sweep
     check_mass = (req.category == 'Asfalto' and req.task_type == 'Execução')
-    divisao = router.dividir_em_equipes_sweep(orders, len(teams), check_mass=check_mass)
+    divisao = router.dividir_em_equipes_sweep(orders, len(teams), check_mass=check_mass, max_orders=req.max_orders)
     
     # 5. Atribuir OSs às equipes
     for i, team in enumerate(teams):
@@ -251,12 +288,22 @@ class TeamCreate(BaseModel):
 
 @app.post("/api/teams")
 def create_team(team: TeamCreate):
-    return db.create_team(team.name, team.type, team.task_type)
+    try:
+        return db.create_team(team.name, team.type, team.task_type)
+    except Exception as e:
+        if "UNIQUE constraint failed" in str(e):
+            raise HTTPException(status_code=400, detail="Já existe uma equipe com este nome.")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.put("/api/teams/{team_id}")
 def update_team(team_id: int, team: TeamCreate):
-    db.update_team(team_id, team.name, team.type, team.task_type)
-    return {"success": True}
+    try:
+        db.update_team(team_id, team.name, team.type, team.task_type)
+        return {"success": True}
+    except Exception as e:
+        if "UNIQUE constraint failed" in str(e):
+            raise HTTPException(status_code=400, detail="Já existe uma equipe com este nome.")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.delete("/api/teams/{team_id}")
 def delete_team(team_id: int):
@@ -345,28 +392,37 @@ def save_settings(data: dict = Body(...)):
     return {"status": "ok", "message": "Configurações salvas com sucesso!"}
 
 @app.get("/api/export")
-def export_excel():
+def export_excel(type: str = "todas", date: str = None):
     # Pega todas as OS
     orders = db.get_orders()
-    
+
+    if type == "programadas":
+        orders = [o for o in orders if o.get('team_id') is not None and o.get('status') == 'Pendente']
+        if date:
+            orders = [o for o in orders if o.get('scheduled_date') == date]
+    elif type == "executadas":
+        orders = [o for o in orders if o.get('status') == 'Executado']
+
     if not orders:
-        raise HTTPException(status_code=400, detail="Nenhum dado para exportar.")
+        raise HTTPException(status_code=400, detail="Nenhum dado para exportar com os filtros informados.")
         
     df = pd.DataFrame(orders)
     
     # Formatação e nomes de colunas
     df['Equipe Designada'] = df['team_name'].fillna("Não Atribuída")
+    df['Função (Equipe)'] = df.apply(lambda row: row.get('team_task_type') if 'team_task_type' in row else '', axis=1)
     df['Ordem de Execução'] = df['execution_order']
     df['Status'] = df['status']
     df['Número da OS'] = df['os_number']
     df['Bairro'] = df['neighborhood']
+    df['Endereço'] = df['address'] if 'address' in df.columns else ''
     df['Serviço'] = df['service_description']
     df['Categoria'] = df['category']
     df['Data Limite'] = df['limit_date']
     
     cols_to_keep = [
-        'Equipe Designada', 'Ordem de Execução', 'Status', 'Número da OS',
-        'Bairro', 'Serviço', 'Categoria', 'Data Limite'
+        'Equipe Designada', 'Função (Equipe)', 'Ordem de Execução', 'Status', 'Número da OS',
+        'Bairro', 'Endereço', 'Serviço', 'Categoria', 'Data Limite'
     ]
     df = df[cols_to_keep]
     df = df.sort_values(by=['Status', 'Equipe Designada', 'Ordem de Execução'], ascending=[False, True, True])

@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Programing
     document.getElementById('prog-filter-cat').addEventListener('change', loadProgramingData);
+    document.getElementById('prog-filter-task-type').addEventListener('change', loadProgramingData);
     document.getElementById('prog-team-select').addEventListener('change', loadProgramingData);
     document.getElementById('prog-date').addEventListener('change', loadProgramingData);
     document.getElementById('btn-reset-yesterday').addEventListener('click', resetYesterdayRoutes);
@@ -205,26 +206,23 @@ function extractMeasurements(text) {
 
 function getStatusBadges(o) {
     let html = getStatusBadge(o.status);
-    if (o.is_postergada) {
-        const safeReason = (o.postergo_reason || 'Motivo não informado').replace(/"/g, '&quot;').replace(/\n/g, '\\n').replace(/\r/g, '');
-        
-        // Se tem números formatados como dimensões, é uma OS Cortada
-        const isCortada = /\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?/i.test(o.postergo_reason || '');
-        
-        if (isCortada) {
-            let extraInfo = '';
-            const area = extractMeasurements(o.postergo_reason);
-            if (area > 0) {
-                extraInfo += `\\n\\nÁrea Total: ${area.toFixed(2).replace('.', ',')} m²`;
-                if (o.category === 'Asfalto') {
-                    const massa = area * 0.05 * 2.4;
-                    extraInfo += `\\nMassa Asfáltica Estimada: ${massa.toFixed(2).replace('.', ',')} Toneladas`;
-                }
+    
+    const safeReason = (o.postergo_reason || 'Motivo não informado').replace(/"/g, '&quot;').replace(/\n/g, '\\n').replace(/\r/g, '');
+    const isCortada = /\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?/i.test(o.postergo_reason || '');
+
+    if (isCortada) {
+        let extraInfo = '';
+        const area = extractMeasurements(o.postergo_reason);
+        if (area > 0) {
+            extraInfo += `\\n\\nÁrea Total: ${area.toFixed(2).replace('.', ',')} m²`;
+            if (o.category === 'Asfalto') {
+                const massa = area * 0.05 * 2.4;
+                extraInfo += `\\nMassa Asfáltica Estimada: ${massa.toFixed(2).replace('.', ',')} Toneladas`;
             }
-            html += ` <span class="badge badge-cortada" onclick="showInfoModal('Medição / Corte', '${safeReason}${extraInfo}')" title="Clique para ver a medição">CORTADA</span>`;
-        } else {
-            html += ` <span class="badge badge-postergada" onclick="showInfoModal('Motivo Postergação', '${safeReason}')" title="Clique para ver o parecer">POSTERGADA</span>`;
         }
+        html += ` <span class="badge badge-cortada" onclick="showInfoModal('Medição / Corte', '${safeReason}${extraInfo}')" title="Clique para ver a medição">CORTADA</span>`;
+    } else if (o.is_postergada) {
+        html += ` <span class="badge badge-postergada" onclick="showInfoModal('Motivo Postergação', '${safeReason}')" title="Clique para ver o parecer">POSTERGADA</span>`;
     }
     return html;
 }
@@ -425,7 +423,8 @@ async function handleCacheImport(e) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function loadTableData() {
-    const status = document.getElementById('filter-status').value;
+    const activeTab = document.querySelector('.os-tab.active');
+    const status = activeTab ? activeTab.getAttribute('data-status') : 'pendentes';
     const category = document.getElementById('filter-category').value;
     const search = document.getElementById('filter-search').value;
     
@@ -440,6 +439,7 @@ async function loadTableData() {
     
     orders.forEach((o, i) => {
         const tr = document.createElement('tr');
+        tr.setAttribute('data-os', o.os_number);
         tr.innerHTML = `
             <td class="text-muted text-sm">${i + 1}</td>
             <td class="font-bold">${o.os_number}</td>
@@ -453,18 +453,74 @@ async function loadTableData() {
     });
 }
 
+// OS Tabs Listener
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.os-tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            document.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+            e.target.classList.add('active');
+            loadTableData();
+        });
+    });
+});
+
+// Context Menu Logic
+let contextMenuTargetOs = null;
+
+document.addEventListener('contextmenu', (e) => {
+    const tr = e.target.closest('tr[data-os]');
+    if (tr && tr.closest('#orders-table')) {
+        e.preventDefault();
+        contextMenuTargetOs = tr.getAttribute('data-os');
+        const menu = document.getElementById('os-context-menu');
+        menu.style.top = e.clientY + 'px';
+        menu.style.left = e.clientX + 'px';
+        menu.classList.remove('hidden');
+    } else {
+        document.getElementById('os-context-menu').classList.add('hidden');
+    }
+});
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('#os-context-menu')) {
+        const menu = document.getElementById('os-context-menu');
+        if (menu) menu.classList.add('hidden');
+    }
+});
+
+async function moveOsToState(state) {
+    if (!contextMenuTargetOs) return;
+    
+    document.getElementById('os-context-menu').classList.add('hidden');
+    
+    try {
+        await fetchAPI(`/api/orders/${contextMenuTargetOs}/state`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ state: state })
+        });
+        
+        // Recarrega os dados
+        loadTableData();
+        loadDashboard();
+        
+    } catch (e) {
+        console.error("Erro ao mover OS", e);
+    }
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // TEAMS
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function loadTeams() {
-    const teams = await fetchAPI('/api/teams');
+    allTeams = await fetchAPI('/api/teams');
     
     // Update Teams Table
     const tbody = document.querySelector('#teams-table tbody');
     if (tbody) {
         tbody.innerHTML = '';
-        teams.forEach(t => {
+        allTeams.forEach(t => {
             const isRouted = t.os_count > 0 && t.routed_count === t.os_count;
             const routeBadge = isRouted 
                 ? '<span class="badge bg-success-soft text-success" style="margin-left: 8px;"><i class="fas fa-route"></i> Roteirizada</span>'
@@ -496,7 +552,7 @@ async function loadTeams() {
         if (!select) return;
         const currentVal = select.value;
         select.innerHTML = '<option value="">Selecione uma Equipe...</option>';
-        teams.forEach(t => {
+        allTeams.forEach(t => {
             const isRouted = t.os_count > 0 && t.routed_count === t.os_count;
             const routeText = isRouted ? ' ✔ Roteirizada' : '';
             select.innerHTML += `<option value="${t.id}">${t.name} (${t.type} - ${t.task_type || 'Execução'})${routeText}</option>`;
@@ -613,7 +669,7 @@ async function loadProgramingData() {
     
     // Left: Available Orders
     // Para OS sem equipe, não filtramos pela data (estão sempre disponíveis)
-    let availUrl = `/api/orders?status=Pendente`;
+    let availUrl = `/api/orders?status=pendentes`;
     if (filterCat) availUrl += `&category=${filterCat}`;
     const availableOrders = await fetchAPI(availUrl);
     
@@ -776,7 +832,8 @@ function openAutoAssignModal() {
     // Filtrar equipes
     const availableTeams = allTeams.filter(t => t.type === cat && t.task_type === taskType);
     if (availableTeams.length === 0) {
-        return showInfoModal('Aviso', "Nenhuma equipe cadastrada para esta Categoria e Função.");
+        const debugInfo = JSON.stringify(allTeams);
+        return showInfoModal('DEBUG', `Cat selecionada: [${cat}], TaskType final: [${taskType}]. Equipes no sistema: ` + debugInfo);
     }
     
     // Renderizar checkboxes
@@ -791,6 +848,9 @@ function openAutoAssignModal() {
     `).join('');
     
     document.getElementById('auto-assign-max').value = '';
+    const osListInput = document.getElementById('auto-assign-os-list');
+    if (osListInput) osListInput.value = '';
+    
     toggleModal('auto-assign-modal');
 }
 
@@ -800,6 +860,9 @@ async function confirmAutoAssign() {
     const progDate = document.getElementById('prog-date').value;
     const maxVal = document.getElementById('auto-assign-max').value;
     const maxOrders = maxVal ? parseInt(maxVal) : null;
+    
+    const osListInput = document.getElementById('auto-assign-os-list');
+    const specificOsList = osListInput && osListInput.value.trim() !== '' ? osListInput.value.trim() : null;
     
     if (cat === 'Calçada') taskType = 'Execução';
     
@@ -826,7 +889,8 @@ async function confirmAutoAssign() {
                 date: progDate, 
                 task_type: taskType,
                 max_orders: maxOrders,
-                team_ids: teamIds
+                team_ids: teamIds,
+                specific_os_list: specificOsList
             })
         });
         showInfoModal('Aviso', res.message);
@@ -1306,3 +1370,41 @@ document.addEventListener('click', function(e) {
     
     rows.forEach(r => tbody.appendChild(r));
 });
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EXPORT EXCEL
+// ─────────────────────────────────────────────────────────────────────────────
+
+function openExportModal() {
+    const today = new Date();
+    const tzOffset = today.getTimezoneOffset() * 60000;
+    const localISOTime = (new Date(today - tzOffset)).toISOString().split('T')[0];
+    document.getElementById('export-date').value = localISOTime;
+    
+    toggleExportDate();
+    toggleModal('export-modal');
+}
+
+function toggleExportDate() {
+    const type = document.getElementById('export-type').value;
+    const dateGroup = document.getElementById('export-date-group');
+    if (type === 'programadas') {
+        dateGroup.style.display = 'block';
+    } else {
+        dateGroup.style.display = 'none';
+    }
+}
+
+function confirmExport() {
+    const type = document.getElementById('export-type').value;
+    const date = document.getElementById('export-date').value;
+    
+    let url = '/api/export?type=' + type;
+    if (type === 'programadas' && date) {
+        url += '&date=' + date;
+    }
+    
+    window.open(url, '_blank');
+    toggleModal('export-modal');
+}

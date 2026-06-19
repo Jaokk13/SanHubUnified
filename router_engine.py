@@ -365,10 +365,9 @@ def roteirizar_equipe(orders: list[dict], log_fn=None) -> dict:
     if len(pontos) < 2:
         return {"route": [], "not_found": not_found, "total_km": 0, "maps_link": ""}
 
-    # Otimiza mantendo a base no início
+    # Otimiza a rota começando obrigatoriamente pela base (pontos[0])
     base_ponto = pontos[0]
-    demais = pontos[1:]
-    rota_otimizada = [base_ponto] + otimizar_rota(demais)
+    rota_otimizada = otimizar_rota(pontos)
 
     # Adiciona retorno à base
     retorno = base_ponto.copy()
@@ -493,11 +492,12 @@ def extract_massa_asfaltica(text: str) -> float:
             pass
     return total_area * 0.05 * 2.4
 
-def dividir_em_equipes_sweep(orders: list[dict], num_equipes: int, check_mass: bool = False) -> dict:
+def dividir_em_equipes_sweep(orders: list[dict], num_equipes: int, check_mass: bool = False, max_orders: int = None) -> dict:
     """
     Usa o Algoritmo Sweep (Varredura Angular) para dividir as OSs 
     em um número de equipes com base em suas localizações geocodificadas.
     Se check_mass=True, limita a alocação para ~8 a 10 toneladas por equipe.
+    Se max_orders for informado, limita o total de OS distribuídas.
     Retorna { "equipe_index": [lista de os_number] }
     """
     config = get_app_config()
@@ -528,6 +528,10 @@ def dividir_em_equipes_sweep(orders: list[dict], num_equipes: int, check_mass: b
 
     # 2. Ordenar por ângulo (Sweep)
     pontos_geocodificados.sort(key=lambda x: x["angulo"])
+    
+    if max_orders is not None and max_orders > 0:
+        pontos_geocodificados = pontos_geocodificados[:max_orders]
+
 
     # 3. Dividir as fatias entre as equipes
     resultado = {}

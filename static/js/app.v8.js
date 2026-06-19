@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Programing
     document.getElementById('prog-filter-cat').addEventListener('change', loadProgramingData);
+    document.getElementById('prog-filter-task-type').addEventListener('change', loadProgramingData);
     document.getElementById('prog-team-select').addEventListener('change', loadProgramingData);
     document.getElementById('prog-date').addEventListener('change', loadProgramingData);
     document.getElementById('btn-reset-yesterday').addEventListener('click', resetYesterdayRoutes);

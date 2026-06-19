@@ -26,6 +26,7 @@ def init_db():
                 os_number           TEXT PRIMARY KEY,
                 solicitation_date   TEXT,
                 neighborhood        TEXT,
+                address             TEXT,
                 service_description TEXT,
                 limit_date          TEXT,
                 status              TEXT DEFAULT 'Pendente',
@@ -89,6 +90,12 @@ def init_db():
             conn.execute("ALTER TABLE teams ADD COLUMN task_type TEXT NOT NULL DEFAULT 'Execução' CHECK(task_type IN ('Prévia', 'Execução'));")
         except sqlite3.OperationalError:
             pass
+        
+        # Migration para address
+        try:
+            conn.execute("ALTER TABLE orders ADD COLUMN address TEXT;")
+        except sqlite3.OperationalError:
+            pass
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -120,14 +127,15 @@ def upsert_orders(orders: list[dict]) -> dict:
         for o in orders:
             cursor = conn.execute("""
                 INSERT OR IGNORE INTO orders
-                    (os_number, solicitation_date, neighborhood,
+                    (os_number, solicitation_date, neighborhood, address,
                      service_description, limit_date, status,
                      category, import_date, is_postergada, postergo_reason)
-                VALUES (?, ?, ?, ?, ?, 'Pendente', ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, 'Pendente', ?, ?, ?, ?)
             """, (
                 o["os_number"],
                 o.get("solicitation_date", ""),
                 o.get("neighborhood", ""),
+                o.get("address", ""),
                 o.get("service_description", ""),
                 o.get("limit_date", ""),
                 o.get("category", "Indefinido"),
@@ -138,15 +146,25 @@ def upsert_orders(orders: list[dict]) -> dict:
             if cursor.rowcount > 0:
                 new_count += 1
             else:
-                # Update postergo info for existing orders if it changed
+                # Update postergo info and address for existing orders
                 if "is_postergada" in o:
                     conn.execute("""
                         UPDATE orders 
-                        SET is_postergada = ?, postergo_reason = ? 
+                        SET is_postergada = ?, postergo_reason = ?, address = COALESCE(?, address)
                         WHERE os_number = ? AND status = 'Pendente'
                     """, (
                         1 if o.get("is_postergada") else 0,
                         o.get("postergo_reason", ""),
+                        o.get("address", ""),
+                        o["os_number"]
+                    ))
+                else:
+                    conn.execute("""
+                        UPDATE orders 
+                        SET address = COALESCE(?, address)
+                        WHERE os_number = ? AND status = 'Pendente'
+                    """, (
+                        o.get("address", ""),
                         o["os_number"]
                     ))
     return {"inserted": new_count}
@@ -186,15 +204,22 @@ def get_orders(
     search: Optional[str] = None,
     scheduled_date: Optional[str] = None,
 ) -> list[dict]:
-    """Retorna lista de OSs filtradas."""
     sql = """
-        SELECT o.*, t.name as team_name, t.type as team_type
+        SELECT o.*, t.name as team_name, t.type as team_type, t.task_type as team_task_type
         FROM orders o
         LEFT JOIN teams t ON o.team_id = t.id
         WHERE 1=1
     """
     params = []
-    if status:
+    
+    if status == "pendentes":
+        sql += " AND o.status='Pendente' AND o.is_postergada=0"
+    elif status == "executadas":
+        sql += " AND o.status='Executado'"
+    elif status == "postergadas":
+        sql += " AND o.status='Pendente' AND o.is_postergada=1"
+    elif status and status != "todas":
+        # Fallback para consultas antigas, caso hajam
         sql += " AND o.status=?"
         params.append(status)
     if category and category != "Todos":
@@ -250,12 +275,12 @@ def set_execution_orders(team_id: int, os_list: list[str]):
 
 def get_stats() -> dict:
     with get_conn() as conn:
-        total = conn.execute("SELECT COUNT(*) FROM orders").fetchone()[0]
-        pendente = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente'").fetchone()[0]
+        total = conn.execute("SELECT COUNT(*) FROM orders WHERE is_postergada=0").fetchone()[0]
+        pendente = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND is_postergada=0").fetchone()[0]
         executado = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Executado'").fetchone()[0]
-        calcada = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND category='Calçada'").fetchone()[0]
-        asfalto = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND category='Asfalto'").fetchone()[0]
-        sem_equipe = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND team_id IS NULL").fetchone()[0]
+        calcada = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND category='Calçada' AND is_postergada=0").fetchone()[0]
+        asfalto = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND category='Asfalto' AND is_postergada=0").fetchone()[0]
+        sem_equipe = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND team_id IS NULL AND is_postergada=0").fetchone()[0]
         return {
             "total": total,
             "pendente": pendente,
@@ -266,7 +291,7 @@ def get_stats() -> dict:
         }
 
 def get_chart_stats() -> list[dict]:
-    """Retorna dados agregados por data de importação para o gráfico."""
+    """Retorna dados agregados por data de importação para o gráfico (ignora postergadas)."""
     sql = """
         SELECT 
             import_date as date,
@@ -274,6 +299,7 @@ def get_chart_stats() -> list[dict]:
             SUM(CASE WHEN category = 'Calçada' THEN 1 ELSE 0 END) as calcada,
             SUM(CASE WHEN category = 'Asfalto' THEN 1 ELSE 0 END) as asfalto
         FROM orders
+        WHERE is_postergada=0
         GROUP BY import_date
         ORDER BY import_date ASC
         LIMIT 30
@@ -358,3 +384,14 @@ def get_setting(key: str, default: str = "") -> str:
 def save_setting(key: str, value: str):
     with get_conn() as conn:
         conn.execute("INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)", (key, value))
+
+def update_os_state(os_number: str, state: str):
+    """Atualiza o estado virtual da OS."""
+    with get_conn() as conn:
+        today = date.today().isoformat()
+        if state == 'pendentes':
+            conn.execute("UPDATE orders SET status='Pendente', is_postergada=0 WHERE os_number=?", (os_number,))
+        elif state == 'executadas':
+            conn.execute("UPDATE orders SET status='Executado', is_postergada=0, execution_date=? WHERE os_number=?", (today, os_number))
+        elif state == 'postergadas':
+            conn.execute("UPDATE orders SET status='Pendente', is_postergada=1 WHERE os_number=?", (os_number,))
