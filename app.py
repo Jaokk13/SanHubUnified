@@ -10,6 +10,7 @@ from typing import List, Optional
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
+import re
 
 import database as db
 import router_engine as router
@@ -82,23 +83,49 @@ async def import_samsys(
         content_a = await file_a.read()
         df1 = pd.read_excel(io.BytesIO(content_a), skiprows=4, engine='xlrd' if file_a.filename.endswith('.xls') else 'openpyxl')
         df1.columns = df1.columns.str.strip()
-        df1['Codigo_Limpo'] = df1['Serviço Solicitado'].astype(str).str.strip().str[:6]
-        df1.rename(columns={'Serviço Solicitado': 'Serviço'}, inplace=True)
+        
+        col_servico_df1 = next((c for c in df1.columns if str(c).lower() in ['serviço solicitado', 'servico solicitado', 'serviço', 'servico']), None)
+        if not col_servico_df1:
+            raise HTTPException(status_code=400, detail=f"Coluna de Serviço não encontrada no Arquivo A. Colunas presentes: {list(df1.columns)}")
+            
+        df1['Codigo_Limpo'] = df1[col_servico_df1].astype(str).str.strip().str[:6]
+        df1.rename(columns={col_servico_df1: 'Serviço'}, inplace=True)
 
         # Lendo Arquivo B
         content_b = await file_b.read()
         df2 = pd.read_excel(io.BytesIO(content_b), skiprows=4, engine='xlrd' if file_b.filename.endswith('.xls') else 'openpyxl')
         df2.columns = df2.columns.str.strip()
-        df2['Codigo_Limpo'] = df2['Serviço'].astype(str).str.strip().str[:6]
+        
+        col_servico_df2 = next((c for c in df2.columns if str(c).lower() in ['serviço', 'servico', 'serviço solicitado', 'servico solicitado']), None)
+        if not col_servico_df2:
+            raise HTTPException(status_code=400, detail=f"Coluna de Serviço não encontrada no Arquivo B. Colunas presentes: {list(df2.columns)}")
+            
+        df2['Codigo_Limpo'] = df2[col_servico_df2].astype(str).str.strip().str[:6]
         if 'Serviço.1' in df2.columns:
-            codigo = df2['Serviço'].astype(str).str.strip()
+            codigo = df2[col_servico_df2].astype(str).str.strip()
             descricao = df2['Serviço.1'].astype(str).str.strip()
             df2['Serviço'] = codigo + ' - ' + descricao
             df2['Serviço'] = df2['Serviço'].str.replace(' - nan', '', case=False)
+        else:
+            df2.rename(columns={col_servico_df2: 'Serviço'}, inplace=True)
 
         # Concatenação e filtro por serviços
         df = pd.concat([df1, df2], ignore_index=True)
         df.columns = df.columns.str.strip()
+        
+        # Corrige descrições ausentes para que a categoria seja identificada corretamente
+        mapa_descricoes = {
+            '613201': '613201 - RECOMPOSIÇÃO DE CALÇADA - LOG.',
+            '613202': '613202 - RECOMPOSIÇÃO DE CALÇADA - U.C.',
+            '613203': '613203 - RECOMPOSIÇÃO DE ASFALTO - LOG.',
+            '613204': '613204 - RECOMPOSIÇÃO DE ASFALTO - U.C.',
+            '613205': '613205 - RECOMPOSIÇÃO DE PAVIMENTO - LOG.',
+            '613206': '613206 - RECOMPOSIÇÃO DE PAVIMENTO - U.C.'
+        }
+        
+        mask = df['Serviço'].astype(str).str.strip().str.len() <= 6
+        df.loc[mask, 'Serviço'] = df.loc[mask, 'Codigo_Limpo'].map(mapa_descricoes).fillna(df.loc[mask, 'Serviço'])
+
         df_filtrado = df[df['Codigo_Limpo'].isin(CODIGOS_SERVICO)].copy()
 
         # Filtro de Bairros (Opcional, se o arquivo foi enviado)
