@@ -37,7 +37,7 @@ venv.bak/
 
 # SQLite databases
 *.sqlite3
-sanhub.db
+# sanhub.db
 sanhub.db-journal
 sanhub.db-wal
 sanhub.db-shm
