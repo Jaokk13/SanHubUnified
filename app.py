@@ -268,6 +268,9 @@ def auto_assign_orders(req: AutoAssignRequest):
     orders = []
     import re
     for o in all_orders:
+        if o.get('team_id') is not None:
+            continue  # Ignorar OS que já têm equipe atribuída
+            
         if o.get('is_postergada'):
             continue  # Ignorar OS postergadas no Programador Automático
             

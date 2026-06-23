@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('settings-form').addEventListener('submit', handleSettingsSubmit);
     
     // Filters
-    document.getElementById('filter-status').addEventListener('change', loadTableData);
     document.getElementById('filter-category').addEventListener('change', loadTableData);
     document.getElementById('filter-search').addEventListener('input', debounce(loadTableData, 300));
     document.getElementById('btn-refresh-table').addEventListener('click', loadTableData);
