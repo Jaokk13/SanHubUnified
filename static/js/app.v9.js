@@ -892,7 +892,14 @@ async function confirmAutoAssign() {
                 specific_os_list: specificOsList
             })
         });
-        showInfoModal('Aviso', res.message);
+        
+        // Verificar se existem OS não encontradas
+        if (res.not_found_report && res.not_found_report.length > 0) {
+            showOsReportModal(res.not_found_report, res.message);
+        } else {
+            showInfoModal('Aviso', res.message);
+        }
+        
         loadProgramingData();
         loadDashboard();
     } catch (e) {
@@ -901,6 +908,82 @@ async function confirmAutoAssign() {
         btn.innerHTML = '<i class="fas fa-magic"></i> Auto';
         btn.disabled = false;
     }
+}
+
+// Variável global para armazenar o relatório para cópia
+let _currentOsReport = [];
+
+function showOsReportModal(report, message) {
+    _currentOsReport = report;
+    
+    const tbody = document.querySelector('#os-report-table tbody');
+    tbody.innerHTML = '';
+    
+    report.forEach(item => {
+        const tr = document.createElement('tr');
+        
+        // Determinar a classe do badge com base na situação
+        let badgeClass = '';
+        switch(item.situacao) {
+            case 'Executada': badgeClass = 'badge-executada'; break;
+            case 'Postergada': badgeClass = 'badge-postergada-report'; break;
+            case 'Já programada': badgeClass = 'badge-ja-programada'; break;
+            case 'Nunca importada no sistema': badgeClass = 'badge-nunca-importada'; break;
+            case 'Pendente (fora do filtro)': badgeClass = 'badge-fora-filtro'; break;
+            default: badgeClass = 'badge-nunca-importada';
+        }
+        
+        const detalhesHtml = item.detalhes 
+            ? `<span class="text-sm text-muted" style="max-width: 200px; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${item.detalhes.replace(/"/g, '&quot;')}">${item.detalhes}</span>`
+            : '<span class="text-muted text-sm">—</span>';
+        
+        tr.innerHTML = `
+            <td class="font-bold">${item.os_number}</td>
+            <td><span class="badge-situacao ${badgeClass}">${item.situacao}</span></td>
+            <td>${detalhesHtml}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+    
+    // Reset o botão de copiar
+    const copyBtn = document.getElementById('btn-copy-os-report');
+    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar Lista';
+    copyBtn.classList.remove('copied');
+    
+    toggleModal('os-report-modal');
+}
+
+function copyOsReport() {
+    if (!_currentOsReport || _currentOsReport.length === 0) return;
+    
+    // Montar texto formatado para clipboard
+    let text = 'OS NÃO PROGRAMADAS\n';
+    text += '═'.repeat(50) + '\n\n';
+    
+    _currentOsReport.forEach(item => {
+        text += `OS: ${item.os_number}\n`;
+        text += `Situação: ${item.situacao}\n`;
+        if (item.detalhes) {
+            text += `Detalhes: ${item.detalhes}\n`;
+        }
+        text += '─'.repeat(30) + '\n';
+    });
+    
+    text += `\nTotal: ${_currentOsReport.length} OS não programada(s)`;
+    
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('btn-copy-os-report');
+        btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-copy"></i> Copiar Lista';
+            btn.classList.remove('copied');
+        }, 2500);
+    }).catch(err => {
+        console.error('Falha ao copiar:', err);
+        showInfoModal('Aviso', 'Não foi possível copiar para a área de transferência.');
+    });
 }
 
 async function resetYesterdayRoutes() {

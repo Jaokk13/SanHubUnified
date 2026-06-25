@@ -2,6 +2,7 @@ import os
 import io
 import pandas as pd
 from datetime import date
+import datetime
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Body
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -290,11 +291,77 @@ def auto_assign_orders(req: AutoAssignRequest):
 
     # Filtro adicional por lista específica de OS
     if req.specific_os_list:
-        specific_os_set = {os.strip() for os in req.specific_os_list.split(',')}
+        # Normaliza: remove prefixo "R" para busca (no banco as OS são sem "R")
+        raw_os_list = [os.strip() for os in req.specific_os_list.split(',') if os.strip()]
+        
+        # Mapeia: número original do usuário → número limpo (sem R)
+        os_map = {}  # cleaned -> original
+        specific_os_set = set()
+        for raw in raw_os_list:
+            cleaned = re.sub(r'^[Rr]\s*', '', raw)
+            specific_os_set.add(cleaned)
+            os_map[cleaned] = raw  # preserva o original para o relatório
+        
         orders = [o for o in orders if str(o['os_number']).strip() in specific_os_set]
 
-    if not orders:
+    if not orders and not req.specific_os_list:
         raise HTTPException(status_code=400, detail="Nenhuma OS pendente sem equipe se encaixa nesta Função (Prévia/Execução) ou na lista fornecida.")
+    
+    # Se temos lista específica mas nenhuma OS foi encontrada, não travar — vamos gerar o relatório
+    not_found_report = []
+    if req.specific_os_list:
+        programmed_os_set = {str(o['os_number']).strip() for o in orders}
+        missing_os_cleaned = specific_os_set - programmed_os_set
+        
+        if missing_os_cleaned:
+            # Busca informações detalhadas no banco (usando os números limpos)
+            lookup = db.lookup_os_numbers(list(missing_os_cleaned))
+            
+            for cleaned_num in sorted(missing_os_cleaned):
+                original_num = os_map.get(cleaned_num, cleaned_num)
+                info = lookup.get(cleaned_num)
+                if info is None:
+                    not_found_report.append({
+                        "os_number": original_num,
+                        "situacao": "Nunca importada no sistema",
+                        "detalhes": ""
+                    })
+                elif info["status"] == "Executado":
+                    not_found_report.append({
+                        "os_number": original_num,
+                        "situacao": "Executada",
+                        "detalhes": ""
+                    })
+                elif info.get("is_postergada"):
+                    reason = info.get("postergo_reason", "Motivo não informado")
+                    not_found_report.append({
+                        "os_number": original_num,
+                        "situacao": "Postergada",
+                        "detalhes": reason
+                    })
+                elif info.get("team_id") is not None:
+                    team_name = info.get("team_name") or f"Equipe #{info['team_id']}"
+                    sched = info.get("scheduled_date") or "sem data"
+                    not_found_report.append({
+                        "os_number": original_num,
+                        "situacao": "Já programada",
+                        "detalhes": f"Equipe: {team_name} ({sched})"
+                    })
+                else:
+                    # Pendente mas não se encaixou nos filtros (categoria/função diferente)
+                    not_found_report.append({
+                        "os_number": original_num,
+                        "situacao": "Pendente (fora do filtro)",
+                        "detalhes": "Não se encaixa na Categoria/Função selecionada"
+                    })
+
+    if not orders:
+        return {
+            "success": True,
+            "message": f"Nenhuma OS da lista foi programada. Verifique o relatório.",
+            "not_found_report": not_found_report
+        }
+    
     # 4. Aplicar algoritmo Sweep
     check_mass = (req.category == 'Asfalto' and req.task_type == 'Execução')
     divisao = router.dividir_em_equipes_sweep(orders, len(teams), check_mass=check_mass, max_orders=req.max_orders)
@@ -305,7 +372,11 @@ def auto_assign_orders(req: AutoAssignRequest):
             for os_num in divisao[i]:
                 db.assign_order_to_team(os_num, team["id"], req.date)
                 
-    return {"success": True, "message": f"Divisão automática via Sweep concluída para {len(orders)} OS(s)!"}
+    return {
+        "success": True, 
+        "message": f"Divisão automática via Sweep concluída para {len(orders)} OS(s)!",
+        "not_found_report": not_found_report
+    }
 
 @app.get("/api/teams")
 def get_teams():
@@ -495,7 +566,23 @@ def export_excel(type: str = "todas", date: str = None):
                 cell.fill = alt_fill
                 
     wb.save(filepath)
-    return FileResponse(filepath, filename="Planejamento_OS.xlsx")
+    
+    # Nome descritivo para download
+    today_str = datetime.date.today().strftime("%d-%m-%Y")
+    type_labels = {"programadas": "Programadas", "executadas": "Executadas", "todas": "Todas_OS"}
+    type_label = type_labels.get(type, "Exportacao")
+    if type == "programadas" and date:
+        # Formata a data de YYYY-MM-DD para DD-MM-YYYY
+        try:
+            parts = date.split('-')
+            date_label = f"{parts[2]}-{parts[1]}-{parts[0]}"
+        except (IndexError, AttributeError):
+            date_label = date
+        download_name = f"SanHub_{type_label}_{date_label}.xlsx"
+    else:
+        download_name = f"SanHub_{type_label}_{today_str}.xlsx"
+    
+    return FileResponse(filepath, filename=download_name)
 
 @app.get("/api/cache/export")
 def export_cache():

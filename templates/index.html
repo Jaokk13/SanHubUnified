@@ -197,6 +197,39 @@
         </div>
     </div>
 
+    <!-- Modal Relatório de OS Não Encontradas -->
+    <div id="os-report-modal" class="modal hidden">
+        <div class="modal-content glass" style="max-width: 650px;">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle text-warning"></i> OS Não Programadas</h2>
+                <button class="close-btn" onclick="toggleModal('os-report-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 15px; color: var(--text-muted);">As seguintes OS da lista fornecida <strong>não foram programadas</strong>. Veja abaixo o motivo de cada uma:</p>
+                <div class="os-report-table-container" style="max-height: 350px; overflow-y: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <table class="table table-sm" id="os-report-table">
+                        <thead>
+                            <tr>
+                                <th>OS</th>
+                                <th>Situação</th>
+                                <th>Detalhes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- JS Injected -->
+                        </tbody>
+                    </table>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-outline" style="flex:1" onclick="toggleModal('os-report-modal')">Fechar</button>
+                    <button class="btn btn-primary" style="flex:1" onclick="copyOsReport()" id="btn-copy-os-report">
+                        <i class="fas fa-copy"></i> Copiar Lista
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Barra Lateral -->
     <aside class="sidebar glass" id="sidebar">
         <div class="logo">

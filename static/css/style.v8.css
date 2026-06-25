@@ -841,3 +841,31 @@ input[type="checkbox"] {
 .context-menu-item:hover {
     background: rgba(255,255,255,0.1);
 }
+
+/* OS Report Modal */
+.os-report-table-container::-webkit-scrollbar {
+    width: 6px;
+}
+.os-report-table-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+.badge-situacao {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.badge-executada { background-color: var(--success-soft); color: var(--success); }
+.badge-postergada-report { background-color: var(--danger-soft); color: var(--danger); }
+.badge-ja-programada { background-color: var(--primary-soft); color: var(--primary); }
+.badge-nunca-importada { background-color: rgba(255,255,255,0.08); color: var(--text-muted); border: 1px dashed var(--border-color); }
+.badge-fora-filtro { background-color: var(--warning-soft); color: var(--warning); }
+
+#btn-copy-os-report.copied {
+    background-color: var(--success);
+    transition: background-color 0.3s ease;
+}
+

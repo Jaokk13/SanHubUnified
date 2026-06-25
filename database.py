@@ -395,3 +395,27 @@ def update_os_state(os_number: str, state: str):
             conn.execute("UPDATE orders SET status='Executado', is_postergada=0, execution_date=? WHERE os_number=?", (today, os_number))
         elif state == 'postergadas':
             conn.execute("UPDATE orders SET status='Pendente', is_postergada=1 WHERE os_number=?", (os_number,))
+
+
+def lookup_os_numbers(os_numbers: list[str]) -> dict:
+    """
+    Busca informações detalhadas de uma lista de números de OS.
+    Retorna um dicionário onde a chave é o os_number e o valor é um dict
+    com status, team_name, scheduled_date, is_postergada, postergo_reason.
+    Se a OS não existir no banco, ela não aparece no dicionário.
+    """
+    if not os_numbers:
+        return {}
+
+    with get_conn() as conn:
+        placeholders = ",".join("?" * len(os_numbers))
+        rows = conn.execute(f"""
+            SELECT o.os_number, o.status, o.is_postergada, o.postergo_reason,
+                   o.team_id, o.scheduled_date,
+                   t.name as team_name
+            FROM orders o
+            LEFT JOIN teams t ON o.team_id = t.id
+            WHERE o.os_number IN ({placeholders})
+        """, list(os_numbers)).fetchall()
+
+        return {r["os_number"]: dict(r) for r in rows}
