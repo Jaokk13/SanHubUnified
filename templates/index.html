@@ -303,8 +303,15 @@
                     <div class="stat-card glass">
                         <div class="stat-icon bg-success-soft text-success"><i class="fas fa-check-circle"></i></div>
                         <div class="stat-info">
-                            <h3>Executadas</h3>
+                            <h3>Executadas (Total)</h3>
                             <h2 id="stat-executado">0</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card glass border-highlight">
+                        <div class="stat-icon bg-success-soft text-success"><i class="fas fa-calendar-check"></i></div>
+                        <div class="stat-info">
+                            <h3>Executadas Hoje</h3>
+                            <h2 id="stat-executado-hoje">0</h2>
                         </div>
                     </div>
                     <div class="stat-card glass">
@@ -312,6 +319,13 @@
                         <div class="stat-info">
                             <h3>Sem Equipe</h3>
                             <h2 id="stat-sem-equipe">0</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon bg-dark-accent text-white" style="background-color: var(--dark-accent);"><i class="fas fa-pause-circle"></i></div>
+                        <div class="stat-info">
+                            <h3>Postergadas</h3>
+                            <h2 id="stat-postergadas">0</h2>
                         </div>
                     </div>
                 </div>
@@ -329,12 +343,45 @@
                                 <div class="bar-bg"><div class="bar-fill bg-dark-accent" id="bar-asfalto" style="width: 0%"></div></div>
                             </div>
                         </div>
+                        
+                        <h3 class="mt-4">Taxa de Conclusão Global</h3>
+                        <div class="category-bars mt-3">
+                            <div class="bar-container">
+                                <div class="bar-label"><span class="text-sm">Executadas / Total Ativo</span> <span id="stat-conclusao-pct" class="font-bold text-success">0%</span></div>
+                                <div class="bar-bg" style="height: 16px;"><div class="bar-fill bg-success" id="bar-conclusao" style="width: 0%"></div></div>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="chart-card glass" style="flex: 2; min-width: 400px;">
                         <h3>Entrada de OS por Dia</h3>
                         <div style="position: relative; height: 250px; width: 100%;">
                             <canvas id="os-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nova seção: Produtividade de Equipes -->
+                <div class="mt-4">
+                    <div class="panel glass" style="height: auto; max-height: 400px;">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-medal text-warning"></i> Ranking de Produtividade das Equipes (Execução)</h3>
+                        </div>
+                        <div class="table-container" style="max-height: 300px; padding: 15px;">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Posição</th>
+                                        <th>Equipe</th>
+                                        <th class="text-center">Executadas Hoje <i class="fas fa-calendar-day text-success"></i></th>
+                                        <th class="text-center">Total Executadas <i class="fas fa-check-circle text-success"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="team-stats-tbody">
+                                    <!-- Injetado via JS -->
+                                    <tr><td colspan="4" class="text-center text-muted">Carregando dados...</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

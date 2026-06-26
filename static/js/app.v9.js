@@ -261,6 +261,8 @@ async function loadDashboard() {
     document.getElementById('stat-pendente').textContent = stats.pendente;
     document.getElementById('stat-executado').textContent = stats.executado;
     document.getElementById('stat-sem-equipe').textContent = stats.sem_equipe;
+    document.getElementById('stat-executado-hoje').textContent = stats.executado_hoje || 0;
+    document.getElementById('stat-postergadas').textContent = stats.postergadas || 0;
     
     document.getElementById('stat-calcada').textContent = stats.calcada_pendente;
     document.getElementById('stat-asfalto').textContent = stats.asfalto_pendente;
@@ -270,9 +272,15 @@ async function loadDashboard() {
     const calcadaPct = totalCat ? (stats.calcada_pendente / totalCat) * 100 : 0;
     const asfaltoPct = totalCat ? (stats.asfalto_pendente / totalCat) * 100 : 0;
     
+    // Taxa de Conclusão Global (Executadas / (Pendentes + Executadas))
+    const totalAtivas = stats.pendente + stats.executado;
+    const conclusaoPct = totalAtivas > 0 ? (stats.executado / totalAtivas) * 100 : 0;
+    document.getElementById('stat-conclusao-pct').textContent = conclusaoPct.toFixed(1) + '%';
+    
     setTimeout(() => {
         document.getElementById('bar-calcada').style.width = `${calcadaPct}%`;
         document.getElementById('bar-asfalto').style.width = `${asfaltoPct}%`;
+        document.getElementById('bar-conclusao').style.width = `${conclusaoPct}%`;
     }, 100);
     
     // Load Chart Data
@@ -280,6 +288,46 @@ async function loadDashboard() {
         const chartData = await fetchAPI('/api/stats/chart');
         renderOsChart(chartData);
     } catch(e) { console.error("Chart load error:", e); }
+    
+    // Load Team Execution Stats
+    try {
+        const teamStats = await fetchAPI('/api/stats/teams');
+        const tbody = document.getElementById('team-stats-tbody');
+        tbody.innerHTML = '';
+        
+        if (!teamStats || teamStats.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Nenhuma execução registrada ainda.</td></tr>';
+            return;
+        }
+        
+        teamStats.forEach((t, i) => {
+            const tr = document.createElement('tr');
+            
+            // Highlight para o Top 3
+            let medal = `<span class="text-muted font-bold">${i + 1}º</span>`;
+            if (i === 0) medal = '<i class="fas fa-medal" style="color: #fbbf24; font-size: 1.2rem;"></i>'; // Ouro
+            else if (i === 1) medal = '<i class="fas fa-medal" style="color: #94a3b8; font-size: 1.2rem;"></i>'; // Prata
+            else if (i === 2) medal = '<i class="fas fa-medal" style="color: #b45309; font-size: 1.2rem;"></i>'; // Bronze
+            
+            // Destaca a linha se a equipe executou algo hoje
+            const hasExecutedToday = t.executadas_hoje > 0;
+            if (hasExecutedToday) {
+                tr.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
+            }
+            
+            tr.innerHTML = `
+                <td class="text-center">${medal}</td>
+                <td class="font-bold">${t.team_name}</td>
+                <td class="text-center">
+                    <span class="badge ${hasExecutedToday ? 'bg-success' : 'bg-dark-accent'} text-white" style="font-size: 0.85rem; padding: 4px 12px;">
+                        ${t.executadas_hoje}
+                    </span>
+                </td>
+                <td class="text-center font-bold">${t.total_executadas}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    } catch(e) { console.error("Team stats error:", e); }
 }
 
 let osChartInstance = null;

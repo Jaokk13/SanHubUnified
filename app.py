@@ -204,6 +204,10 @@ async def import_samsys(
 def get_stats():
     return db.get_stats()
 
+@app.get("/api/stats/teams")
+def get_team_stats():
+    return db.get_team_execution_stats()
+
 @app.get("/api/stats/chart")
 def get_chart_stats():
     return db.get_chart_stats()

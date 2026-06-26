@@ -274,10 +274,13 @@ def set_execution_orders(team_id: int, os_list: list[str]):
 
 
 def get_stats() -> dict:
+    today = date.today().isoformat()
     with get_conn() as conn:
         total = conn.execute("SELECT COUNT(*) FROM orders WHERE is_postergada=0").fetchone()[0]
         pendente = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND is_postergada=0").fetchone()[0]
         executado = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Executado'").fetchone()[0]
+        executado_hoje = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Executado' AND execution_date=?", (today,)).fetchone()[0]
+        postergada = conn.execute("SELECT COUNT(*) FROM orders WHERE is_postergada=1").fetchone()[0]
         calcada = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND category='Calçada' AND is_postergada=0").fetchone()[0]
         asfalto = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND category='Asfalto' AND is_postergada=0").fetchone()[0]
         sem_equipe = conn.execute("SELECT COUNT(*) FROM orders WHERE status='Pendente' AND team_id IS NULL AND is_postergada=0").fetchone()[0]
@@ -285,10 +288,30 @@ def get_stats() -> dict:
             "total": total,
             "pendente": pendente,
             "executado": executado,
+            "executado_hoje": executado_hoje,
+            "postergadas": postergada,
             "calcada_pendente": calcada,
             "asfalto_pendente": asfalto,
             "sem_equipe": sem_equipe,
         }
+
+def get_team_execution_stats() -> list[dict]:
+    """Retorna a quantidade de OS executadas (Geral e Hoje) por equipe."""
+    today = date.today().isoformat()
+    sql = """
+        SELECT 
+            t.name as team_name,
+            COUNT(o.os_number) as total_executadas,
+            SUM(CASE WHEN o.execution_date = ? THEN 1 ELSE 0 END) as executadas_hoje
+        FROM teams t
+        LEFT JOIN orders o ON t.id = o.team_id AND o.status = 'Executado'
+        GROUP BY t.id
+        HAVING total_executadas > 0 OR executadas_hoje > 0
+        ORDER BY executadas_hoje DESC, total_executadas DESC
+    """
+    with get_conn() as conn:
+        rows = conn.execute(sql, (today,)).fetchall()
+        return [dict(r) for r in rows]
 
 def get_chart_stats() -> list[dict]:
     """Retorna dados agregados por data de importação para o gráfico (ignora postergadas)."""
