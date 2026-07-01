@@ -437,8 +437,8 @@
                             <h3><i class="fas fa-list-ul"></i> OS Disponíveis (Sem Equipe)</h3>
                             <div class="filters-small">
                                 <input type="date" id="prog-date" class="filter-input" style="width:130px; padding:6px; border-radius:8px; outline:none; border:1px solid var(--border-color); background:rgba(0,0,0,0.2); color:white;">
-                                <button class="btn btn-outline btn-sm text-danger" id="btn-reset-yesterday" title="Zerar todas as atribuições do dia ANTERIOR ao selecionado" style="border-color: var(--danger-soft);">
-                                    <i class="fas fa-undo"></i> Zerar Anterior
+                                <button class="btn btn-outline btn-sm text-danger" id="btn-reset-yesterday" title="Zerar todas as atribuições de dias ANTERIORES ao selecionado" style="border-color: var(--danger-soft);">
+                                    <i class="fas fa-undo"></i> Zerar Anteriores
                                 </button>
                                 <select id="prog-filter-cat">
                                     <option value="">Ambas Categorias</option>
@@ -650,6 +650,23 @@
         </div>
         <div class="context-menu-item" onclick="moveOsToState('postergadas')">
             <i class="fas fa-pause-circle text-danger"></i> Mover para Postergadas
+        </div>
+        <div style="border-top: 1px solid var(--border-color); margin: 4px 0;"></div>
+        <div class="context-menu-item" onclick="forceOsTaskType('Execução')">
+            <i class="fas fa-hard-hat text-primary"></i> Forçar Função: Execução
+        </div>
+        <div class="context-menu-item" onclick="forceOsTaskType('Prévia')">
+            <i class="fas fa-search text-warning"></i> Forçar Função: Prévia
+        </div>
+        <div class="context-menu-item" onclick="forceOsTaskType(null)">
+            <i class="fas fa-magic text-muted"></i> Função: Automático
+        </div>
+        <div style="border-top: 1px solid var(--border-color); margin: 4px 0;"></div>
+        <div class="context-menu-item" onclick="changeOsCategory('Calçada')">
+            <i class="fas fa-road text-success"></i> Categoria: Calçada
+        </div>
+        <div class="context-menu-item" onclick="changeOsCategory('Asfalto')">
+            <i class="fas fa-road text-muted"></i> Categoria: Asfalto
         </div>
     </div>
 </body>

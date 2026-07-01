@@ -97,6 +97,12 @@ def init_db():
         except sqlite3.OperationalError:
             pass
 
+        # Migration para force_task_type (override manual de Prévia/Execução)
+        try:
+            conn.execute("ALTER TABLE orders ADD COLUMN force_task_type TEXT;")
+        except sqlite3.OperationalError:
+            pass
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # SETTINGS
@@ -254,13 +260,14 @@ def assign_order_to_team(os_number: str, team_id: Optional[int], scheduled_date:
             (team_id, scheduled_date, os_number),
         )
 
-def reset_past_routes(date_str: str):
-    """Remove a atribuição de equipes para OSs pendentes numa data específica."""
+def reset_past_routes(date_str: str) -> int:
+    """Remove a atribuição de equipes para OSs pendentes agendadas ANTES da data informada."""
     with get_conn() as conn:
-        conn.execute(
-            "UPDATE orders SET team_id=NULL, scheduled_date=NULL, execution_order=NULL WHERE scheduled_date=? AND status='Pendente'",
+        cursor = conn.execute(
+            "UPDATE orders SET team_id=NULL, scheduled_date=NULL, execution_order=NULL WHERE scheduled_date<? AND status='Pendente'",
             (date_str,)
         )
+        return cursor.rowcount
 
 
 def set_execution_orders(team_id: int, os_list: list[str]):
@@ -418,6 +425,18 @@ def update_os_state(os_number: str, state: str):
             conn.execute("UPDATE orders SET status='Executado', is_postergada=0, execution_date=? WHERE os_number=?", (today, os_number))
         elif state == 'postergadas':
             conn.execute("UPDATE orders SET status='Pendente', is_postergada=1 WHERE os_number=?", (os_number,))
+
+
+def set_force_task_type(os_number: str, task_type: str | None):
+    """Define manualmente a função (Prévia/Execução) de uma OS, ou None para auto-detectar."""
+    with get_conn() as conn:
+        conn.execute("UPDATE orders SET force_task_type=? WHERE os_number=?", (task_type, os_number))
+
+
+def set_os_category(os_number: str, category: str):
+    """Altera a categoria (Calçada/Asfalto) de uma OS."""
+    with get_conn() as conn:
+        conn.execute("UPDATE orders SET category=? WHERE os_number=?", (category, os_number))
 
 
 def lookup_os_numbers(os_numbers: list[str]) -> dict:

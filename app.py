@@ -244,6 +244,23 @@ def update_os_state(os_number: str, req: UpdateStateRequest):
     db.update_os_state(os_number, req.state)
     return {"success": True}
 
+class ForceTaskTypeRequest(BaseModel):
+    task_type: Optional[str] = None  # 'Prévia', 'Execução', ou null para auto
+
+@app.post("/api/orders/{os_number}/task-type")
+def force_task_type(os_number: str, req: ForceTaskTypeRequest):
+    db.set_force_task_type(os_number, req.task_type)
+    label = req.task_type or "Automático"
+    return {"success": True, "message": f"Função da OS {os_number} alterada para: {label}"}
+
+class ChangeCategoryRequest(BaseModel):
+    category: str  # 'Calçada' ou 'Asfalto'
+
+@app.post("/api/orders/{os_number}/category")
+def change_os_category(os_number: str, req: ChangeCategoryRequest):
+    db.set_os_category(os_number, req.category)
+    return {"success": True, "message": f"Categoria da OS {os_number} alterada para: {req.category}"}
+
 class AutoAssignRequest(BaseModel):
     category: str
     date: Optional[str] = None
@@ -284,14 +301,20 @@ def auto_assign_orders(req: AutoAssignRequest):
             if req.task_type == 'Execução':
                 orders.append(o)
         else:
-            is_cortada = False
-            if o.get('is_postergada') and o.get('postergo_reason'):
-                is_cortada = bool(re.search(r'\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?', o['postergo_reason'], re.IGNORECASE))
-            
-            if req.task_type == 'Execução' and is_cortada:
-                orders.append(o)
-            elif req.task_type == 'Prévia' and not is_cortada:
-                orders.append(o)
+            # Verificar se há override manual da função
+            forced = o.get('force_task_type')
+            if forced:
+                # Override manual: usar a função forçada
+                if forced == req.task_type:
+                    orders.append(o)
+            else:
+                # Auto-detecção: cortada = Execução, não-cortada = Prévia
+                is_cortada = bool(re.search(r'\d+[,.]?\d*\s*(?:m|mts|cm)?\s*[xX]\s*\d+[,.]?\d*\s*(?:m|mts|cm)?', o.get('postergo_reason', ''), re.IGNORECASE))
+                
+                if req.task_type == 'Execução' and is_cortada:
+                    orders.append(o)
+                elif req.task_type == 'Prévia' and not is_cortada:
+                    orders.append(o)
 
     # Filtro adicional por lista específica de OS
     if req.specific_os_list:
@@ -477,8 +500,8 @@ class ResetRoutesRequest(BaseModel):
 @app.post("/api/reset-routes")
 def reset_routes(req: ResetRoutesRequest):
     try:
-        db.reset_past_routes(req.date)
-        return {"success": True, "message": f"Rotas apagadas para a data {req.date}."}
+        count = db.reset_past_routes(req.date)
+        return {"success": True, "message": f"{count} OS tiveram suas atribuições zeradas (datas anteriores a {req.date})."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

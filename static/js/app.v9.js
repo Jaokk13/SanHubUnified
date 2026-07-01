@@ -556,6 +556,47 @@ async function moveOsToState(state) {
     }
 }
 
+async function forceOsTaskType(taskType) {
+    if (!contextMenuTargetOs) return;
+    
+    document.getElementById('os-context-menu').classList.add('hidden');
+    
+    try {
+        const res = await fetchAPI(`/api/orders/${contextMenuTargetOs}/task-type`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ task_type: taskType })
+        });
+        
+        showInfoModal('Aviso', res.message);
+        loadTableData();
+        
+    } catch (e) {
+        console.error("Erro ao alterar função da OS", e);
+    }
+}
+
+async function changeOsCategory(category) {
+    if (!contextMenuTargetOs) return;
+    
+    document.getElementById('os-context-menu').classList.add('hidden');
+    
+    try {
+        const res = await fetchAPI(`/api/orders/${contextMenuTargetOs}/category`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ category: category })
+        });
+        
+        showInfoModal('Aviso', res.message);
+        loadTableData();
+        loadDashboard();
+        
+    } catch (e) {
+        console.error("Erro ao alterar categoria da OS", e);
+    }
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // TEAMS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1036,21 +1077,13 @@ function copyOsReport() {
 
 async function resetYesterdayRoutes() {
     const progDate = document.getElementById('prog-date').value;
-    if (!progDate) return showInfoModal('Aviso', "Selecione uma data para determinar qual será o dia anterior a ser zerado.");
+    if (!progDate) return showInfoModal('Aviso', "Selecione uma data primeiro.");
     
-    // Subtrai 1 dia
-    const d = new Date(progDate);
-    // JS dates can have timezone issues, use split components
+    // Formata a data para exibição (DD/MM/YYYY)
     const parts = progDate.split('-');
-    const localD = new Date(parts[0], parts[1] - 1, parts[2]);
-    localD.setDate(localD.getDate() - 1);
+    const displayDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
     
-    const year = localD.getFullYear();
-    const month = String(localD.getMonth() + 1).padStart(2, '0');
-    const day = String(localD.getDate()).padStart(2, '0');
-    const yesterdayStr = `${year}-${month}-${day}`;
-    
-    if(!confirm(`Deseja zerar todas as atribuições que foram agendadas para o dia anterior (${yesterdayStr}) e não foram executadas?`)) return;
+    if(!confirm(`Deseja zerar TODAS as atribuições de dias anteriores a ${displayDate} que ainda não foram executadas?`)) return;
     
     const btn = document.getElementById('btn-reset-yesterday');
     const oldHtml = btn.innerHTML;
@@ -1061,7 +1094,7 @@ async function resetYesterdayRoutes() {
         const res = await fetchAPI('/api/reset-routes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ date: yesterdayStr })
+            body: JSON.stringify({ date: progDate })
         });
         showInfoModal('Aviso', res.message);
         loadProgramingData();
